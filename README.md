@@ -27,3 +27,7 @@
 ## 一些说明
 
 - 原作者的 Git 提交并不规范，所以我自己新开了一个仓库存放这些配置文件🫠。
+
+## 修改记录
+
+- 2026/01/03 移除了 `grub-themes` 安装脚本和 `07-grub-theme.sh` 目录，使用个人 [`arch-config`](https://github.com/Mugzx/arch-config)。
