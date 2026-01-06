@@ -433,7 +433,7 @@ if [ "$INSTALL_LAZYVIM" = true ]; then
   fi
 
   log "Cloning LazyVim starter..."
-  if as_user git clone https://github.com/LazyVim/starter "$NVIM_CFG"; then
+  if as_user git clone https://github.com/Mugzx/nvim.git "$NVIM_CFG"; then
     rm -rf "$NVIM_CFG/.git"
     success "LazyVim installed (Override)."
   else

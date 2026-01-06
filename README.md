@@ -31,3 +31,5 @@
 ## 修改记录
 
 - 2026/01/03 移除了 `grub-themes` 安装脚本和 `07-grub-theme.sh` 目录，使用个人 [`arch-config`](https://github.com/Mugzx/arch-config)。
+
+- 2026/01/06 使用个人 [`nvim`](https://github.com/Mugzx/nvim)与暗色主题。
