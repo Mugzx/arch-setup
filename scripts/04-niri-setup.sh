@@ -370,16 +370,9 @@ fi
 # ==============================================================================
 section "Step 5/9" "Deploying Dotfiles"
 
-REPO_GITHUB="https://github.com/Mugzx/arch-config.git"
-TEMP_DIR="/tmp/shorin-repo"
-rm -rf "$TEMP_DIR"
+TEMP_DIR="/niri-dotfiles"
 
-log "Cloning configuration..."
-if ! as_user git clone "$REPO_GITHUB" "$TEMP_DIR"; then
-  critical_failure_handler "Failed to clone dotfiles."
-fi
-
-if [ -d "$TEMP_DIR/dotfiles" ]; then
+if [ -d "$TEMP_DIR" ]; then
   # Filter Exclusions
   if [ "$TARGET_USER" != "shorin" ]; then
     EXCLUDE_FILE="$PARENT_DIR/exclude-dotfiles.txt"
@@ -387,7 +380,7 @@ if [ -d "$TEMP_DIR/dotfiles" ]; then
       log "Processing exclusions..."
       while IFS= read -r item; do
         item=$(echo "$item" | tr -d '\r' | xargs)
-        [ -n "$item" ] && [[ ! "$item" =~ ^# ]] && rm -rf "$TEMP_DIR/dotfiles/.config/$item"
+        [ -n "$item" ] && [[ ! "$item" =~ ^# ]] && rm -rf "$TEMP_DIR/.config/$item"
       done <"$EXCLUDE_FILE"
     fi
   fi
@@ -395,7 +388,7 @@ if [ -d "$TEMP_DIR/dotfiles" ]; then
   # Backup & Apply
   log "Backing up & Applying..."
   as_user tar -czf "$HOME_DIR/config_backup_$(date +%s).tar.gz" -C "$HOME_DIR" .config
-  as_user cp -rf "$TEMP_DIR/dotfiles/." "$HOME_DIR/"
+  as_user cp -rf "$TEMP_DIR/." "$HOME_DIR/"
 
   # Post-Process
   if [ "$TARGET_USER" != "shorin" ]; then
