@@ -370,7 +370,7 @@ fi
 # ==============================================================================
 section "Step 5/9" "Deploying Dotfiles"
 
-TEMP_DIR="/niri-dotfiles"
+TEMP_DIR="$PARENT_DIR/niri-dotfiles"
 
 if [ -d "$TEMP_DIR" ]; then
   # Filter Exclusions
