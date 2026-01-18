@@ -49,7 +49,7 @@ section "Step 2/5" "Software Store & Network"
 
 log "Configuring Discover & Flatpak..."
 
-exe pacman -Syu --noconfirm --needed flatpak flatpak-kcm
+exe pacman -S --noconfirm --needed flatpak flatpak-kcm
 exe flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # --- Network Detection Logic ---
@@ -262,7 +262,7 @@ if [ -f "$LIST_FILE" ]; then
             for pkg in "${REPO_QUEUE[@]}"; do
                 if ! verify_installation "$pkg"; then
                     warn "Verification failed for '$pkg'. Retrying individually..."
-                    exe runuser -u "$TARGET_USER" -- yay -Syu --noconfirm --needed "$pkg"
+                    exe runuser -u "$TARGET_USER" -- yay -S --noconfirm --needed "$pkg"
                     
                     if ! verify_installation "$pkg"; then
                         critical_failure_handler "$pkg (Repo)"
@@ -298,7 +298,7 @@ if [ -f "$LIST_FILE" ]; then
                     sleep 3
                 fi
                 
-                runuser -u "$TARGET_USER" -- yay -Syu --noconfirm --needed --answerdiff=None --answerclean=None "$aur_pkg"
+                runuser -u "$TARGET_USER" -- yay -S --noconfirm --needed --answerdiff=None --answerclean=None "$aur_pkg"
                 EXIT_CODE=$?
 
                 # Handle Ctrl+C skip

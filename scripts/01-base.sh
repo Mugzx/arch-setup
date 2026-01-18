@@ -27,7 +27,7 @@ elif command -v nano &> /dev/null; then
 else
     log "Neovim or Nano not found. Installing Vim..."
     if ! command -v vim &> /dev/null; then
-        exe pacman -Syu --noconfirm gvim
+        exe pacman -S --noconfirm gvim
     fi
 fi
 
@@ -65,7 +65,7 @@ fi
 section "Step 3/6" "Base Fonts"
 
 log "Installing adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts noto-fonts-cjk, noto-fonts, emoji..."
-exe pacman -Syu --noconfirm --needed adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts noto-fonts-cjk noto-fonts noto-fonts-emoji
+exe pacman -S --noconfirm --needed adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts noto-fonts-cjk noto-fonts noto-fonts-emoji
 success "Base fonts installed."
 
 # ------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ success "ArchLinuxCN configured."
 section "Step 5/6" "AUR Helpers"
 
 log "Installing yay and paru..."
-exe pacman -Syu --noconfirm --needed base-devel yay paru
+exe pacman -S --noconfirm --needed base-devel yay paru
 success "Helpers installed."
 
 log "Module 01 completed."
