@@ -14,7 +14,7 @@ lines=8
 line_wrap=word
 
 #指定终端仿真器
-term=ghostty
+term=kitty
 
 #允许特殊标记
 allow_markup=true

@@ -1,5 +1,3 @@
 lsfg-vk
 mango
 hypr
-ghostty
-

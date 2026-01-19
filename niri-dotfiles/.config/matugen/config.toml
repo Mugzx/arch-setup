@@ -67,11 +67,6 @@ output_path = '~/.config/gtk-4.0/colors.css'
 #output_path = '~/.config/swaync/colors.css'
 #post_hook = 'swaync-client -rs &'
 
-[templates.ghostty]
-input_path = '~/.config/matugen/templates/ghostty-colors.conf'
-output_path = '~/.config/ghostty/themes/Matugen'
-post_hook = 'pkill -SIGUSR2 ghostty'
-
 [templates.qt5ct]
 input_path = '~/.config/matugen/templates/qtct-colors.conf'
 output_path = '~/.config/qt5ct/colors/matugen.conf'
