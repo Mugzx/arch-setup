@@ -45,7 +45,7 @@ as_user() {
 if [ "$DESKTOP_ENV" == "kde" ]; then
     LIST_FILENAME="kde-common-applist.txt"
 else
-    LIST_FILENAME="common-applist.txt"
+    LIST_FILENAME="niri-common-applist.txt"
 fi
 LIST_FILE="$PARENT_DIR/$LIST_FILENAME"
 

@@ -11,7 +11,7 @@
 
 2. 登录之后从 tty 运行以下命令
     
-    ```
+    ```sh
     # 1. 安装 git
     sudo pacman -Syu git
 
@@ -24,9 +24,40 @@
     ```
     - 一条命令版
 
-        ```
+        ```sh
         sudo pacman -Syu git && git clone https://github.com/Mugzx/arch-setup.git && cd arch-setup && sudo bash install.sh
         ```
+
+## 目录结构
+
+```sh
+.
+├── kde-dotfiles # KDE Plasma 配置
+├── niri-dotfiles # Niri 配置
+│   └── wallpapers # Waypaper 壁纸目录★
+├── resources # 资源目录
+│   └── windows-sim-fonts # Windows 字体 (Wine)
+├── scripts # 安装脚本
+│   ├── 00-btrfs-init.sh # Btrfs文件系统初始化
+│   ├── 00-utils.sh # 工具函数和通用变量定义
+│   ├── 01-base.sh # 基础系统安装
+│   ├── 02a-dualboot-fix.sh # 系统引导
+│   ├── 02-musthave.sh # 必备软件安装
+│   ├── 03-user.sh # 用户账户和权限配置
+│   ├── 04-niri-setup.sh # Niri 安装和配置
+│   ├── 06-kdeplasma-setup.sh # KDE Plasma 安装和配置
+│   ├── 99-apps.sh # 安装应用列表中的软件包
+│   └── niri-undochange.sh # 快照回档 (Niri)
+├── niri-common-applist.txt # Niri 常用软件应用列表★
+├── exclude-dotfiles.txt # 需要排除的配置★
+├── install.sh # 主安装脚本，调用其他脚本完成系统安装
+├── kde-applist.txt # KDE (KDE Plasma 桌面环境)
+├── kde-common-applist.txt # KDE 常用软件应用列表★
+├── niri-applist.txt # Niri (Niri 窗口管理器)
+└── undochange.sh # 快照回档
+```
+
+有特殊标记的目录/文件建议按个人习惯自行调整。
 
 ## 一些说明
 
@@ -37,42 +68,3 @@
   - `~/arch-setup/niri-dotfiles/.config/waybar/scripts/`
   - `~/arch-setup/niri-dotfiles/.config/waybar-niri-Win11Like/scripts/`
 - 这个dotfiles仓库更多按照个人习惯进行配置。
-
-## 目录结构
-
-```
-.
-├── kde-dotfiles                   # KDE Plasma 配置
-├── niri-dotfiles                  # Niri 配置
-│   └── wallpapers                 # Waypaper 壁纸目录★
-├── resources                      # 资源目录
-│   └── windows-sim-fonts          # Windows 字体 (Wine)
-├── scripts                        # 安装脚本
-│   ├── 00-btrfs-init.sh           # Btrfs文件系统初始化
-│   ├── 00-utils.sh                # 工具函数和通用变量定义
-│   ├── 01-base.sh                 # 基础系统安装
-│   ├── 02a-dualboot-fix.sh        # 系统引导
-│   ├── 02-musthave.sh             # 必备软件安装
-│   ├── 03-user.sh                 # 用户账户和权限配置
-│   ├── 04-niri-setup.sh           # Niri 安装和配置
-│   ├── 06-kdeplasma-setup.sh      # KDE Plasma 安装和配置
-│   ├── 99-apps.sh                 # 安装应用列表中的软件包
-│   └── niri-undochange.sh         # 快照回档 (Niri)
-├── common-applist.txt             # Niri 常用软件应用列表★
-├── exclude-dotfiles.txt           # 需要排除的配置★
-├── install.sh                     # 主安装脚本，调用其他脚本完成系统安装
-├── kde-applist.txt                # KDE (KDE Plasma 桌面环境)★
-├── kde-common-applist.txt         # KDE 常用软件应用列表★
-├── niri-applist.txt               # Niri (Niri 窗口管理)★
-└── undochange.sh                  # 快照回档
-```
-
-有特殊标记的目录/文件建议按个人习惯自行调整。
-
-## 修改记录
-
-- 2026/01/03 移除了 `grub-themes` 安装脚本和 `07-grub-theme.sh` 目录。
-
-- 2026/01/06 使用个人 [`nvim`](https://github.com/Mugzx/nvim) 配置与暗色主题。
-
-- 2026/01/18 修改niri的安装逻辑, 不再克隆仓库。

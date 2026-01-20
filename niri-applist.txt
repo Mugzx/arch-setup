@@ -1,12 +1,10 @@
-neovim                                   # Advanced version of vim 
-lazyvim                                  # Great preset of neovim 
 imv                                      # Image Viewer for Wayland
 fish                                     # Friendly Interactive Shell
-
+gnome-software                           # Gui store for flatpak software
 # --- Niri/Wayland Components ---
 xwayland-satellite                       # XWayland compatibility 
 swayidle                                 # Idle management daemon (Screen lock/suspend)
-swaylock-effects                         # Screen locker with effects (Blur/Screenshots)
+hyprlock                                 # Screen locker with effects (Blur/Screenshots)
 swayosd                                  # On-Screen Display for Volume/Brightness
 nwg-look                                 # GTK3 settings editor for Wayland
 qt5ct                                    # Qt5 configuration tool
@@ -14,9 +12,6 @@ qt6ct                                    # Qt6 configuration tool
 
 # --- Aesthetics & Theming ---
 breeze                                   # KDE Breeze visual style
-breeze-gtk                               # Breeze GTK theme
-breeze-icons                             # Breeze icon theme
-breeze5                                  # Breeze style for Qt5
 ttf-jetbrains-mono-nerd                  # JetBrains Mono font (Nerd Font patched)
 
 # --- Wallpaper ---
@@ -30,6 +25,7 @@ grim                                     # Screenshot utility (Grabs images)
 slurp                                    # Region selector (Works with grim)
 wf-recorder                              # Screen recorder for Wayland
 hyprpicker                               # Color picker for Wayland
+satty                                   # Modern screenshot annotation tool
 
 # --- Clipboard ---
 wl-clipboard                             # Command-line copy/paste utilities
@@ -41,21 +37,20 @@ zoxide                                   # Smarter cd command
 eza                                      # Modern replacement for ls
 thefuck                                  # Magnificent app which corrects your previous console command
 jq                                       # Command-line JSON processor
-yazi                                     # Blazing fast terminal file manager
 imagemagick                              # Image manipulation tools
 
 # --- Hardware & Audio ---
 brightnessctl                            # Device brightness control
 cava                                     # Console-based Audio Visualizer
+bluetui                                  # tui for bluetooth
 
 # --- AUR Packages ---
 AUR:waybar-niri-taskbar-git              # Waybar module: Niri Workspaces/Taskbar
 AUR:waybar-module-pacman-updates-git     # Waybar module: Pacman updates indicator
 AUR:wlogout                              # Logout menu (Shutdown/Reboot/Lock)
 AUR:matugen                              # Material You theme generator
-AUR:clipse-bin                           # Clipboard manager
+AUR:clipse                               # Clipboard manager
 AUR:clipse-gui                           # Clipboard manager (GUI binary)
-AUR:satty-git                            # Modern screenshot annotation tool
 AUR:python-pywalfox                      # Pywal support for Firefox
 AUR:waypaper                             # GUI wallpaper setter (Frontend for swww)
 AUR:ddcutil-service                      # Monitor hardware brightness control service
