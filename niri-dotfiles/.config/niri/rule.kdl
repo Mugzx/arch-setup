@@ -59,6 +59,7 @@ window-rule {
     match app-id="org.gnome.FileRoller"
     match app-id="thunar" title="文件操作进度"
     match app-id="waypaper"
+    match app-id="clipse-gui"
     match title="群聊的聊天记录"
     match title="聊天记录"
     match title="日历"
