@@ -34,7 +34,7 @@ export WARN="${H_YELLOW}⚠${NC}"
 export ARROW="${H_CYAN}➜${NC}"
 
 # 日志文件
-export TEMP_LOG_FILE="/tmp/log-shorin-arch-setup.txt"
+export TEMP_LOG_FILE="/tmp/log-Mugzx-arch-setup.txt"
 [ ! -f "$TEMP_LOG_FILE" ] && touch "$TEMP_LOG_FILE" && chmod 666 "$TEMP_LOG_FILE"
 
 # --- 2. 基础工具 ---

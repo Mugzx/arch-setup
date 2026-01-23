@@ -56,7 +56,7 @@ else
 fi
 
 # Export username for next scripts
-echo "$MY_USERNAME" > /tmp/shorin_install_user
+echo "$MY_USERNAME" > /tmp/Mugzx_install_user
 
 # ------------------------------------------------------------------------------
 # 2. Create User & Sudo

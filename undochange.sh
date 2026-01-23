@@ -4,7 +4,7 @@
 # undochange.sh - Emergency System Rollback Tool (Silent Mode)
 # ==============================================================================
 # Usage: sudo ./undochange.sh
-# Description: Reverts system to the state "Before Shorin Setup" IMMEDIATELY
+# Description: Reverts system to the state "Before Mugzx Setup" IMMEDIATELY
 # ==============================================================================
 
 RED='\033[0;31m'
@@ -27,10 +27,10 @@ if ! command -v snapper &> /dev/null; then
 fi
 
 # Logic: List snapshots -> Grep description -> Take last one -> Get ID
-ROOT_ID=$(snapper -c root list | grep "Before Shorin Setup" | tail -n 1 | awk '{print $1}')
+ROOT_ID=$(snapper -c root list | grep "Before Mugzx Setup" | tail -n 1 | awk '{print $1}')
 
 if [ -z "$ROOT_ID" ]; then
-    echo -e "${RED}Critical: Could not find snapshot 'Before Shorin Setup' for root.${NC}"
+    echo -e "${RED}Critical: Could not find snapshot 'Before Mugzx Setup' for root.${NC}"
     echo "Cannot perform rollback."
     exit 1
 fi
@@ -40,7 +40,7 @@ echo -e "Found Root Snapshot ID: ${GREEN}$ROOT_ID${NC}"
 # 3. Find Home Snapshot ID (Optional)
 HOME_ID=""
 if snapper list-configs | grep -q "^home "; then
-    HOME_ID=$(snapper -c home list | grep "Before Shorin Setup" | tail -n 1 | awk '{print $1}')
+    HOME_ID=$(snapper -c home list | grep "Before Mugzx Setup" | tail -n 1 | awk '{print $1}')
     if [ -n "$HOME_ID" ]; then
         echo -e "Found Home Snapshot ID: ${GREEN}$HOME_ID${NC}"
     fi

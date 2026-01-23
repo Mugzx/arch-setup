@@ -100,7 +100,7 @@ section "Safety Net" "Creating Initial Snapshots"
 # Snapshot Root
 if snapper list-configs | grep -q "^root "; then
     log "Creating Root snapshot..."
-    if exe snapper -c root create --description "Before Shorin Setup" --cleanup-algorithm number; then
+    if exe snapper -c root create --description "Before Mugzx Setup" --cleanup-algorithm number; then
         success "Root snapshot created."
     else
         error "Failed to create Root snapshot."
@@ -112,7 +112,7 @@ fi
 # Snapshot Home
 if snapper list-configs | grep -q "^home "; then
     log "Creating Home snapshot..."
-    if exe snapper -c home create --description "Before Shorin Setup" --cleanup-algorithm number; then
+    if exe snapper -c home create --description "Before Mugzx Setup" --cleanup-algorithm number; then
         success "Home snapshot created."
     else
         error "Failed to create Home snapshot."

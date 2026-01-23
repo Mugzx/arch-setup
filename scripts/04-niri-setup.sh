@@ -235,7 +235,7 @@ else
   log "Using Global Sources."
 fi
 
-SUDO_TEMP_FILE="/etc/sudoers.d/99_shorin_installer_temp"
+SUDO_TEMP_FILE="/etc/sudoers.d/99_Mugzx_installer_temp"
 echo "$TARGET_USER ALL=(ALL) NOPASSWD: ALL" >"$SUDO_TEMP_FILE"
 chmod 440 "$SUDO_TEMP_FILE"
 
@@ -374,7 +374,7 @@ TEMP_DIR="$PARENT_DIR/niri-dotfiles"
 
 if [ -d "$TEMP_DIR" ]; then
   # Filter Exclusions
-  if [ "$TARGET_USER" != "shorin" ]; then
+  if [ "$TARGET_USER" != "Mugzx" ]; then
     EXCLUDE_FILE="$PARENT_DIR/exclude-dotfiles.txt"
     if [ -f "$EXCLUDE_FILE" ]; then
       log "Processing exclusions..."
@@ -391,7 +391,7 @@ if [ -d "$TEMP_DIR" ]; then
   as_user cp -rf "$TEMP_DIR/." "$HOME_DIR/"
 
   # Post-Process
-  if [ "$TARGET_USER" != "shorin" ]; then
+  if [ "$TARGET_USER" != "Mugzx" ]; then
     as_user truncate -s 0 "$HOME_DIR/.config/niri/output.kdl" 2>/dev/null
     rm -f "$HOME_DIR/.config/gtk-3.0/bookmarks"
   fi

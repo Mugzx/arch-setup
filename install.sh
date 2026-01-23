@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==============================================================================
-# Shorin Arch Setup - Main Installer (v1.1))
+# Mugzx Arch Setup - Main Installer (v1.1))
 # ==============================================================================
 
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -18,7 +18,7 @@ fi
 
 # --- Global Cleanup on Exit ---
 cleanup() {
-    rm -f "/tmp/shorin_install_user"
+    rm -f "/tmp/Mugzx_install_user"
 }
 trap cleanup EXIT
 
@@ -293,7 +293,7 @@ section "Completion" "System Cleanup"
 # --- 1. Snapshot Cleanup Logic ---
 clean_intermediate_snapshots() {
     local config_name="$1"
-    local marker_name="Before Shorin Setup"
+    local marker_name="Before Mugzx Setup"
     
     if ! snapper -c "$config_name" list &>/dev/null; then
         return
@@ -344,12 +344,12 @@ clean_intermediate_snapshots "root"
 clean_intermediate_snapshots "home"
 
 # --- 3. Remove Installer Files ---
-if [ -d "/root/shorin-arch-setup" ]; then
+if [ -d "/root/Mugzx-arch-setup" ]; then
     log "Removing installer from /root..."
     cd /
-    rm -rfv /root/shorin-arch-setup
+    rm -rfv /root/Mugzx-arch-setup
 else
-    log "Repo cleanup skipped (not in /root/shorin-arch-setup)."
+    log "Repo cleanup skipped (not in /root/Mugzx-arch-setup)."
     log "If you cloned this manually, please remove the folder yourself."
 fi
 
@@ -368,8 +368,8 @@ echo ""
 if [ -f "$STATE_FILE" ]; then rm "$STATE_FILE"; fi
 
 log "Archiving log..."
-if [ -f "/tmp/shorin_install_user" ]; then
-    FINAL_USER=$(cat /tmp/shorin_install_user)
+if [ -f "/tmp/Mugzx_install_user" ]; then
+    FINAL_USER=$(cat /tmp/Mugzx_install_user)
 else
     FINAL_USER=$(awk -F: '$3 == 1000 {print $1}' /etc/passwd)
 fi
@@ -377,9 +377,9 @@ fi
 if [ -n "$FINAL_USER" ]; then
     FINAL_DOCS="/home/$FINAL_USER/Documents"
     mkdir -p "$FINAL_DOCS"
-    cp "$TEMP_LOG_FILE" "$FINAL_DOCS/log-shorin-arch-setup.txt"
+    cp "$TEMP_LOG_FILE" "$FINAL_DOCS/log-Mugzx-arch-setup.txt"
     chown -R "$FINAL_USER:$FINAL_USER" "$FINAL_DOCS"
-    echo -e "   ${H_BLUE}●${NC} Log Saved     : ${BOLD}$FINAL_DOCS/log-shorin-arch-setup.txt${NC}"
+    echo -e "   ${H_BLUE}●${NC} Log Saved     : ${BOLD}$FINAL_DOCS/log-Mugzx-arch-setup.txt${NC}"
 fi
 
 # --- Reboot Countdown ---

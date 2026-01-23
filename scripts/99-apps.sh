@@ -158,7 +158,7 @@ info_kv "Scheduled" "Repo: ${#REPO_APPS[@]}" "AUR: ${#AUR_APPS[@]}" "Flatpak: ${
 # ------------------------------------------------------------------------------
 if [ ${#REPO_APPS[@]} -gt 0 ] || [ ${#AUR_APPS[@]} -gt 0 ]; then
     log "Configuring temporary NOPASSWD for installation..."
-    SUDO_TEMP_FILE="/etc/sudoers.d/99_shorin_installer_apps"
+    SUDO_TEMP_FILE="/etc/sudoers.d/99_Mugzx_installer_apps"
     echo "$TARGET_USER ALL=(ALL) NOPASSWD: ALL" > "$SUDO_TEMP_FILE"
     chmod 440 "$SUDO_TEMP_FILE"
 fi
