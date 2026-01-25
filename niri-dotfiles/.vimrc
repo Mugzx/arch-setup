@@ -5,7 +5,7 @@ set relativenumber
 "高亮当前行
 set cursorline
 "语法高亮
-syntax on 
+syntax on
 
 " 开启自动缩进，新的一行会自动与上一行对齐
 set autoindent
@@ -32,4 +32,3 @@ set clipboard=unnamedplus
 
 " 接管鼠标事件
 set mouse=a
-

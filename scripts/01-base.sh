@@ -103,4 +103,3 @@ exe pacman -S --noconfirm --needed base-devel yay paru
 success "Helpers installed."
 
 log "Module 01 completed."
-
