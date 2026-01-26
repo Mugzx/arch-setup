@@ -33,7 +33,7 @@ binds {
     Mod+F4 hotkey-overlay-title="开关任务栏 toggle bar" { spawn-sh "pkill waybar && pkill cava || waybar "; }
     // gnome的文本编辑器
     Mod+M hotkey-overlay-title="记事本 Notebook" { spawn "gnome-text-editor"; }
-    Mod+B hotkey-overlay-title="浏览器 Browser" { spawn-sh "firefox || chromium";}
+    Mod+B hotkey-overlay-title="浏览器 Browser" { spawn "chromium";}
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="终端 Terminal" { spawn "kitty"; }

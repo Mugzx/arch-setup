@@ -1,9 +1,11 @@
+# Arch Linux 的 DE/WM 安装脚本
+
 > [!WARNING]
 >
 > 使用该安装脚本需自备代理，否则无法正常工作。
 >
 
-此 Arch Setup 复刻自[SHORiN-KiWATA/shorin-arch-setup](https://github.com/SHORiN-KiWATA/shorin-arch-setup)。
+仓库复刻自[SHORiN-KiWATA/shorin-arch-setup](https://github.com/SHORiN-KiWATA/shorin-arch-setup)。
 
 ## 使用方法
 
@@ -63,8 +65,8 @@
 
 - 原作者的 Git 提交并不规范，所以我自己新开了一个仓库存放这些配置文件🫠。
 - 部分依赖脚本的功能可能无法正常工作，需要前往以下路径设置脚本「作为程序运行」：
-  - `~/arch-setup/niri-dotfiles/.config/scripts/`
-  - `~/arch-setup/niri-dotfiles/.config/niri/scripts/`
-  - `~/arch-setup/niri-dotfiles/.config/waybar/scripts/`
-  - `~/arch-setup/niri-dotfiles/.config/waybar-niri-Win11Like/scripts/`
-- 这个dotfiles仓库更多按照个人习惯进行配置。
+  - `~/.config/scripts/`
+  - `~/.config/niri/scripts/`
+  - `~/.config/waybar/scripts/`
+  - `~/.config/waybar-niri-Win11Like/scripts/`
+- 这个仓库更多按照个人习惯进行配置。

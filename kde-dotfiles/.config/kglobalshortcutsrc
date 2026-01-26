@@ -251,9 +251,6 @@ switch to next activity=none,,切换到下一个活动
 switch to previous activity=none,,切换到上一个活动
 toggle do not disturb=none,,切换勿扰模式
 
-[services][firefox.desktop]
-_launch=Meta+B
-
 [services][org.kde.konsole.desktop]
 _launch=Ctrl+Alt+T\tMeta+T
 

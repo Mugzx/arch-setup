@@ -39,14 +39,10 @@ window-rule {
     open-focused false
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
 // 以浮动模式打开
 window-rule {
     // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id="nm-connection-editor"
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id="steam" title="Friends List"
     match app-id="blueberry.py" title="蓝牙"
     match app-id="blueman-manager"
@@ -66,7 +62,7 @@ window-rule {
     match title="重命名"
     match app-id="btrfs-assistant"
     match app-id="markpix"
-    match title="Steam 设置" 
+    match title="Steam 设置"
     open-floating true
 }
 window-rule{
@@ -112,23 +108,6 @@ window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
 }
-/-window-rule {
-    // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    default-floating-position x=0 y=0 relative-to="bottom-right"
-    open-floating true
-}
-// window-rule {
-//     // This app-id regular expression will work for both:
-//     // - host Firefox (app-id is "firefox")
-//     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-
-//     match app-id="blueman-manager" title="蓝牙设备"
-//     match app-id="org.pulseaudio.pavucontrol" title="音量控制"
-//     default-floating-position x=0 y=0 relative-to="top-right"
-//     open-floating true
-// }
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {

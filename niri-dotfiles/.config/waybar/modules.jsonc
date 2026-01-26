@@ -56,7 +56,6 @@
   "niri/window": {
     "format": "{}",
     "rewrite": {
-      "(.*) - Mozilla Firefox": "🌎 $1",
       "(.*) - zsh": "> [$1]",
     },
   },
@@ -331,7 +330,7 @@
     },
     "exec-if": "which waybar-module-pacman-updates",
     "exec": "waybar-module-pacman-updates --no-zero-output",
-    "on-click": "kitty -e yay",
+    "on-click": "kitty -e paru",
   },
   //隐私
   "privacy": {
@@ -373,5 +372,4 @@
   "dwl/window": {
     "format": "[{layout}]{title}",
   },
-
 }

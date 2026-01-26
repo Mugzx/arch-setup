@@ -38,7 +38,7 @@ info_kv "Target" "$TARGET_USER"
 section "Step 1/5" "Plasma Core"
 
 log "Installing KDE Plasma Meta & Apps..."
-KDE_PKGS="plasma-meta konsole dolphin kate firefox qt6-multimedia-ffmpeg pipewire-jack sddm"
+KDE_PKGS="plasma-meta konsole dolphin kate qt6-multimedia-ffmpeg pipewire-jack sddm"
 exe pacman -Syu --noconfirm --needed $KDE_PKGS
 success "KDE Plasma installed."
 
@@ -92,10 +92,10 @@ UNDO_SCRIPT="$PARENT_DIR/undochange.sh"
 # --- Critical Failure Handler ---
 critical_failure_handler() {
     local failed_pkg="$1"
-    
+
     # Disable trap to prevent loops
     trap - ERR
-    
+
     echo ""
     echo -e "\033[0;31m################################################################\033[0m"
     echo -e "\033[0;31m#                                                              #\033[0m"
@@ -139,7 +139,7 @@ verify_installation() {
 }
 
 if [ -f "$LIST_FILE" ]; then
-    
+
     REPO_APPS=()
     AUR_APPS=()
 
@@ -195,9 +195,9 @@ if [ -f "$LIST_FILE" ]; then
                     --color=info:magenta \
                     --color=prompt:cyan,pointer:cyan:bold,marker:green:bold \
                     --color=spinner:yellow)
-            
+
             clear
-            
+
             if [ -z "$SELECTED_RAW" ]; then
                 warn "User cancelled selection. Skipping Step 3."
                 # Empty arrays
@@ -244,7 +244,7 @@ if [ -f "$LIST_FILE" ]; then
     # --- A. Install Repo Apps (BATCH MODE) ---
     if [ ${#REPO_APPS[@]} -gt 0 ]; then
         log "Phase 1: Batch Installing Repository Packages..."
-        
+
         # Filter installed
         REPO_QUEUE=()
         for pkg in "${REPO_APPS[@]}"; do
@@ -256,7 +256,7 @@ if [ -f "$LIST_FILE" ]; then
         if [ ${#REPO_QUEUE[@]} -gt 0 ]; then
             # Batch Install
             exe runuser -u "$TARGET_USER" -- yay -Syu --noconfirm --needed --answerdiff=None --answerclean=None "${REPO_QUEUE[@]}"
-            
+
             # Verify Loop
             log "Verifying batch installation..."
             for pkg in "${REPO_QUEUE[@]}"; do
@@ -287,17 +287,17 @@ if [ -f "$LIST_FILE" ]; then
                 log "Skipping '$aur_pkg' (Already installed)."
                 continue
             fi
-            
+
             log "Installing AUR: $aur_pkg ..."
             install_success=false
             max_retries=2
-            
+
             for (( i=0; i<=max_retries; i++ )); do
                 if [ $i -gt 0 ]; then
                     warn "Retry $i/$max_retries for '$aur_pkg' in 3 seconds..."
                     sleep 3
                 fi
-                
+
                 runuser -u "$TARGET_USER" -- yay -S --noconfirm --needed --answerdiff=None --answerclean=None "$aur_pkg"
                 EXIT_CODE=$?
 
@@ -336,24 +336,24 @@ DOTFILES_SOURCE="$PARENT_DIR/kde-dotfiles"
 
 if [ -d "$DOTFILES_SOURCE" ]; then
     log "Deploying KDE configurations..."
-    
+
     # 1. Backup Existing .config
     BACKUP_NAME="config_backup_kde_$(date +%s).tar.gz"
     if [ -d "$HOME_DIR/.config" ]; then
         log "Backing up ~/.config to $BACKUP_NAME..."
         exe runuser -u "$TARGET_USER" -- tar -czf "$HOME_DIR/$BACKUP_NAME" -C "$HOME_DIR" .config
     fi
-    
+
     # 2. Explicitly Copy .config and .local
-    
+
     # --- Process .config ---
     if [ -d "$DOTFILES_SOURCE/.config" ]; then
         log "Merging .config..."
         if [ ! -d "$HOME_DIR/.config" ]; then mkdir -p "$HOME_DIR/.config"; fi
-        
+
         exe cp -rf "$DOTFILES_SOURCE/.config/"* "$HOME_DIR/.config/" 2>/dev/null || true
         exe cp -rf "$DOTFILES_SOURCE/.config/." "$HOME_DIR/.config/" 2>/dev/null || true
-        
+
         log "Fixing permissions for .config..."
         exe chown -R "$TARGET_USER" "$HOME_DIR/.config"
     fi
@@ -362,10 +362,10 @@ if [ -d "$DOTFILES_SOURCE" ]; then
     if [ -d "$DOTFILES_SOURCE/.local" ]; then
         log "Merging .local..."
         if [ ! -d "$HOME_DIR/.local" ]; then mkdir -p "$HOME_DIR/.local"; fi
-        
+
         exe cp -rf "$DOTFILES_SOURCE/.local/"* "$HOME_DIR/.local/" 2>/dev/null || true
         exe cp -rf "$DOTFILES_SOURCE/.local/." "$HOME_DIR/.local/" 2>/dev/null || true
-        
+
         log "Fixing permissions for .local..."
         exe chown -R "$TARGET_USER" "$HOME_DIR/.local"
     fi
