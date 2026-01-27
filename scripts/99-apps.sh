@@ -95,7 +95,7 @@ else
     else
         clear
         echo -e "\n  Loading application list..."
-        
+
         SELECTED_RAW=$(grep -vE "^\s*#|^\s*$" "$LIST_FILE" | \
             sed -E 's/[[:space:]]+#/\t#/' | \
             fzf --multi \
@@ -120,7 +120,7 @@ else
                 --color=info:magenta \
                 --color=prompt:cyan,pointer:cyan:bold,marker:green:bold \
                 --color=spinner:yellow)
-        
+
         clear
         
         if [ -z "$SELECTED_RAW" ]; then
@@ -170,7 +170,7 @@ fi
 # --- A. Install Repo Apps (BATCH MODE) ---
 if [ ${#REPO_APPS[@]} -gt 0 ]; then
     section "Step 1/3" "Official Repository Packages (Batch)"
-    
+
     REPO_QUEUE=()
     for pkg in "${REPO_APPS[@]}"; do
         if pacman -Qi "$pkg" &>/dev/null; then
@@ -182,9 +182,9 @@ if [ ${#REPO_APPS[@]} -gt 0 ]; then
 
     if [ ${#REPO_QUEUE[@]} -gt 0 ]; then
         BATCH_LIST="${REPO_QUEUE[*]}"
-        info_kv "Installing" "${#REPO_QUEUE[@]} packages via Pacman/Yay"
-        
-        if ! exe as_user yay -Syu --noconfirm --needed --answerdiff=None --answerclean=None $BATCH_LIST; then
+        info_kv "Installing" "${#REPO_QUEUE[@]} packages via Pacman/Paru"
+
+        if ! exe as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake $BATCH_LIST; then
             error "Batch installation failed. Some repo packages might be missing."
             for pkg in "${REPO_QUEUE[@]}"; do
                 FAILED_PACKAGES+=("repo:$pkg")
@@ -200,13 +200,12 @@ fi
 # --- B. Install AUR Apps (INDIVIDUAL MODE + RETRY) ---
 if [ ${#AUR_APPS[@]} -gt 0 ]; then
     section "Step 2/3" "AUR Packages (Sequential + Retry)"
-    
+
     for app in "${AUR_APPS[@]}"; do
         if pacman -Qi "$app" &>/dev/null; then
             log "Skipping '$app' (Already installed)."
             continue
         fi
-
 
         log "Installing AUR: $app ..."
         install_success=false
@@ -217,8 +216,8 @@ if [ ${#AUR_APPS[@]} -gt 0 ]; then
                 warn "Retry $i/$max_retries for '$app' in 3 seconds..."
                 sleep 3
             fi
-            
-            if as_user yay -S --noconfirm --needed --answerdiff=None --answerclean=None "$app"; then
+
+            if as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake "$app"; then
                 install_success=true
                 success "Installed $app"
                 break
@@ -296,7 +295,7 @@ if pacman -Qi virt-manager &>/dev/null; then
   sleep 3
   virsh net-start default >/dev/null 2>&1 || warn "Default network might be already active."
   virsh net-autostart default >/dev/null 2>&1 || true
-  
+
   success "Virtualization (KVM) configured."
 fi
 
@@ -349,7 +348,7 @@ if pacman -Qi wine &>/dev/null; then
         # 必须以目标用户身份执行 wineserver -k
         as_user env WINEPREFIX="$WINE_PREFIX" wineserver -k
     fi
-    
+
     success "Wine fonts installed and cache refresh triggered."
   else
     warn "Resources font directory not found at: $FONT_SRC"
@@ -392,16 +391,16 @@ fi
 if [ ${#FAILED_PACKAGES[@]} -gt 0 ]; then
     DOCS_DIR="$HOME_DIR/Documents"
     REPORT_FILE="$DOCS_DIR/安装失败的软件.txt"
-    
+
     if [ ! -d "$DOCS_DIR" ]; then as_user mkdir -p "$DOCS_DIR"; fi
-    
+
     echo -e "\n========================================================" >> "$REPORT_FILE"
     echo -e " Installation Failure Report - $(date)" >> "$REPORT_FILE"
     echo -e "========================================================" >> "$REPORT_FILE"
     printf "%s\n" "${FAILED_PACKAGES[@]}" >> "$REPORT_FILE"
-    
+
     chown "$TARGET_USER:$TARGET_USER" "$REPORT_FILE"
-    
+
     echo ""
     warn "Some applications failed to install."
     warn "A report has been saved to:"

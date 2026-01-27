@@ -91,7 +91,7 @@ ensure_package_installed() {
     fi
 
     # Try installation
-    if as_user yay -Syu --noconfirm --needed --answerdiff=None --answerclean=None "$pkg"; then
+    if as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake "$pkg"; then
       install_success=true
       break
     else
@@ -183,7 +183,7 @@ fi
 # STEP 2: Core Components
 # ==============================================================================
 section "Step 1/9" "Core Components"
-PKGS="niri xdg-desktop-portal-gnome fuzzel kitty firefox libnotify mako polkit-gnome"
+PKGS="niri xdg-desktop-portal-gnome fuzzel kitty libnotify mako polkit-gnome"
 exe pacman -Syu --noconfirm --needed $PKGS
 
 # ==============================================================================
@@ -331,7 +331,7 @@ if [ -f "$LIST_FILE" ]; then
     # 1. Batch Install Repo Packages
     if [ ${#BATCH_LIST[@]} -gt 0 ]; then
       log "Phase 1: Batch Installing Repo Packages..."
-      as_user yay -S --noconfirm --needed --answerdiff=None --answerclean=None "${BATCH_LIST[@]}" || true
+      as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake "${BATCH_LIST[@]}" || true
 
       # Verify Each
       for pkg in "${BATCH_LIST[@]}"; do

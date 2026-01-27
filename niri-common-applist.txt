@@ -2,22 +2,21 @@ neovim                                   # Advanced version of vim
 lazyvim                                  # Great preset of neovim
 wine                                     # run windows exe
 virt-manager                             # KVM qemu virtula machine
-yazi                                     # great tui file manager
-btop                                     # great tui mission center / system info
 
 # --- Gaming & Media ---
-steam                                    # Gaming Platform (Valve)
-lutris                                   # Gaming outside steam
-heroic-games-launcher-bin                # Playing Epic games
-protonplus                               # mange proton 
+# steam                                    Gaming Platform (Valve)
+# lutris                                   Gaming outside steam
+# heroic-games-launcher-bin                Playing Epic games
+# protonplus                               mange proton
 mpv                                      # Minimalist High Performance Video Player
-fragments                                # BitTorrent Client (GNOME style)
-mangohud                                 # OSD tool for gaming (like msi afterburner)
-gamescope                                # gaming conpositor made by Valve
+# fragments                                BitTorrent Client (GNOME style)
+# mangohud                                 OSD tool for gaming (like msi afterburner)
+# gamescope                                gaming conpositor made by Valve
 upscaler                                 # image upscaler (make it more clear)
-curtail                                  # compress image (make it smaller)    
+curtail                                  # compress image (make it smaller)
 lact                                     # GPU Control Tool (Overclocking/Fan)
 obs-studio                               # OBS Studio (Streaming & Recording)
+
 # --- System Utilities ---
 yazi                                     # Blazing fast terminal file manager
 btop                                     # Resource Monitor (TUI)
@@ -32,22 +31,23 @@ exfat-utils                              # exFAT filesystem utilities
 f2fs-tools                               # Tools for Flash-Friendly File System
 udftools                                 # Tools for UDF filesystems (DVD/Optical)
 xfsprogs                                 # Tools for XFS filesystems
+gvfs-mtp                                 # MTP filesystem driver (nautilus)
 
 # --- Others ---
 gnome-font-viewer                        # manage fonts easily
 gnome-calendar                           # calendar
 gnome-clocks                             # clocks
-gnome-text-editor                        # notebook
 localsend                                # send files to other devices
 
 # --- AUR Packages (Social) ---
 AUR:linuxqq-appimage                     # Tencent QQ (AppImage)
-AUR:wechat-appimage                      # WeChat (AppImage)
+# AUR:wechat-appimage                      WeChat (AppImage)
+AUR:flclash-appimage-bin                 # Clash Proxy (AppImage)
 AUR:lsfg-vk-bin                          # yellow duck frame generator
 AUR:mangojuice-bin                       # GUI for mangohud
+AUR:vscodium-bin                         # Open source version of VS Code (Code Editor)
+AUR:ungoogled-chromium-bin               # Better Google Chrome
 
-# --- Flatpak Packages (Prefix with flatpak:) ---      
+# --- Flatpak Packages (Prefix with flatpak:) ---
 flatpak:it.mijorus.gearlever             # AppImage Manager (Integrates AppImages)
-flatpak:io.github.fabrialberio.pinapp    # PinApp (Unofficial Pinterest Client)
 flatpak:com.github.wwmm.easyeffects      # Audio Effects for PipeWire (Equalizer)
-flatpak:com.github.unrud.VideoDownloader # Download youtube or bilibili videos

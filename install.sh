@@ -340,7 +340,7 @@ clean_intermediate_snapshots() {
 }
 
 # --- 2. Execute Cleanup ---
-log "Cleaning Pacman/Yay cache..."
+log "Cleaning Pacman cache..."
 exe pacman -Sc --noconfirm
 
 clean_intermediate_snapshots "root"

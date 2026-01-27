@@ -75,7 +75,7 @@ popupWidth=432
 
 [Containments][2][Applets][25][Configuration][Upgrade]
 terminal=/usr/bin/konsole
-wrapper=yay
+wrapper=paru
 
 [Containments][2][Applets][26]
 immutability=1

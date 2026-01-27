@@ -36,7 +36,7 @@ function pac --description "Fuzzy search and install packages (Official Repo fir
     set aur_filter      '^(mingw-|lib32-|cross-|.*-debug$)'
 
     # --- 逻辑区域 ---
-    set preview_cmd 'yay -Si {2}'
+    set preview_cmd 'paru -Si {2}'
 
     # 生成列表 -> 过滤 -> 上色 -> fzf
     set packages (begin
@@ -45,7 +45,7 @@ function pac --description "Fuzzy search and install packages (Official Repo fir
             '{printf "%s%-10s%s %-30s %s\n", c, $1, r, $2, $3}'
 
         # 2. AUR 源：紫色前缀 + 过滤垃圾包
-        yay -Sl aur | grep -vE "$aur_filter" | awk -v c=$color_aur -v r=$color_reset \
+        paru -Sl aur | grep -vE "$aur_filter" | awk -v c=$color_aur -v r=$color_reset \
             '{printf "%s%-10s%s %-30s %s\n", c, $1, r, $2, $3}'
     end | \
     fzf --multi --ansi \
@@ -61,7 +61,7 @@ function pac --description "Fuzzy search and install packages (Official Repo fir
     if test -n "$packages"
         echo "正在准备安装: $packages"
         # 修复点：直接使用 $packages 列表，不要再用 awk 处理，否则多选会失效
-        yay -S $packages
+        paru -S $packages
     end
 end
 # fzf卸载软件包
@@ -74,7 +74,7 @@ function pacr --description "Fuzzy find and remove packages (UI matched with pac
 
     # --- 逻辑区域 ---
     # 预览命令：查询本地已安装详细信息 (-Qi)，目标是第2列(包名)
-    set preview_cmd 'yay -Qi {2}'
+    set preview_cmd 'paru -Qi {2}'
 
     # 生成列表 -> 上色 -> fzf
     set packages (begin
@@ -99,6 +99,6 @@ function pacr --description "Fuzzy find and remove packages (UI matched with pac
     if test -n "$packages"
         echo "正在准备卸载: $packages"
         # -Rns: 递归删除配置文件和不再需要的依赖
-        yay -Rns $packages
+        paru -Rns $packages
     end
 end
