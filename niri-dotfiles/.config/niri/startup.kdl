@@ -1,0 +1,30 @@
+// 自动启动
+
+// 询问管理员权限功能（身份验证）
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+// 桌面壁纸的守护进程
+spawn-at-startup "swww-daemon"
+// 总览界面背景壁纸的守护进程
+spawn-sh-at-startup "swww-daemon -n overview"
+// 启动niri时ss随机更换一张壁纸
+spawn-at-startup "waypaper" "--random"
+// 有聚焦窗口时桌面自动模糊的脚本
+spawn-at-startup "~/.config/scripts/niri_auto_blur_bg.sh"
+// 屏幕分享、录屏相关的环境设置
+spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=niri & /usr/lib/xdg-desktop-portal-gnome"
+// GNOME tracker修复
+spawn-sh-at-startup "systemctl --user set-environment XDG_SESSION_CLASS=user"
+// 通知程序
+spawn-at-startup "mako"
+// 任务栏
+spawn-at-startup "waybar"
+// 输入法
+spawn-at-startup "fcitx5"
+// 剪贴板守护进程
+spawn-sh-at-startup "copyq & disown"
+// 闲置时自动熄屏锁屏休眠的脚本
+spawn-at-startup "~/.config/niri/scripts/swayidle.sh"
+// 大写锁定键的osd显示
+spawn-at-startup "swayosd-server"
+// alt+tab切换器（这是一个第三方，无缩略图显示的切换器）
+spawn-at-startup "niriswitcher"

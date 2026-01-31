@@ -52,7 +52,6 @@ window-rule {
     match app-id="org.gnome.clocks" title="时钟"
     match app-id="fcitx" title="Fcitx5 Input Window"
     match app-id="org.gnome.FileRoller"
-    match app-id="thunar" title="文件操作进度"
     match app-id="waypaper"
     match app-id="copyq"
     match title="群聊的聊天记录"
@@ -96,7 +95,7 @@ window-rule {
 window-rule {
     match app-id="mpv"
     match app-id="celluloid"
-    opacity 1.0 
+    opacity 1.0
 }
 
 
