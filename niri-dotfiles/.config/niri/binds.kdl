@@ -8,6 +8,7 @@ binds {
     Mod+Alt+W  hotkey-overlay-title="切换壁纸" { spawn "waypaper"; }
     Mod+Alt+T  hotkey-overlay-title="切换颜色策略" { spawn "~/.config/scripts/matugen-select-type.sh"; }
     Mod+Alt+L  hotkey-overlay-title="锁屏" { spawn "swaylock"; }
+    Mod+Alt+V hotkey-overlay-title="剪贴板" {spawn-sh "copyq toggle";}
 
     Mod+F1  hotkey-overlay-title="开关输入法" { spawn-sh "pkill fcitx5 || fcitx5 "; }
     Mod+F2  hotkey-overlay-title="顶部任务栏" { spawn-sh "pkill waybar & pkill cava || true && waybar -c $HOME/.config/waybar/config.jsonc -s $HOME/.config/waybar/style.css "; }

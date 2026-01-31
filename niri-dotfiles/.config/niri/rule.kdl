@@ -47,7 +47,6 @@ window-rule {
     match app-id="blueberry.py" title="蓝牙"
     match app-id="blueman-manager"
     match app-id="flameshot"
-    match app-id="com.github.hluk.copyq" 
     match app-id="be.alexandervanhee.gradia"
     match app-id="org.pulseaudio.pavucontrol" title="音量控制"
     match app-id="org.gnome.clocks" title="时钟"
@@ -55,7 +54,7 @@ window-rule {
     match app-id="org.gnome.FileRoller"
     match app-id="thunar" title="文件操作进度"
     match app-id="waypaper"
-    match app-id="clipse-gui"
+    match app-id="copyq"
     match title="群聊的聊天记录"
     match title="聊天记录"
     match title="日历"
@@ -67,12 +66,12 @@ window-rule {
 }
 window-rule{
     match app-id="bluetui"
-    min-width 500 
+    min-width 500
     min-height 600
 	open-floating true
 }
 
-    // waydroid调整
+// waydroid调整
 window-rule {
     match title="gsr ui"
     match app-id="waydroid"
