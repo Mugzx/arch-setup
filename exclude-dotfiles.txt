@@ -2,7 +2,5 @@ lsfg-vk
 mango
 swaylock
 swaync
-Thunar
-ulauncher
 wofi
 xfce4
