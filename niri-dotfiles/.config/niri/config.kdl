@@ -98,7 +98,7 @@ input {
         accel-profile "flat"
         // scroll-method "no-scroll"
         //speed of scroll,like:
-        //scroll-factor horizontal=2.0 vertical=-5.0 
+        //scroll-factor horizontal=2.0 vertical=-5.0
     }
 
     trackpoint {

@@ -108,7 +108,6 @@
           "label": "󰃞",
           "command": "ddcutil --display 1 setvcp 10 10 && notify-send -a 'Ddcutil' 'Brightness set to 10%'"
         }
-                
       ]
     }
   }

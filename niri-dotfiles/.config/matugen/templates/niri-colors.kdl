@@ -5,7 +5,7 @@ layout{
 
         }
 }
-recent-windows {    
+recent-windows {
     highlight {
         active-color "{{colors.surface_bright.default.hex}}"
         urgent-color "{{colors.error.default.hex}}"

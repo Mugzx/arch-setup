@@ -130,7 +130,7 @@ while true; do
             
             # 如果此时 Super+Q 杀掉 Slurp，GEO_NEXT 为空，回到菜单
             if [ -z "$GEO_NEXT" ]; then 
-                continue 
+                continue
             fi
             
             IFS=', x' read -r _TEMP_X NEW_Y _TEMP_W NEW_H <<< "$GEO_NEXT"
@@ -141,25 +141,25 @@ while true; do
             ((INDEX++))
             ;;
             
-        *"💾"*) 
+        *"💾"*)
             SAVE_MODE="save"
-            break 
+            break
             ;;
             
-        *"🎨"*) 
+        *"🎨"*)
             SAVE_MODE="edit"
-            break 
+            break
             ;;
             
-        *"❌"*) 
-            exit 0 
+        *"❌"*)
+            exit 0
             ;;
             
-        *) 
+        *)
             # Fuzzel 被 Super+Q 关闭，ACTION 为空，进入这里
             # 直接 Break 跳出循环，进入保存/拼接流程 (防止误操作导致丢失)
             # 或者如果你想放弃，这里改成 exit 0
-            break 
+            break
             ;;
     esac
 done

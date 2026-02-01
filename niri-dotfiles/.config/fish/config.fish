@@ -27,8 +27,8 @@ abbr fa fastfetch
 function pac --description "Fuzzy search and install packages (Official Repo first)"
     # --- 配置区域 ---
     # 1. 定义颜色 (ANSI 标准色，兼容 Matugen)
-    set color_official  "\033[34m"   
-    set color_aur       "\033[35m"   
+    set color_official  "\033[34m"
+    set color_aur       "\033[35m"
     set color_reset     "\033[0m"
 
     # 2. AUR 净化过滤器 (正则)
@@ -68,8 +68,8 @@ end
 function pacr --description "Fuzzy find and remove packages (UI matched with pac)"
     # --- 配置区域 ---
     # 1. 定义颜色 (保持与 pac 一致)
-    set color_official  "\033[34m"    
-    set color_aur       "\033[35m"    
+    set color_official  "\033[34m"
+    set color_aur       "\033[35m"
     set color_reset     "\033[0m"
 
     # --- 逻辑区域 ---

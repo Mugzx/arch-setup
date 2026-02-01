@@ -1,14 +1,14 @@
 #! /bin/bash
 
-waybar & 
+waybar &
 
-mako & 
+mako &
 
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & 
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 swww-daemon &
 
-fcitx5 & 
+fcitx5 &
 
 copyq &
 

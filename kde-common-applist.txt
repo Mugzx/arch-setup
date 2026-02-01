@@ -6,7 +6,7 @@ ksystemlog                               # System Log Viewer
 pacman-contrib                           # Pacman utilities (paccache, checkupdates)
 btop                                     # Resource Monitor (TUI)
 lact                                     # GPU Control Panel (Overclocking/Fan control)
-upscaler                                 # # AI Image Upscaler (Enhance low-res images)
+upscaler                                 # AI Image Upscaler (Enhance low-res images)
 curtail                                  # Image Compressor (Reduce PNG/JPG size)
 
 # --- Disk & Filesystem Tools ---

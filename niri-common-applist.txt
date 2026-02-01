@@ -1,17 +1,17 @@
 neovim                                   # Advanced version of vim
 lazyvim                                  # Great preset of neovim
 wine                                     # run windows exe
-virt-manager                             # KVM qemu virtula machine
+virt-manager                             # KVM qemu virtual machine
 
 # --- Gaming & Media ---
 # steam                                    Gaming Platform (Valve)
 # lutris                                   Gaming outside steam
 # heroic-games-launcher-bin                Playing Epic games
-# protonplus                               mange proton
+# protonplus                               manage proton
 mpv                                      # Minimalist High Performance Video Player
 # fragments                                BitTorrent Client (GNOME style)
 # mangohud                                 OSD tool for gaming (like msi afterburner)
-# gamescope                                gaming conpositor made by Valve
+# gamescope                                gaming compositor made by Valve
 upscaler                                 # image upscaler (make it more clear)
 curtail                                  # compress image (make it smaller)
 lact                                     # GPU Control Tool (Overclocking/Fan)
@@ -23,7 +23,8 @@ btop                                     # Resource Monitor (TUI)
 gnome-disk-utility                       # Disk Management Utility (Disks)
 baobab                                   # Disk Usage Analyzer
 mission-center                           # System Monitor (Task Manager style)
-flatseal                                 # flatpak permission manager 
+flatseal                                 # flatpak permission manager
+
 # --- Filesystem Support ---
 dosfstools                               # Tools for FAT12/16/32 filesystems
 ntfs-3g                                  # NTFS filesystem driver
@@ -37,7 +38,7 @@ gvfs-mtp                                 # MTP filesystem driver (nautilus)
 gnome-font-viewer                        # manage fonts easily
 gnome-calendar                           # calendar
 gnome-clocks                             # clocks
-localsend                                # send files to other devices
+localsend                                # send files across devices
 
 # --- AUR Packages (Social) ---
 AUR:linuxqq-appimage                     # Tencent QQ (AppImage)

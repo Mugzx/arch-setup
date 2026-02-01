@@ -80,7 +80,7 @@ for cmd in "${REQUIRED_CMDS[@]}"; do
 done
 
 EDITOR_CMD=""
-if command -v satty &> /dev/null; then EDITOR_CMD="satty --filename"; 
+if command -v satty &> /dev/null; then EDITOR_CMD="satty --filename";
 elif command -v swappy &> /dev/null; then EDITOR_CMD="swappy -f"; fi
 
 MENU_CMD=""
@@ -129,8 +129,8 @@ while true; do
             GEO_NEXT=$(slurp)
             
             # 如果此时 Super+Q 杀掉 Slurp，GEO_NEXT 为空，回到菜单
-            if [ -z "$GEO_NEXT" ]; then 
-                continue 
+            if [ -z "$GEO_NEXT" ]; then
+                continue
             fi
             
             IFS=', x' read -r _TEMP_X NEW_Y _TEMP_W NEW_H <<< "$GEO_NEXT"
@@ -141,25 +141,25 @@ while true; do
             ((INDEX++))
             ;;
             
-        *"💾"*) 
+        *"💾"*)
             SAVE_MODE="save"
-            break 
+            break
             ;;
             
-        *"🎨"*) 
+        *"🎨"*)
             SAVE_MODE="edit"
-            break 
+            break
             ;;
             
-        *"❌"*) 
-            exit 0 
+        *"❌"*)
+            exit 0
             ;;
             
-        *) 
+        *)
             # Fuzzel 被 Super+Q 关闭，ACTION 为空，进入这里
             # 直接 Break 跳出循环，进入保存/拼接流程 (防止误操作导致丢失)
             # 或者如果你想放弃，这里改成 exit 0
-            break 
+            break
             ;;
     esac
 done
