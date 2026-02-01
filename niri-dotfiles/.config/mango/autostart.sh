@@ -17,7 +17,3 @@ dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 /usr/lib/xdg-desktop-portal-wlr &
 
 hypridle &
-
-clipse --listen &
-
-

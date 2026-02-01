@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=Catppuccin-Macchiato
+ColorScheme=catppuccin-mocha
 Font=JetBrains Maple Mono,15,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 LineSpacing=0
 
