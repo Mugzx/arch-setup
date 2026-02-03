@@ -12,10 +12,6 @@ DEBUG=${DEBUG:-0}
 CN_MIRROR=${CN_MIRROR:-0}
 UNDO_SCRIPT="$SCRIPT_DIR/niri-undochange.sh"
 
-# --- [CONFIGURATION] ---
-# LazyVim 硬性依赖列表
-LAZYVIM_DEPS=("neovim" "ripgrep" "fd" "ttf-jetbrains-mono-nerd" "git")
-
 check_root
 
 # --- [HELPER FUNCTIONS] ---
@@ -229,7 +225,7 @@ else
   log "Using Global Sources."
 fi
 
-SUDO_TEMP_FILE="/etc/sudoers.d/99_Mugzx_installer_temp"
+SUDO_TEMP_FILE="/etc/sudoers.d/99_installer_temp"
 echo "$TARGET_USER ALL=(ALL) NOPASSWD: ALL" >"$SUDO_TEMP_FILE"
 chmod 440 "$SUDO_TEMP_FILE"
 
@@ -301,22 +297,6 @@ if [ -f "$LIST_FILE" ]; then
     fi
   fi
 
-  # --- Pre-Installation Filter (LazyVim Interceptor) ---
-  INSTALL_LAZYVIM=false
-  FINAL_ARRAY=()
-  if [ ${#PACKAGE_ARRAY[@]} -gt 0 ]; then
-    for pkg in "${PACKAGE_ARRAY[@]}"; do
-      if [ "${pkg,,}" == "lazyvim" ]; then
-        INSTALL_LAZYVIM=true
-        FINAL_ARRAY+=("${LAZYVIM_DEPS[@]}")
-        info_kv "Config" "LazyVim detected" "Setup deferred to post-dotfiles"
-      else
-        FINAL_ARRAY+=("$pkg")
-      fi
-    done
-    PACKAGE_ARRAY=("${FINAL_ARRAY[@]}")
-  fi
-
   # --- Installation Loop ---
   if [ ${#PACKAGE_ARRAY[@]} -gt 0 ]; then
     BATCH_LIST=()
@@ -360,7 +340,7 @@ else
 fi
 
 # ==============================================================================
-# STEP 6: Dotfiles & LazyVim
+# STEP 6: Dotfiles
 # ==============================================================================
 section "Step 5/9" "Deploying Dotfiles"
 
@@ -406,26 +386,6 @@ if [ -d "$TEMP_DIR" ]; then
   success "Dotfiles Applied."
 else
   warn "Dotfiles missing in temp directory."
-fi
-
-# --- Post-Dotfiles Configuration: LazyVim ---
-if [ "$INSTALL_LAZYVIM" = true ]; then
-  section "Config" "Applying LazyVim Overrides"
-  NVIM_CFG="$HOME_DIR/.config/nvim"
-
-  if [ -d "$NVIM_CFG" ]; then
-    BACKUP_PATH="$HOME_DIR/.config/nvim.old.dotfiles.$(date +%s)"
-    warn "Collision detected. Moving existing nvim config to $BACKUP_PATH"
-    mv "$NVIM_CFG" "$BACKUP_PATH"
-  fi
-
-  log "Cloning LazyVim starter..."
-  if as_user git clone https://github.com/Mugzx/nvim.git "$NVIM_CFG"; then
-    rm -rf "$NVIM_CFG/.git"
-    success "LazyVim installed (Override)."
-  else
-    error "Failed to clone LazyVim."
-  fi
 fi
 
 log "Hiding useless .desktop files"

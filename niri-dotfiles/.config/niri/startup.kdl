@@ -6,13 +6,14 @@ spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "swww-daemon"
 // 总览界面背景壁纸的守护进程
 spawn-sh-at-startup "swww-daemon -n overview"
-// 启动niri时ss随机更换一张壁纸
-spawn-at-startup "waypaper" "--random"
-// 有聚焦窗口时桌面自动模糊的脚本
+// 启动 niri 时随机更换/维持当前壁纸
+//spawn-at-startup "waypaper" "--random"
+spawn-at-startup "waypaper" "--restore"
+// 聚焦窗口时桌面自动模糊
 spawn-at-startup "~/.config/scripts/niri_auto_blur_bg.sh"
 // 屏幕分享、录屏相关的环境设置
 spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=niri & /usr/lib/xdg-desktop-portal-gnome"
-// GNOME tracker修复
+// GNOME tracker 修复
 spawn-sh-at-startup "systemctl --user set-environment XDG_SESSION_CLASS=user"
 // 通知程序
 spawn-at-startup "mako"
@@ -20,11 +21,11 @@ spawn-at-startup "mako"
 spawn-at-startup "waybar"
 // 输入法
 spawn-at-startup "fcitx5"
-// 剪贴板守护进程
+// 剪贴板
 spawn-sh-at-startup "copyq & disown"
-// 闲置时自动熄屏锁屏休眠的脚本
+// 闲置时自动熄屏锁屏休眠
 spawn-at-startup "~/.config/niri/scripts/swayidle.sh"
-// 大写锁定键的osd显示
+// 大写锁定键的 osd 显示
 spawn-at-startup "swayosd-server"
-// alt+tab切换器（这是一个第三方，无缩略图显示的切换器）
+// alt+tab切换器（第三方，无缩略图显示的切换器）
 spawn-at-startup "niriswitcher"

@@ -1,5 +1,4 @@
 neovim                                   # Advanced version of vim
-lazyvim                                  # Great preset of neovim
 wine                                     # run windows exe
 virt-manager                             # KVM qemu virtual machine
 
@@ -20,7 +19,7 @@ obs-studio                               # OBS Studio (Streaming & Recording)
 # --- System Utilities ---
 yazi                                     # Blazing fast terminal file manager
 btop                                     # Resource Monitor (TUI)
-gnome-disk-utility                       # Disk Management Utility (Disks)
+# gnome-disk-utility                       Disk Management Utility (Disks)
 baobab                                   # Disk Usage Analyzer
 mission-center                           # System Monitor (Task Manager style)
 flatseal                                 # flatpak permission manager

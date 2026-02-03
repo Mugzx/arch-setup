@@ -5,7 +5,7 @@
 > 使用该安装脚本需自备代理，否则无法正常工作。
 >
 
-仓库复刻自[SHORiN-KiWATA/shorin-arch-setup](https://github.com/SHORiN-KiWATA/shorin-arch-setup)。
+仓库复刻自 [shorin-arch-setup](https://github.com/SHORiN-KiWATA/shorin-arch-setup)。
 
 ## 使用方法
 
