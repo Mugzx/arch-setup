@@ -50,12 +50,12 @@
 │   ├── 06-kdeplasma-setup.sh # KDE Plasma 安装和配置
 │   ├── 99-apps.sh # 安装应用列表中的软件包
 │   └── niri-undochange.sh # 快照回档 (Niri)
-├── niri-common-applist.txt # Niri 常用软件应用列表★
 ├── exclude-dotfiles.txt # 需要排除的配置★
 ├── install.sh # 主安装脚本，调用其他脚本完成系统安装
 ├── kde-applist.txt # KDE (KDE Plasma 桌面环境)
 ├── kde-common-applist.txt # KDE 常用软件应用列表★
 ├── niri-applist.txt # Niri (Niri 窗口管理器)
+├── niri-common-applist.txt # Niri 常用软件应用列表★
 └── undochange.sh # 快照回档
 ```
 

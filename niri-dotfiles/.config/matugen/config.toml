@@ -11,6 +11,7 @@ post_hook='rm ~/.config/waybar-niri-Win11Like/colors.css && ln -s ~/.config/wayb
 [templates.fuzzel]
 input_path = '~/.config/matugen/templates/fuzzel.ini'
 output_path = '~/.config/fuzzel/colors.ini'
+
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty-colors.conf'
 output_path ='~/.config/kitty/themes/matugen.conf'
@@ -47,28 +48,19 @@ output_path = '~/.config/yazi/theme.toml'
 [templates.wlogout]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/wlogout/colors.css'
+
 [templates.wlogout-recolor]
 input_path = '~/.config/matugen/templates/wlogout/recolor.sh'
 output_path = '~/.config/wlogout/icons/recolor.sh'
 post_hook = 'chmod +x ~/.config/wlogout/icons/recolor.sh && bash ~/.config/wlogout/icons/recolor.sh &'
+
 [templates.gtk3]
 input_path ='~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-3.0/colors.css'
+
 [templates.gtk4]
 input_path ='~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/colors.css'
-#[templates.swaync]
-#input_path = '~/.config/matugen/templates/swaync-colors.css'
-#output_path = '~/.config/swaync/colors.css'
-#post_hook = 'swaync-client -rs &'
-
-[templates.qt5ct]
-input_path = '~/.config/matugen/templates/qtct-colors.conf'
-output_path = '~/.config/qt5ct/colors/matugen.conf'
-
-[templates.qt6ct]
-input_path = '~/.config/matugen/templates/qtct-colors.conf'
-output_path = '~/.config/qt6ct/colors/matugen.conf'
 
 [templates.color-scheme]
 input_path = '~/.config/matugen/templates/Matugen.colors'
@@ -84,7 +76,6 @@ input_path = '~/.config/matugen/templates/niriswitcher-colors.css'
 output_path = '~/.config/niriswitcher/style.css'
 post_hook= 'pkill niriswitcher || true && niriswitcher & disown'
 
-#当前版本的niri暂时不支持include
 [templates.niri]
 input_path = '~/.config/matugen/templates/niri-colors.kdl'
 output_path = '~/.config/niri/colors.kdl'
@@ -106,8 +97,3 @@ output_path = '~/.config/swaylock/config'
 [templates.fastfetch]
 input_path = '~/.config/matugen/templates/fastfetch-config.jsonc'
 output_path = '~/.config/fastfetch/config.jsonc'
-
-#[templates.neovim]
-#input_path = '~/.config/matugen/templates/neovim/template.lua'
-#output_path = '~/.config/nvim/generated.lua'
-#post_hook = 'pkill -SIGUSR1 nvim'
