@@ -1,3 +1,6 @@
+// Key Bindings - niri:
+// https://yalter.github.io/niri/Configuration:-Key-Bindings
+
 binds {
 
     // 显示快捷键教程
@@ -8,17 +11,12 @@ binds {
     Mod+Alt+W  hotkey-overlay-title="切换壁纸" { spawn "waypaper"; }
     Mod+Alt+T  hotkey-overlay-title="切换颜色策略" { spawn "~/.config/scripts/matugen-select-type.sh"; }
     Mod+Alt+L  hotkey-overlay-title="锁屏" { spawn "swaylock"; }
-    Mod+Alt+V hotkey-overlay-title="剪贴板" {spawn-sh "copyq toggle";}
+    Mod+Alt+V hotkey-overlay-title="剪贴板" {spawn "copyq" "toggle";}
 
     Mod+F1  hotkey-overlay-title="开关输入法" { spawn-sh "pkill fcitx5 || fcitx5 "; }
-    Mod+F2  hotkey-overlay-title="顶部任务栏" { spawn-sh "pkill waybar & pkill cava || true && waybar -c $HOME/.config/waybar/config.jsonc -s $HOME/.config/waybar/style.css "; }
-    Mod+F3  hotkey-overlay-title="底部任务栏" { spawn-sh "pkill waybar & pkill cava || true && waybar -c $HOME/.config/waybar-niri-Win11Like/config.jsonc -s $HOME/.config/waybar-niri-Win11Like/style.css "; }
-    // 隐藏waybar，不关闭进程
-    //Mod+F4  hotkey-overlay-title="隐藏waybar" { spawn-sh "killall -SIGUSR1 waybar"; }
-    // 关闭waybar进程，释放资源占用
-    Mod+F4  hotkey-overlay-title="开关任务栏" { spawn-sh "pkill waybar && pkill cava || waybar "; }
-    Mod+F5  hotkey-overlay-title="快速存档" { spawn "~/.config/scripts/quicksave.sh"; }
-    Mod+F10  hotkey-overlay-title="随机切换壁纸" { spawn "waypaper" "--random"; }
+    Mod+F2  hotkey-overlay-title="底部任务栏" { spawn-sh "pkill waybar & pkill cava || true && waybar"; }
+    Mod+F3  hotkey-overlay-title="快速存档" { spawn "~/.config/scripts/quicksave.sh"; }
+    Mod+F4  hotkey-overlay-title="随机切换壁纸" { spawn "waypaper" "--random"; }
 
     // 快捷键打开应用
     Mod+B hotkey-overlay-title="浏览器" { spawn "chromium"; }
@@ -148,11 +146,11 @@ binds {
     Mod+Shift+V hotkey-overlay-title="切换浮动聚焦" { switch-focus-between-floating-and-tiling; }
 
     // 截图
-    Mod+Alt+A hotkey-overlay-title="选取区域截图" {screenshot;}
+    Mod+Alt+A hotkey-overlay-title="选取区域截图" { screenshot; }
     Mod+Alt+Ctrl+A hotkey-overlay-title="截取聚焦窗口" { screenshot-window; }
     Mod+Alt+Ctrl+Shift+A hotkey-overlay-title="截取显示器" { screenshot-screen; }
     //Mod+Shift+S { spawn "~/.config/niri/scripts/satty-screenshot.sh";}
-    Mod+Shift+S hotkey-overlay-title="截图后按下此键进行编辑" { spawn-sh "wl-paste | satty -f -";}
+    Mod+Shift+S hotkey-overlay-title="截图后按下此键进行编辑" { spawn-sh "wl-paste | satty -f -"; }
 
     // 其它
     // 鼠标中键 关闭窗口

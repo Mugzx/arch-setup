@@ -1,5 +1,4 @@
-// Window rules let you adjust behavior for individual windows.
-// Find more information on the wiki:
+// Window Rules - niri:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
 // 放进overview里的壁纸程序
@@ -8,8 +7,9 @@ layer-rule{
     match namespace="wallpaper"
     match namespace="awww-daemon"
     match namespace="swww-daemonoverview"
-     place-within-backdrop true
+    place-within-backdrop true
 }
+
 // 全局窗口规则
 window-rule {
     // 圆角
@@ -21,18 +21,14 @@ window-rule {
     // 禁止边框画到背景里
     draw-border-with-background false
 }
+
 // 以浮动模式打开imv（一个轻量化图片预览程序）且不自动聚焦
 window-rule {
     match app-id="imv"
     open-focused false
     open-floating true
-    }
-// steam好友列表宽度
-window-rule {
-    match title="好友列表"
-    match title="Friends List"
-     max-width 450
 }
+
 // 取消打开自动聚焦
 window-rule {
     match app-id="wechat"
@@ -41,28 +37,30 @@ window-rule {
 
 // 以浮动模式打开
 window-rule {
-    // This app-id regular expression will work for both:
-    match app-id="nm-connection-editor"
-    match app-id="steam" title="Friends List"
+    // 窗口标题和应用程序 ID
     match app-id="blueberry.py" title="蓝牙"
-    match app-id="blueman-manager"
-    match app-id="flameshot"
-    match app-id="be.alexandervanhee.gradia"
     match app-id="org.pulseaudio.pavucontrol" title="音量控制"
     match app-id="org.gnome.clocks" title="时钟"
     match app-id="fcitx" title="Fcitx5 Input Window"
+
+    match app-id="nm-connection-editor"
+    match app-id="blueman-manager"
+    match app-id="flameshot"
+    match app-id="be.alexandervanhee.gradia"
     match app-id="org.gnome.FileRoller"
     match app-id="waypaper"
     match app-id="copyq"
+    match app-id="btrfs-assistant"
+    match app-id="markpix"
+
     match title="群聊的聊天记录"
     match title="聊天记录"
     match title="日历"
     match title="重命名"
-    match app-id="btrfs-assistant"
-    match app-id="markpix"
-    match title="Steam 设置"
+    match title="任务管理器"
     open-floating true
 }
+
 window-rule{
     match app-id="bluetui"
     min-width 500
@@ -76,13 +74,16 @@ window-rule {
     match app-id="waydroid"
     open-fullscreen true
     open-floating true
-    focus-ring{
+
+    focus-ring {
         off
     }
+
     shadow {
-    off
+        off
     }
 }
+
 // 取消图片预览、视频播放器之类的透明度，并且以浮动模式打开
 window-rule {
     match title="图片查看器"
@@ -92,12 +93,12 @@ window-rule {
     open-floating true
     opacity 1.0
 }
+
 window-rule {
     match app-id="mpv"
     match app-id="celluloid"
     opacity 1.0
 }
-
 
 window-rule {
     // This regular expression is intentionally made as specific as possible,
@@ -106,6 +107,7 @@ window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
 }
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
