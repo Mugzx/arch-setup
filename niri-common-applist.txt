@@ -1,16 +1,7 @@
 neovim                                   # Advanced version of vim
-wine                                     # run windows exe
-virt-manager                             # KVM qemu virtual machine
 
 # --- Gaming & Media ---
-# steam                                    Gaming Platform (Valve)
-# lutris                                   Gaming outside steam
-# heroic-games-launcher-bin                Playing Epic games
-# protonplus                               manage proton
 mpv                                      # Minimalist High Performance Video Player
-# fragments                                BitTorrent Client (GNOME style)
-# mangohud                                 OSD tool for gaming (like msi afterburner)
-# gamescope                                gaming compositor made by Valve
 upscaler                                 # image upscaler (make it more clear)
 curtail                                  # compress image (make it smaller)
 lact                                     # GPU Control Tool (Overclocking/Fan)
@@ -41,7 +32,7 @@ localsend                                # send files across devices
 
 # --- AUR Packages (Social) ---
 AUR:linuxqq-appimage                     # Tencent QQ (AppImage)
-# AUR:wechat-appimage                      WeChat (AppImage)
+AUR:wechat-appimage                      WeChat (AppImage)
 AUR:flclash-appimage-bin                 # Clash Proxy (AppImage)
 AUR:lsfg-vk-bin                          # yellow duck frame generator
 AUR:mangojuice-bin                       # GUI for mangohud

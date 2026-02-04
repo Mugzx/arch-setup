@@ -380,7 +380,7 @@ fi
 # ------------------------------------------------------------------------------
 log "Deploying desktop resources..."
 
-SOURCE_README="$PARENT_DIR/resources/KDE-README.txt"
+SOURCE_README="$PARENT_DIR/kde-dotfiles/KDE-README.txt"
 DESKTOP_DIR="$HOME_DIR/Desktop"
 
 if [ ! -d "$DESKTOP_DIR" ]; then
@@ -393,7 +393,7 @@ if [ -f "$SOURCE_README" ]; then
     exe chown "$TARGET_USER" "$DESKTOP_DIR/KDE-README.txt"
     success "Readme deployed."
 else
-    warn "resources/KDE-README.txt not found."
+    warn "kde-dotfiles/KDE-README.txt not found."
 fi
 
 # ------------------------------------------------------------------------------

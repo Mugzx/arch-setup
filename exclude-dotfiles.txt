@@ -1,6 +1,4 @@
-lsfg-vk
-mango
 swaylock
 swaync
 wofi
-xfce4
+obs-studio

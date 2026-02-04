@@ -254,130 +254,6 @@ if [ ${#FLATPAK_APPS[@]} -gt 0 ]; then
 fi
 
 # ------------------------------------------------------------------------------
-# 4. Environment & Additional Configs (Virt/Wine/Steam)
-# ------------------------------------------------------------------------------
-section "Post-Install" "System & App Tweaks"
-
-# --- [NEW] Virtualization Configuration (Virt-Manager) ---
-if pacman -Qi virt-manager &>/dev/null; then
-  info_kv "Config" "Virt-Manager detected"
-  
-  # 1. 安装完整依赖
-  # iptables-nft 和 dnsmasq 是默认 NAT 网络必须的
-  log "Installing QEMU/KVM dependencies..."
-  pacman -S --noconfirm --needed qemu-full virt-manager swtpm dnsmasq 
-
-  # 2. 添加用户组 (需要重新登录生效)
-  log "Adding $TARGET_USER to libvirt group..."
-  usermod -a -G libvirt "$TARGET_USER"
-  # 同时添加 kvm 和 input 组以防万一
-  usermod -a -G kvm,input "$TARGET_USER"
-
-  # 3. 开启服务
-  log "Enabling libvirtd service..."
-  systemctl enable --now libvirtd
-
-  # 4. [修复] 强制设置 virt-manager 默认连接为 QEMU/KVM
-  # 解决第一次打开显示 LXC 或无法连接的问题
-  log "Setting default URI to qemu:///system..."
-  
-  # 编译 glib schemas (防止 gsettings 报错)
-  glib-compile-schemas /usr/share/glib-2.0/schemas/
-
-  # 强制写入 Dconf 配置
-  # uris: 连接列表
-  # autoconnect: 自动连接的列表
-  as_user gsettings set org.virt-manager.virt-manager.connections uris "['qemu:///system']"
-  as_user gsettings set org.virt-manager.virt-manager.connections autoconnect "['qemu:///system']"
-
-  # 5. 配置网络 (Default NAT)
-  log "Starting default network..."
-  sleep 3
-  virsh net-start default >/dev/null 2>&1 || warn "Default network might be already active."
-  virsh net-autostart default >/dev/null 2>&1 || true
-
-  success "Virtualization (KVM) configured."
-fi
-
-# --- [NEW] Wine Configuration & Fonts ---
-if pacman -Qi wine &>/dev/null; then
-  info_kv "Config" "Wine detected"
-  
-  # 1. 安装 Gecko 和 Mono
-  log "Ensuring Wine Gecko/Mono are installed..."
-  pacman -S --noconfirm --needed wine wine-gecko wine-mono
-
-  # 2. 初始化 Wine (使用 wineboot -u 在后台运行，不弹窗)
-  WINE_PREFIX="$HOME_DIR/.wine"
-  if [ ! -d "$WINE_PREFIX" ]; then
-    log "Initializing wine prefix (This may take a minute)..."
-    # WINEDLLOVERRIDES prohibits popups
-    as_user env WINEDLLOVERRIDES="mscoree,mshtml=" wineboot -u
-    # Wait for completion
-    as_user wineserver -w
-  else
-    log "Wine prefix already exists."
-  fi
-
-  # 3. 复制字体
-  FONT_SRC="$SCRIPT_DIR/resources/windows-sim-fonts"
-  FONT_DEST="$WINE_PREFIX/drive_c/windows/Fonts"
-
-  if [ -d "$FONT_SRC" ]; then
-    log "Copying Windows fonts from resources..."
-    
-    # 1. 确保目标目录存在 (以用户身份创建)
-    if [ ! -d "$FONT_DEST" ]; then
-        as_user mkdir -p "$FONT_DEST"
-    fi
-
-    # 2. 执行复制 (关键修改：直接以目标用户身份复制，而不是 Root 复制后再 Chown)
-    # 使用 cp -rT 确保目录内容合并，而不是把源目录本身拷进去
-    # 注意：这里假设 as_user 能够接受命令参数。如果 as_user 只是简单的 su/sudo 封装：
-    if sudo -u "$TARGET_USER" cp -rf "$FONT_SRC"/. "$FONT_DEST/"; then
-        success "Fonts copied successfully."
-    else
-        error "Failed to copy fonts."
-    fi
-
-    # 3. 强制刷新 Wine 字体缓存 (非常重要！)
-    # 字体文件放进去了，但 Wine 不一定会立刻重修构建 fntdata.dat
-    # 杀死 wineserver 会强制 Wine 下次启动时重新扫描系统和本地配置
-    log "Refreshing Wine font cache..."
-    if command -v wineserver &> /dev/null; then
-        # 必须以目标用户身份执行 wineserver -k
-        as_user env WINEPREFIX="$WINE_PREFIX" wineserver -k
-    fi
-
-    success "Wine fonts installed and cache refresh triggered."
-  else
-    warn "Resources font directory not found at: $FONT_SRC"
-  fi
-fi
-
-# --- Steam Locale Fix ---
-STEAM_desktop_modified=false
-NATIVE_DESKTOP="/usr/share/applications/steam.desktop"
-if [ -f "$NATIVE_DESKTOP" ]; then
-    log "Checking Native Steam..."
-    if ! grep -q "env LANG=zh_CN.UTF-8" "$NATIVE_DESKTOP"; then
-        exe sed -i 's|^Exec=/usr/bin/steam|Exec=env LANG=zh_CN.UTF-8 /usr/bin/steam|' "$NATIVE_DESKTOP"
-        exe sed -i 's|^Exec=steam|Exec=env LANG=zh_CN.UTF-8 steam|' "$NATIVE_DESKTOP"
-        success "Patched Native Steam .desktop."
-        STEAM_desktop_modified=true
-    else
-        log "Native Steam already patched."
-    fi
-fi
-
-if flatpak list | grep -q "com.valvesoftware.Steam"; then
-    log "Checking Flatpak Steam..."
-    exe flatpak override --env=LANG=zh_CN.UTF-8 com.valvesoftware.Steam
-    success "Applied Flatpak Steam override."
-    STEAM_desktop_modified=true
-fi
-
-# ------------------------------------------------------------------------------
 # [FIX] CLEANUP GLOBAL SUDO CONFIGURATION
 # ------------------------------------------------------------------------------
 if [ -f "$SUDO_TEMP_FILE" ]; then
@@ -386,7 +262,7 @@ if [ -f "$SUDO_TEMP_FILE" ]; then
 fi
 
 # ------------------------------------------------------------------------------
-# 5. Generate Failure Report
+# 4. Generate Failure Report
 # ------------------------------------------------------------------------------
 if [ ${#FAILED_PACKAGES[@]} -gt 0 ]; then
     DOCS_DIR="$HOME_DIR/Documents"

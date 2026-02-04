@@ -37,8 +37,6 @@
 ├── kde-dotfiles # KDE Plasma 配置
 ├── niri-dotfiles # Niri 配置
 │   └── wallpapers # Waypaper 壁纸目录★
-├── resources # 资源目录
-│   └── windows-sim-fonts # Windows 字体 (Wine)
 ├── scripts # 安装脚本
 │   ├── 00-btrfs-init.sh # Btrfs文件系统初始化
 │   ├── 00-utils.sh # 工具函数和通用变量定义
@@ -68,5 +66,4 @@
   - `~/.config/scripts/`
   - `~/.config/niri/scripts/`
   - `~/.config/waybar/scripts/`
-  - `~/.config/waybar-niri-Win11Like/scripts/`
 - 这个仓库更多按照个人习惯进行配置。
