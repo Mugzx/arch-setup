@@ -29,6 +29,7 @@ hyprpicker                               # Color picker for Wayland
 satty                                    # Modern screenshot annotation tool
 
 # --- Clipboard ---
+wl-clipboard                             # Command-line copy/paste utilities
 copyq                                    # Clipboard manager
 
 # --- CLI Enhancements ---
