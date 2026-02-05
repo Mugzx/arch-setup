@@ -80,8 +80,7 @@ for cmd in "${REQUIRED_CMDS[@]}"; do
 done
 
 EDITOR_CMD=""
-if command -v satty &> /dev/null; then EDITOR_CMD="satty --filename"; 
-elif command -v swappy &> /dev/null; then EDITOR_CMD="swappy -f"; fi
+if command -v satty &> /dev/null; then EDITOR_CMD="satty --filename"; fi
 
 MENU_CMD=""
 if command -v fuzzel &> /dev/null; then MENU_CMD="$CMD_FUZZEL"

@@ -7,7 +7,7 @@ set -euo pipefail
 
 NIRI_CONFIG="$HOME/.config/niri/config.kdl"   # niri 配置文件
 
-SHOTEDITOR_DEFAULT="satty"                   # 默认截图编辑器：swappy 或 satty
+SHOTEDITOR_DEFAULT="satty"                   # 默认截图编辑器: satty
 COPY_CMD="wl-copy"                            # 复制到剪贴板的命令
 
 # 菜单程序，按你实际使用的启动器改
@@ -148,7 +148,7 @@ load_editor() {
 
     ed="${ed,,}"
     case "$ed" in
-        swappy|satty) ;;
+        satty) ;;
         *) ed="$SHOTEDITOR_DEFAULT" ;;
     esac
     printf '%s\n' "$ed"
@@ -194,12 +194,8 @@ detect_backend() {
 
 choose_editor() {
     local choice
-    choice="$(menu_prompt "$PROMPT_EDITOR" "swappy" "satty" "$LABEL_BACK")"
+    choice="$(menu_prompt "$PROMPT_EDITOR" "satty" "$LABEL_BACK")"
     case "$choice" in
-        swappy|Swappy)
-            SHOTEDITOR="swappy"
-            save_editor "$SHOTEDITOR"
-            ;;
         satty|Satty)
             SHOTEDITOR="satty"
             save_editor "$SHOTEDITOR"
@@ -333,11 +329,8 @@ edit_file_image() {
         satty)
             satty --filename "$src" --output-filename "$dst"
             ;;
-        swappy)
-            swappy -f "$src" -o "$dst"
-            ;;
         *)
-            echo "Unknown SHOTEDITOR: $SHOTEDITOR (use satty or swappy)" >&2
+            echo "Unknown SHOTEDITOR: $SHOTEDITOR (use satty)" >&2
             return 0
             ;;
     esac
@@ -369,11 +362,8 @@ edit_from_clipboard() {
         satty)
             wl-paste -t image/png 2>/dev/null | satty -f - --output-filename "$dst"
             ;;
-        swappy)
-            wl-paste -t image/png 2>/dev/null | swappy -f - -o "$dst"
-            ;;
         *)
-            echo "Unknown SHOTEDITOR: $SHOTEDITOR (use satty or swappy)" >&2
+            echo "Unknown SHOTEDITOR: $SHOTEDITOR (use satty)" >&2
             return 0
             ;;
     esac

@@ -474,12 +474,6 @@ window#waybar.empty #window {
     color: @on_secondary_container;
 }
 
-#custom-swaync {
-    background-color: @surface_container_high;
-    color: @on_surface_container;
-    padding: 0px 0.83em; /* 15px */
-}
-
 #custom-mako {
     background-color: @surface_container_high;
     color: @on_surface_container;

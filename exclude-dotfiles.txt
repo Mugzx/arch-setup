@@ -1,4 +1,3 @@
 swaylock
-swaync
 wofi
 obs-studio
