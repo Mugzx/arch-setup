@@ -10,9 +10,9 @@ NIRI_CONFIG="$HOME/.config/niri/config.kdl"   # niri 配置文件
 SHOTEDITOR_DEFAULT="satty"                   # 默认截图编辑器: satty
 COPY_CMD="wl-copy"                            # 复制到剪贴板的命令
 
-# 菜单程序，按你实际使用的启动器改
-# wofi 示例: MENU_CMD='wofi -d'
-# rofi 示例: MENU_CMD='rofi -dmenu'
+# 菜单程序
+#MENU_CMD='wofi -d'
+#MENU_CMD='rofi -dmenu'
 MENU_CMD='fuzzel --dmenu'
 
 # 图片目录

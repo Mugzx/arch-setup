@@ -71,7 +71,6 @@ fi
 
 # 合并选项
 OPTIONS="${MODE_OPTION}
---------------------
 ${SCHEMES}"
 
 # --- 4. Fuzzel 菜单 ---

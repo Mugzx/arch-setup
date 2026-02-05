@@ -84,7 +84,7 @@ has() { command -v "$1" >/dev/null 2>&1; }
 lang_code() {
   local l="${LC_MESSAGES:-${LANG:-en}}"
   l="${l,,}"; l="${l%%.*}"; l="${l%%-*}"; l="${l%%_*}"
-  case "$l" in zh|zh-cn|zh-tw|zh-hk) echo zh ;; ja|jp) echo ja ;; *) echo en ;; esac
+  case "$l" in zh|zh-cn|zh-tw|zh-hk) echo zh ;; *) echo en ;; esac
 }
 
 msg() {
@@ -132,51 +132,6 @@ msg() {
         mode_region)      printf "区域" ;;
         prompt_enter_number) printf "输入编号：" ;;
         menu_exit)        printf "退出" ;;
-        *) printf "%s" "$id" ;;
-      esac
-      ;;
-    ja)
-      case "$id" in
-        err_wf_not_found) printf "wf-recorder が見つかりません" ;;
-        err_need_slurp)   printf "領域選択には slurp が必要です" ;;
-        warn_drm_ignored) printf "警告：DRM_DEVICE=%s は無視されます。" "$@" ;;
-        warn_invalid_fps) printf "警告：FRAMERATE=\"%s\" は不正です。" "$@" ;;
-        warn_render_unreadable) printf "警告：無効なレンダー ノード：%s" "$@" ;;
-        cancel_no_mode)   printf "キャンセル：録画モード未選択。" ;;
-        cancel_no_output) printf "キャンセル：出力未選択。" ;;
-        cancel_no_region) printf "キャンセル：領域未選択。" ;;
-        warn_multi_outputs_cancel) printf "出力が複数ですが未選択のため中止。" ;;
-        notif_started_full)   printf "録画開始（全画面：%s）→ %s" "$@" ;;
-        notif_started_region) printf "録画開始（領域）→ %s" "$@" ;;
-        notif_device_suffix)  printf "（デバイス %s）" "$@" ;;
-        notif_saved)    printf "保存しました：%s" "$@" ;;
-        notif_stopped)  printf "録画を停止しました。" ;;
-        already_running) printf "already running" ;;
-        not_running)      printf "not running" ;;
-        title_mode)       printf "録画モードを選択" ;;
-        title_output)     printf "出力を選択" ;;
-        menu_fullscreen) printf "全画面" ;;
-        menu_region)      printf "領域選択" ;;
-        # settings labels -> "ラベル：値"（全角コロン）
-        title_settings)  printf "設定" ;;
-        menu_settings)   printf "設定..." ;;
-        menu_set_codec)  printf "コーデック：%s" "$@" ;;
-        menu_set_fps)    printf "フレームレート：%s" "$@" ;;
-        menu_set_filefmt) printf "ファイル形式：%s" "$@" ;;
-        menu_toggle_audio) printf "音声：%s" "$@" ;;
-        menu_set_render) printf "レンダーデバイス：%s" "$@" ;;
-        menu_back)        printf "戻る" ;;
-        fps_unlimited)    printf "無制限" ;;
-        render_auto)      printf "自動" ;;
-        ext_auto)         printf "自動" ;;
-        title_select_codec) printf "コーデックを選択" ;;
-        title_select_fps)     printf "フレームレートを選択" ;;
-        title_select_filefmt) printf "ファイル形式を選択" ;;
-        title_select_render) printf "レンダーデバイスを選択（/dev/dri/renderD*）" ;;
-        mode_full)        printf "全画面" ;;
-        mode_region)      printf "領域" ;;
-        prompt_enter_number) printf "番号を入力：" ;;
-        menu_exit)        printf "終了" ;;
         *) printf "%s" "$id" ;;
       esac
       ;;
@@ -474,7 +429,6 @@ decide_mode() {
   local L_FULL L_REGION L_SETTINGS L_EXIT
   case "$(lang_code)" in
     zh) L_FULL="$(msg menu_fullscreen)"; L_REGION="$(msg menu_region)"; L_SETTINGS="$(msg menu_settings)"; L_EXIT="$(msg menu_exit)";;
-    ja) L_FULL="$(msg menu_fullscreen)"; L_REGION="$(msg menu_region)"; L_SETTINGS="$(msg menu_settings)"; L_EXIT="$(msg menu_exit)";;
     *)  L_FULL="Fullscreen"; L_REGION="Region"; L_SETTINGS="$(msg menu_settings)"; L_EXIT="$(msg menu_exit)";;
   esac
   local title; title="$(msg title_mode)"
@@ -638,12 +592,6 @@ tooltip_idle_text() {
 右键：强制关闭
 EOF
       ;;
-    ja) cat <<'EOF'
-画面録画（wf-recorder）
-左クリック：録画メニューを開く
-右クリック：強制停止
-EOF
-      ;;
     *)  cat <<'EOF'
 Screen recording (wf-recorder)
 Left click: open recording menu
@@ -658,7 +606,6 @@ tooltip_recording_text() { # $1 elapsed, $2 filepath, $3 mode: full|region
   case "$m" in full|fullscreen) mode_label="$(msg mode_full)";; region|area) mode_label="$(msg mode_region)";; *) mode_label="";; esac
   case "$(lang_code)" in
     zh) [[ -n "$p" ]] && { [[ -n "$mode_label" ]] && printf "录制中（%s）\n已用时：%s\n文件：%s\n" "$mode_label" "$t" "$p" || printf "录制中\n已用时：%s\n文件：%s\n" "$t" "$p"; } || { [[ -n "$mode_label" ]] && printf "录制中（%s）\n已用时：%s\n" "$mode_label" "$t" || printf "录制中\n已用时：%s\n" "$t"; } ;;
-    ja) [[ -n "$p" ]] && { [[ -n "$mode_label" ]] && printf "録画中（%s）\n経過時間：%s\nファイル：%s\n" "$mode_label" "$t" "$p" || printf "録画中\n経過時間：%s\nファイル：%s\n" "$t" "$p"; } || { [[ -n "$mode_label" ]] && printf "録画中（%s）\n経過時間：%s\n" "$mode_label" "$t" || printf "録画中\n経過時間：%s\n" "$t"; } ;;
     *)  [[ -n "$p" ]] && { [[ -n "$mode_label" ]] && printf "Recording (%s)\nElapsed: %s\nFile: %s\n" "$mode_label" "$t" "$p" || printf "Recording\nElapsed: %s\nFile: %s\n" "$t" "$p"; } || { [[ -n "$mode_label" ]] && printf "Recording (%s)\nElapsed: %s\n" "$mode_label" "$t" || printf "Recording\nElapsed: %s\n" "$t"; } ;;
   esac
 }
