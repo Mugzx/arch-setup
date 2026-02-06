@@ -25,9 +25,8 @@ obs-studio                               # OBS Studio (Streaming & Recording)
 
 # --- AUR Packages (Social) ---
 AUR:linuxqq-appimage                     # Tencent QQ (AppImage)
-AUR:wechat-appimage                      WeChat (AppImage)
+AUR:wechat-appimage                      # WeChat (AppImage)
 AUR:flclash-appimage-bin                 # Clash Proxy (AppImage)
-AUR:mangojuice-bin                       # GUI for mangohud
 AUR:vscodium-bin                         # Open source version of VS Code (Code Editor)
 AUR:ungoogled-chromium-bin               # Better Google Chrome
 AUR:ttf-jetbrains-maple-mono-nf-xx-xx    # Maple Mono NF font

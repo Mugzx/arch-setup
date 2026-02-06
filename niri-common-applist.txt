@@ -32,10 +32,8 @@ localsend                                # send files across devices
 
 # --- AUR Packages (Social) ---
 AUR:linuxqq-appimage                     # Tencent QQ (AppImage)
-AUR:wechat-appimage                      WeChat (AppImage)
+AUR:wechat-appimage                      # WeChat (AppImage)
 AUR:flclash-appimage-bin                 # Clash Proxy (AppImage)
-AUR:lsfg-vk-bin                          # yellow duck frame generator
-AUR:mangojuice-bin                       # GUI for mangohud
 AUR:vscodium-bin                         # Open source version of VS Code (Code Editor)
 AUR:ungoogled-chromium-bin               # Better Google Chrome
 
