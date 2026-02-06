@@ -63,7 +63,7 @@
 
 - 原作者的 Git 提交并不规范，所以我自己新开了一个仓库存放这些配置文件🫠。
 - 部分依赖脚本的功能可能无法正常工作，需要前往以下路径设置脚本「作为程序运行」：
-  - `~/.config/scripts/`
   - `~/.config/niri/scripts/`
   - `~/.config/waybar/scripts/`
+  - `~/.config/matugen/scripts/`
 - 这个仓库更多按照个人习惯进行配置。

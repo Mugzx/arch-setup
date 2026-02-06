@@ -3,7 +3,7 @@
 CACHE_DIR="$HOME/.cache/matugen-strategy"
 TYPE_FILE="$CACHE_DIR/type"
 MODE_FILE="$CACHE_DIR/mode"
-UPDATE_SCRIPT="$HOME/.config/scripts/matugen-update.sh"
+UPDATE_SCRIPT="$HOME/.config/matugen/scripts/update.sh"
 WAYPAPER_CONFIG="$HOME/.config/waypaper/config.ini"
 
 # --- 0. 确保缓存目录存在 ---

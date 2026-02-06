@@ -10,7 +10,7 @@ spawn-sh-at-startup "swww-daemon -n overview"
 //spawn-at-startup "waypaper" "--random"
 spawn-at-startup "waypaper" "--restore"
 // 聚焦窗口时桌面自动模糊
-spawn-at-startup "~/.config/scripts/niri_auto_blur_bg.sh"
+spawn-at-startup "~/.config/niri/scripts/auto-blur-bg.sh"
 // 屏幕分享、录屏相关的环境设置
 spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=niri & /usr/lib/xdg-desktop-portal-gnome"
 // GNOME tracker 修复

@@ -4,7 +4,7 @@
 # 1. 配置区
 # ==============================================================================
 CACHE_DIR="$HOME/.cache/blur-wallpapers/auto-blur-bg"
-LAST_CLEAR_FILE="/tmp/niri_last_clear_wallpaper"
+LAST_CLEAR_FILE="/tmp/niri-last-clear-wallpaper"
 # [新增] PID 文件路径，用于防止重复运行
 PID_FILE="/tmp/niri_auto_blur.pid"
 LINK_NAME="cache-niri-auto-blur-bg"

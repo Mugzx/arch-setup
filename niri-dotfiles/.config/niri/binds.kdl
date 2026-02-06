@@ -9,13 +9,13 @@ binds {
     // alt+tab切换窗口
     Alt+Tab  repeat=false { spawn "niriswitcherctl" "show" "--window"; }
     Mod+Alt+W  hotkey-overlay-title="切换壁纸" { spawn "waypaper"; }
-    Mod+Alt+T  hotkey-overlay-title="切换颜色策略" { spawn "~/.config/scripts/matugen-select-type.sh"; }
+    Mod+Alt+T  hotkey-overlay-title="切换颜色策略" { spawn "~/.config/matugen/scripts/select-type.sh"; }
     Mod+Alt+L  hotkey-overlay-title="锁屏" { spawn "swaylock"; }
     Mod+Alt+V hotkey-overlay-title="剪贴板" {spawn "copyq" "toggle";}
 
     Mod+F1  hotkey-overlay-title="开关输入法" { spawn-sh "pkill fcitx5 || fcitx5 "; }
     Mod+F2  hotkey-overlay-title="底部任务栏" { spawn-sh "pkill waybar & pkill cava || true && waybar"; }
-    Mod+F3  hotkey-overlay-title="快速存档" { spawn "~/.config/scripts/quicksave.sh"; }
+    Mod+F3  hotkey-overlay-title="快速存档" { spawn "~/.config/niri/scripts/quicksave.sh"; }
     Mod+F4  hotkey-overlay-title="随机切换壁纸" { spawn "waypaper" "--random"; }
 
     // 快捷键打开应用
