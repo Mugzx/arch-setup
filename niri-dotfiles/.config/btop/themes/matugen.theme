@@ -1,6 +1,5 @@
 # Matugen template for btop
 
-
 # Colors should be in 6 or 2 character hexadecimal or single spaced rgb decimal: "#RRGGBB", "#BW" or "0-255 0-255 0-255"
 # example for white: "#ffffff", "#ff" or "255 255 255".
 
@@ -16,22 +15,22 @@ theme[main_bg]=""
 theme[main_fg]="#e6e1e9"
 
 # Title color for boxes
-theme[title]="#cbbeff"
+theme[title]="#cebdff"
 
 # Highlight color for keyboard shortcuts
-theme[hi_fg]="#cac3dc"
+theme[hi_fg]="#cbc3dc"
 
 # Background color of selected item in processes box
-theme[selected_bg]="#cbbeff"
+theme[selected_bg]="#cebdff"
 
 # Foreground color of selected item in processes box
-theme[selected_fg]="#33275e"
+theme[selected_fg]="#35275e"
 
 # Color of inactive/disabled text
 theme[inactive_fg]="#cac4cf"
 
 # Misc colors for processes box including mini cpu graphs, details memory graph and details status text
-theme[proc_misc]="#eeb8cb"
+theme[proc_misc]="#efb8c9"
 
 # Cpu box outline color
 theme[cpu_box]="#938f99"
@@ -49,29 +48,29 @@ theme[proc_box]="#938f99"
 theme[div_line]="#48454e"
 
 # Temperature graph colors
-theme[temp_start]="#cac3dc"
-theme[temp_mid]="#cbbeff"
+theme[temp_start]="#cbc3dc"
+theme[temp_mid]="#cebdff"
 theme[temp_end]="#ffb4ab"
 
 # CPU graph colors
-theme[cpu_start]="#cac3dc"
-theme[cpu_mid]="#cbbeff"
+theme[cpu_start]="#cbc3dc"
+theme[cpu_mid]="#cebdff"
 theme[cpu_end]="#ffb4ab"
 
 # Mem/Disk free meter
-theme[free_start]="#cac3dc"
+theme[free_start]="#cbc3dc"
 theme[free_mid]=""
-theme[free_end]="#484458"
+theme[free_end]="#494458"
 
 # Mem/Disk cached meter
-theme[cached_start]="#eeb8cb"
+theme[cached_start]="#efb8c9"
 theme[cached_mid]=""
-theme[cached_end]="#623b4b"
+theme[cached_end]="#633b49"
 
 # Mem/Disk available meter
-theme[available_start]="#cbbeff"
+theme[available_start]="#cebdff"
 theme[available_mid]=""
-theme[available_end]="#493e76"
+theme[available_end]="#4b3e76"
 
 # Mem/Disk used meter
 theme[used_start]="#ffb4ab"
@@ -79,11 +78,11 @@ theme[used_mid]=""
 theme[used_end]="#93000a"
 
 # Download graph colors
-theme[download_start]="#cac3dc"
-theme[download_mid]="#cbbeff"
-theme[download_end]="#eeb8cb"
+theme[download_start]="#cbc3dc"
+theme[download_mid]="#cebdff"
+theme[download_end]="#efb8c9"
 
 # Upload graph colors
-theme[upload_start]="#cac3dc"
-theme[upload_mid]="#cbbeff"
-theme[upload_end]="#eeb8cb"
+theme[upload_start]="#cbc3dc"
+theme[upload_mid]="#cebdff"
+theme[upload_end]="#efb8c9"
