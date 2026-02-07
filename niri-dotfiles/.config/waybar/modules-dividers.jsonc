@@ -6,10 +6,6 @@
 		"format": "",
 		"tooltip": false
 	},
-	"custom/left_div#11": {
-		"format": "",
-		"tooltip": false
-	},
 	"custom/left_div#2": {
 		"format": "",
 		"tooltip": false
@@ -38,10 +34,6 @@
 		"format": "",
 		"tooltip": false
 	},
-	"custom/left_div#9": {
-		"format": "",
-		"tooltip": false
-	},
 	"custom/left_inv#1": {
 		"format": "",
 		"tooltip": false
@@ -54,10 +46,6 @@
 		right dividers
 	--------------------*/
 	"custom/right_div#1": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right_div#11": {
 		"format": "",
 		"tooltip": false
 	},
@@ -78,6 +66,14 @@
 		"tooltip": false
 	},
 	"custom/right_div#6": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right_div#7": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right_div#8": {
 		"format": "",
 		"tooltip": false
 	},

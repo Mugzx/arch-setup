@@ -34,7 +34,7 @@ localsend                                # send files across devices
 AUR:linuxqq-appimage                     # Tencent QQ (AppImage)
 AUR:wechat-appimage                      # WeChat (AppImage)
 AUR:flclash-appimage-bin                 # Clash Proxy (AppImage)
-AUR:vscodium-bin                         # Open source version of VS Code (Code Editor)
+AUR:vscodium-bin                         # Open Source Software Binaries of VS Code
 AUR:ungoogled-chromium-bin               # Better Google Chrome
 
 # --- Flatpak Packages (Prefix with flatpak:) ---
