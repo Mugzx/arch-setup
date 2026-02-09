@@ -42,7 +42,7 @@ tooltip label {
 
 /* niri任务栏 */
 .niri-taskbar {
-    background: @surface_container_high;
+    background: @surface_container;
     padding: 0 0 0 0.28em;
 }
 
@@ -115,8 +115,8 @@ window#waybar.empty #window {
 #custom-right_div.1 { background: @surface_container; color: @primary; }
 #custom-right_div.2 { background: @surface_container_high; color: @secondary; }
 #custom-right_div.3 { color: @surface_container_high; }
-#custom-right_div.4 { color: @on_secondary; }
-#custom-right_div.5 { background: @surface_container_high; color: @surface; }
+#custom-right_div.4 { background: @surface_container_high; color: @surface_container; }
+#custom-right_div.5 { background: @surface_container; color: @surface; }
 #custom-right_div.6 { color: @surface_bright; }
 #custom-right_div.7 { background: @surface_bright; color: @surface_container_high; }
 #custom-right_div.8 { background: @secondary; color: @surface_container; }
@@ -126,7 +126,7 @@ window#waybar.empty #window {
 #network,
 #custom-settings,
 #custom-screenshot,
-#custom-wfrec {
+#custom-recorder {
     background-color: @surface_container_high;
     color: @secondary;
 }
@@ -136,8 +136,8 @@ window#waybar.empty #window {
 #network { padding: 0 0.34em; font-size: 1.2em; }
 #custom-settings { padding: 0 0.39em; font-size: 1.06em; }
 #custom-screenshot { padding: 0 0.4em; font-size: 1.28em; }
-#custom-wfrec { padding: 0 0.3em; font-size: 1.1em; }
-#custom-wfrec.recording { color: @error; }
+#custom-recorder { padding: 0 0.3em; font-size: 1.1em; }
+#custom-recorder.recording { color: @error; }
 
 /* 电源管理 */
 #power-profiles-daemon,

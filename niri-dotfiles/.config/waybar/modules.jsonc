@@ -1,3 +1,4 @@
+// TODO: 模块排序
 {
   // 电池电量
   "battery": {
@@ -39,7 +40,7 @@
     "tooltip-format": "{:%Y/%m/%d %A}",
   },
 
-  // 正在运行的软件
+  // 软件托盘
   "tray": {
     "icon-size": 22,
     "spacing": 7,
@@ -52,13 +53,12 @@
       "active": "󰜋",
       "default": "",
     },
+    "ignore-hidden": true,
   },
 
   "niri/window": {
     "format": "{}",
-    "rewrite": {
-      "(.*) - zsh": "> [$1]",
-    },
+    "rewrite": {},
   },
 
   // 网络 蓝牙
@@ -99,7 +99,7 @@
     "on-click-right": "kitty --class bluetui -e bluetui",
   },
 
-  //左键循环切换性能模式
+  // 切换性能模式
   "power-profiles-daemon": {
     "format": "{icon}",
     "tooltip-format": "当前性能模式：{profile}\n左键：切换性能模式",
@@ -111,7 +111,7 @@
     },
   },
 
-  //截图
+  // 截图
   "custom/screenshot": {
     "format": "",
     "tooltip-format": "左键：快速截图（仅保存到剪贴板）\n右键：打开截图菜单\n中键：打开长截图菜单",
@@ -120,8 +120,8 @@
     "on-click-middle":"~/.config/waybar/scripts/longshot-sh/longshot.sh"
   },
 
-  //wf-recorder
-  "custom/wfrec": {
+  // 录屏
+  "custom/recorder": {
     "exec": "~/.config/waybar/scripts/wf-recorder.sh status-json",
     "return-type": "json",
     //"interval": 1,  // 每秒刷新一次
@@ -132,7 +132,7 @@
     "on-click-right": "~/.config/waybar/scripts/wf-recorder.sh stop"
   },
 
-  //声音模块
+  // 声音模块
   "group/audio": {
     "orientation": "inherit",
     "drawer": {
@@ -168,7 +168,7 @@
     "orientation": "horizontal",
   },
 
-  //多媒体
+  // 媒体控制
   "mpris": {
     "format": "{player_icon}",
     "format-paused": "{status_icon}",
@@ -182,7 +182,7 @@
     "enable-tooltip-len-limits": true,
   },
 
-  //logo+程序启动器
+  // 程序启动器
   "custom/applauncher": {
     "tooltip-format": "左键：软件启动菜单\n右键：切换壁纸\n中键：启用/禁用 niri 背景自动模糊",
     "format": "󰣇",
@@ -191,7 +191,7 @@
     "on-click-middle":"~/.config/niri/scripts/auto-blur-bg.sh || pkill -f auto-blur-bg.sh"
   },
 
-  //电源菜单
+  // 电源菜单
   "group/powermenu": {
     "orientation": "inherit",
     "drawer": {
@@ -214,7 +214,7 @@
   "custom/lockscreen": {
     "tooltip": false,
     "format": "",
-    "on-click": "swaylock || hyprlock",
+    "on-click": "swaylock",
   },
 
   "custom/reboot": {
@@ -229,7 +229,7 @@
     "tooltip": false,
   },
 
-  //内屏亮度
+  // 屏幕亮度
   "backlight/slider": {
     "min": 5,
     "max": 100,
@@ -238,12 +238,12 @@
 
   "backlight": {
     "tooltip": false,
-    "tooltip-format":"调节内屏亮度",
+    "tooltip-format":"调节亮度",
     "format": "{icon}",
     "format-icons": ["", "", "", "", "", "", "", "", ""],
   },
 
-  //调节外接屏幕亮度
+  // 屏幕亮度（外接）
   "group/ddcutil": {
     "orientation": "inherit",
     "drawer": {
@@ -288,14 +288,7 @@
     "on-click": "makoctl restore",
   },
 
-  //gnome-control-center 
-  "custom/settings": {
-    "format": "",
-    "on-click": "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center",
-    "tooltip-format": "Open control center",
-  },
-
-  //获取屏幕颜色
+  // 取色
   "custom/colorpicker": {
     "tooltip": false,
     "tooltip-format": "左键：提取颜色",
@@ -303,14 +296,14 @@
     "on-click": "hyprpicker | wl-copy",
   },
 
-  //音频可视化
+  // 音频可视化
   "custom/cava": {
     "tooltip": false,
     "format": "{}",
     "exec": "~/.config/waybar/scripts/cava.sh",
   },
 
-  //禁止熄屏
+  // 熄屏
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
@@ -321,14 +314,14 @@
     "tooltip-format-deactivated": "自动熄屏已开启",
     "on-click-right":"~/.config/matugen/scripts/select-type.sh"
   },
-  //分隔符
+  // 分隔符
   "custom/separator#1": {
     "format": "󱋱",
     //"format": "󰇝",
     "tooltip": false,
   },
 
-  //archupdater
+  // 软件包更新模块
   "custom/updates": {
     "format": "{}{icon}",
     "return-type": "json",
@@ -341,7 +334,7 @@
     "on-click": "kitty -e paru",
   },
 
-  //隐私
+  // 屏幕共享/录制提示
   "privacy": {
     "icon-spacing": 10,
     "icon-size": 16,
@@ -366,22 +359,5 @@
         },
       ],
     },
-  },
-
-  // dwl and mangowc
-  "ext/workspaces": {
-    "format": "{icon}",
-    //"format-icons": {
-    //        "active": "󰜋",
-    //        "default": ""
-    //    },
-    "ignore-hidden": true,
-    "on-click": "activate",
-    "on-click-right": "deactivate",
-    "sort-by-id": true,
-  },
-
-  "dwl/window": {
-    "format": "[{layout}]{title}",
   },
 }
