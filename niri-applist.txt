@@ -5,7 +5,7 @@ gnome-software                           # Gui store for flatpak software
 # --- Niri/Wayland Components ---
 xwayland-satellite                       # XWayland compatibility 
 swayidle                                 # Idle management daemon (Screen lock/suspend)
-hyprlock                                 # Screen locker with effects (Blur/Screenshots)
+swaylock                                 # Screen locker (Blur/Screenshots)
 swayosd                                  # On-Screen Display for Volume/Brightness
 nwg-look                                 # GTK3 settings editor for Wayland
 qt5ct                                    # Qt5 configuration tool
@@ -52,5 +52,4 @@ AUR:wlogout                              # Logout menu (Shutdown/Reboot/Lock)
 AUR:matugen                              # Material You theme generator
 AUR:waypaper                             # GUI wallpaper setter (Frontend for swww)
 AUR:ddcutil-service                      # Monitor hardware brightness control service
-AUR:niriswitcher                         # Window switcher for Niri
 AUR:ttf-jetbrains-maple-mono-nf-xx-xx    # Maple Mono NF font

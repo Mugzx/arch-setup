@@ -27,5 +27,3 @@ spawn-sh-at-startup "copyq & disown"
 spawn-at-startup "~/.config/niri/scripts/swayidle.sh"
 // 大写锁定键的 osd 显示
 spawn-at-startup "swayosd-server"
-// alt+tab切换器（第三方，无缩略图显示的切换器）
-spawn-at-startup "niriswitcher"

@@ -9,14 +9,6 @@
   --indicator-focus-color: rgba(10, 132, 255, 0.95);
   --indicator-color: rgba(58, 58, 60, .95);
 }
-#niriswitcher.background {
-    background-color: transparent;
-}
-
-#niriswitcher {
-  background-color: transparent;
-  padding: 40px;
-}
 
 #main-view {
     background-color: var(--bg-color);
