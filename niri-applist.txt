@@ -21,10 +21,7 @@ swww                                     # Efficient wallpaper daemon for Waylan
 # --- Status Bar ---
 waybar                                   # Highly customizable Wayland bar
 
-# --- Screenshots & Recording ---
-grim                                     # Screenshot utility (Grabs images)
-slurp                                    # Region selector (Works with grim)
-wf-recorder                              # Screen recorder for Wayland
+# --- Screenshots & Picker ---
 hyprpicker                               # Color picker for Wayland
 satty                                    # Modern screenshot annotation tool
 

@@ -9,26 +9,25 @@
 
 ## 使用方法
 
-1. 安装一个 Arch Linux 系统
+安装系统，登录之后从 tty 运行以下命令
 
-2. 登录之后从 tty 运行以下命令
-    
-    ```sh
-    # 1. 安装 git
-    sudo pacman -Syu git
+### 安装 git
 
-    # 2. 克隆仓库
-    git clone https://github.com/Mugzx/arch-setup.git
+```sh
+sudo pacman -Syu git
+```
 
-    # 3. 进入目录并运行
-    cd arch-setup
-    sudo bash install.sh
-    ```
-    - 一条命令版
+### 克隆仓库
 
-        ```sh
-        sudo pacman -Syu git && git clone https://github.com/Mugzx/arch-setup.git && cd arch-setup && sudo bash install.sh
-        ```
+```sh
+git clone https://github.com/Mugzx/arch-setup.git
+```
+
+### 进入目录并运行
+
+```sh
+cd arch-setup && sudo bash install.sh
+```
 
 ## 目录结构
 
@@ -59,11 +58,18 @@
 
 有特殊标记的目录/文件建议按个人习惯自行调整。
 
+## 方法解决
+
+部分依赖脚本的功能可能无法正常工作，需要前往以下路径设置脚本「作为程序运行」：
+- `~/.config/niri/scripts/`
+- `~/.config/waybar/scripts/`
+- `~/.config/matugen/scripts/`
+
+```sh
+chmod +x *.sh
+```
+
 ## 一些说明
 
-- 原作者的 Git 提交并不规范，所以我自己新开了一个仓库存放这些配置文件🫠。
-- 部分依赖脚本的功能可能无法正常工作，需要前往以下路径设置脚本「作为程序运行」：
-  - `~/.config/niri/scripts/`
-  - `~/.config/waybar/scripts/`
-  - `~/.config/matugen/scripts/`
+- 原作者的 Git 提交并不规范，所以我自己新开了一个仓库存放这些配置文件。
 - 这个仓库更多按照个人习惯进行配置。

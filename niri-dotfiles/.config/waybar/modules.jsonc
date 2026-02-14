@@ -114,22 +114,18 @@
   // 截图
   "custom/screenshot": {
     "format": "",
-    "tooltip-format": "左键：快速截图（仅保存到剪贴板）\n右键：打开截图菜单\n中键：打开长截图菜单",
-    "on-click":"~/.config/waybar/scripts/screenshot.sh",
-    "on-click-right": "~/.config/waybar/scripts/power-screenshot.sh",
-    "on-click-middle":"~/.config/waybar/scripts/longshot-sh/longshot.sh"
+    "tooltip-format": "左键：选取区域截图\n右键：截取聚焦窗口\n中键：截取显示器",
+    "on-click": "niri msg action screenshot | wl-copy",
+    "on-click-right": "niri msg action screenshot-window | wl-copy",
+    "on-click-middle": "niri msg action screenshot-screen --show-pointer false | wl-copy"
   },
 
   // 录屏
   "custom/recorder": {
-    "exec": "~/.config/waybar/scripts/wf-recorder.sh status-json",
-    "return-type": "json",
-    //"interval": 1,  // 每秒刷新一次
-    "signal": 9,  // 与脚本里的 WAYBAR_SIG 对应
-    "tooltip": true,
-    // 左键：开始/停止
-    "on-click": "~/.config/waybar/scripts/wf-recorder.sh toggle",
-    "on-click-right": "~/.config/waybar/scripts/wf-recorder.sh stop"
+    "format": "",
+    "tooltip-format": "左键：最小化开始录制\n右键：强制关闭",
+    "on-click": "obs --startrecording --minimize-to-tray",
+    "on-click-right": "pkill obs"
   },
 
   // 声音模块
@@ -188,7 +184,7 @@
     "format": "󰣇",
     "on-click": "fuzzel",
     "on-click-right": "waypaper",
-    "on-click-middle":"~/.config/niri/scripts/auto-blur-bg.sh || pkill -f auto-blur-bg.sh"
+    "on-click-middle": "~/.config/niri/scripts/auto-blur-bg.sh || pkill -f auto-blur-bg.sh"
   },
 
   // 电源菜单
@@ -263,24 +259,24 @@
     "tooltip-format": "左键：100%外接屏幕亮度",
     "format": "󰃠",
     "on-click": "ddcutil --display 1 setvcp 10 100",
-    "on-scroll-up":"true",
-    "on-scroll-down":"true"
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
   },
 
   "custom/ddcutil-night": {
     "tooltip-format": "左键：65%外接屏幕亮度",
     "format": "󰃟",
     "on-click": "ddcutil --display 1 setvcp 10 65",
-    "on-scroll-up":"true",
-    "on-scroll-down":"true"
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
   },
 
   "custom/ddcutil-sleep": {
     "tooltip-format": "左键：5%外接屏幕亮度",
     "format": "󰃞",
     "on-click": "ddcutil --display 1 setvcp 10 5",
-    "on-scroll-up":"true",
-    "on-scroll-down":"true"
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
   },
 
   "custom/mako": {
@@ -312,7 +308,7 @@
     },
     "tooltip-format-activated": "自动熄屏已禁止",
     "tooltip-format-deactivated": "自动熄屏已开启",
-    "on-click-right":"~/.config/matugen/scripts/select-type.sh"
+    "on-click-right": "~/.config/matugen/scripts/select-type.sh"
   },
   // 分隔符
   "custom/separator#1": {
