@@ -164,20 +164,6 @@
     "orientation": "horizontal",
   },
 
-  // 媒体控制
-  "mpris": {
-    "format": "{player_icon}",
-    "format-paused": "{status_icon}",
-    "player-icons": {
-      "default": "▶",
-    },
-    "status-icons": {
-      "paused": "⏸",
-    },
-    "toooltip": "{dynamic}",
-    "enable-tooltip-len-limits": true,
-  },
-
   // 程序启动器
   "custom/applauncher": {
     "tooltip-format": "左键：软件启动菜单\n右键：切换壁纸\n中键：启用/禁用 niri 背景自动模糊",
@@ -286,7 +272,6 @@
 
   // 取色
   "custom/colorpicker": {
-    "tooltip": false,
     "tooltip-format": "左键：提取颜色",
     "format": "󱏜",
     "on-click": "hyprpicker | wl-copy",
@@ -295,8 +280,10 @@
   // 音频可视化
   "custom/cava": {
     "tooltip": false,
+    //"tooltip-format": "左键：播放/暂停",
     "format": "{}",
     "exec": "~/.config/waybar/scripts/cava.sh",
+    "on-click": "playerctl play-pause"
   },
 
   // 熄屏
