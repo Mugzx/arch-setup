@@ -115,7 +115,8 @@
   "custom/screenshot": {
     "format": "",
     "tooltip-format": "左键：选取区域截图\n右键：截取聚焦窗口\n中键：截取显示器",
-    "on-click": "niri msg action screenshot | wl-copy",
+    // https://github.com/Alexays/Waybar/issues/4306
+    //"on-click": "niri msg action screenshot | wl-copy",
     "on-click-right": "niri msg action screenshot-window | wl-copy",
     "on-click-middle": "niri msg action screenshot-screen --show-pointer false | wl-copy"
   },
