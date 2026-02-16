@@ -1,5 +1,6 @@
 #! /bin/bash
 
+# https://github.com/ray-pH/waybar-cava/blob/main/cava.sh
 bar="▁▂▃▄▅▆▇█"
 dict="s/;//g;"
 
@@ -16,6 +17,10 @@ config_file="/tmp/polybar_cava_config"
 echo "
 [general]
 bars = 10
+
+[input]
+method = pulse
+source = auto
 
 [output]
 method = raw
