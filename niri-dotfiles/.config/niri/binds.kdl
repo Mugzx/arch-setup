@@ -2,7 +2,6 @@
 // https://yalter.github.io/niri/Configuration:-Key-Bindings
 
 binds {
-
     // 显示快捷键教程
     Mod+Shift+Slash hotkey-overlay-title="快捷键教程" { show-hotkey-overlay; }
 
@@ -74,14 +73,14 @@ binds {
     Mod+Ctrl+U hotkey-overlay-title="向下移动窗口到其他工作区" { move-column-to-workspace-down; }
     Mod+Ctrl+I hotkey-overlay-title="向上移动窗口到其他工作区" { move-column-to-workspace-up; }
 
-    // 滚轮 上下切换工作区
+    // 滚轮
+    // 上下切换工作区
     Mod+Shift+WheelScrollDown hotkey-overlay-title="切换工作区" cooldown-ms=150 { focus-workspace-down; }
     Mod+Shift+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
     // 移动窗口
     Mod+Ctrl+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
     Mod+Ctrl+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
-
-    // 滚轮 左右切换聚焦
+    // 左右切换聚焦
     Mod+WheelScrollDown   { focus-column-right; }
     Mod+WheelScrollUp     { focus-column-left; }
     // 移动colume
@@ -97,7 +96,7 @@ binds {
     Mod+Ctrl+2 { move-column-to-workspace 2; }
     Mod+Ctrl+3 { move-column-to-workspace 3; }
 
-    // mod+左右方括号 移动窗口
+    // 左右方括号 移动窗口
     Mod+BracketLeft hotkey-overlay-title="向左移动到同一列" { consume-or-expel-window-left; }
     Mod+BracketRight hotkey-overlay-title="向右移动到同一列" { consume-or-expel-window-right; }
 
@@ -107,7 +106,7 @@ binds {
     // 开启colume的标签页模式
     Mod+Shift+X { toggle-column-tabbed-display; }
     Mod+X { toggle-column-tabbed-display; }
-    // 鼠标侧键上下切换聚焦
+    // 鼠标侧键 上下切换聚焦
     //Mod+MouseForward { focus-window-up; }
     //Mod+MouseBack    { focus-window-down; }
 
@@ -129,10 +128,11 @@ binds {
     // 居中当前窗口位置
     Mod+Ctrl+C { center-visible-columns; }
 
-    // 加减号 调整窗口宽度
+    // 加减号
+    // 调整窗口宽度
     Mod+Minus { set-column-width "-5%"; }
     Mod+Equal { set-column-width "+5%"; }
-    // 加减号 调整窗口高度
+    // 调整窗口高度
     Mod+Shift+Minus { set-window-height "-5%"; }
     Mod+Shift+Equal { set-window-height "+5%"; }
 
@@ -143,8 +143,8 @@ binds {
 
     // 截图
     Mod+Alt+A hotkey-overlay-title="选取区域截图" { screenshot; }
-    Mod+Alt+Ctrl+A hotkey-overlay-title="截取聚焦窗口" { screenshot-window; }
-    Mod+Alt+Ctrl+Shift+A hotkey-overlay-title="截取显示器" { screenshot-screen; }
+    Mod+Alt+S hotkey-overlay-title="截取聚焦窗口" { screenshot-window; }
+    Mod+Alt+D hotkey-overlay-title="截取显示器" { screenshot-screen; }
     Mod+Shift+S hotkey-overlay-title="截图后按下此键进行编辑" { spawn-sh "wl-paste | satty -f -"; }
 
     // 其它
@@ -158,4 +158,12 @@ binds {
 
     // 避免问题软件劫持快捷键
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+}
+
+// 切换窗口 可以选择上/下一个窗口
+recent-windows {
+    binds {
+        Alt+Tab { next-window scope="all"; }
+        Alt+Shift+Tab { previous-window scope="all"; }
+    }
 }

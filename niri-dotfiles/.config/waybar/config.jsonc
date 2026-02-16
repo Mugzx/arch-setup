@@ -1,7 +1,6 @@
 // Docs: https://github.com/Alexays/Waybar/wiki/Configuration
 {
-    // 这个waybar因为大该过一次布局，所以箭头已经的位置和名字已经完全对不上了，从左到右看吧。
-    // TODO: 重新调整箭头命名
+    // 左/右 箭头需要从 左/右 的方向来看
     "include": [
         "modules.jsonc",
         "modules-dividers.jsonc"
@@ -16,45 +15,44 @@
     "reload_style_on_change": true,
     "modules-left": [
         "niri/workspaces",
-        "custom/right_div#5",
+        "custom/right_div#8",
         //"cffi/niri-taskbar",
-        "custom/right_div#4",
-        "custom/cava",
         "custom/right_div#7",
+        "custom/cava",
+        "custom/right_div#6",
         "niri/window",
-        "custom/right_div#6"
+        "custom/right_div#5"
     ],
     "modules-center": [
-        "custom/left_div#3",
-        "custom/recorder",
+        "custom/left_div#1",
         //"privacy",
+        "custom/recorder",
         "custom/screenshot",
         "custom/left_div#2",
         "idle_inhibitor",
         "custom/colorpicker",
         "power-profiles-daemon",
-        "custom/left_div#8",
-        "custom/left_div#1",
+        "custom/left_div#3",
+        "custom/left_div#4",
         "custom/applauncher",
-        "custom/right_div#1",
-        "custom/right_div#8",
+        "custom/right_div#4",
+        "custom/right_div#3",
         "clock",
         "custom/right_div#2",
-        //"clock#date",
         "bluetooth",
         "network",
-        "custom/right_div#3"
+        "custom/right_div#1"
     ],
     "modules-right": [
-        "custom/left_div#6",
+        "custom/left_div#5",
         "custom/updates",
         "tray",
-        "custom/left_div#4",
+        "custom/left_div#6",
         "group/ddcutil",
         "group/audio",
         "custom/left_div#7",
         "battery",
-        "custom/left_div#5",
+        "custom/left_div#8",
         "group/powermenu"
     ]
 }

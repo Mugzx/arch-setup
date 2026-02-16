@@ -1,15 +1,111 @@
-// TODO: 模块排序
 {
-  // 电池电量
-  "battery": {
-    "interval": 60,
-    "states": {
-      "critical": 20,
+  // 工作区 窗口名称
+  "niri/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": "󰜋",
+      "default": "",
     },
-    "format": "{icon} {capacity}%",
-    "format-charging": "󰂄 {capacity}% ",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂂", "󰁹"],
-    "tooltip-format": "剩余电量：{capacity}%\n充 放 电 ：{power}\n可用时间：{timeTo}\n电池健康度：{health}%",
+    "ignore-hidden": true,
+  },
+
+  "cffi/niri-taskbar": {
+    // module_path
+    "module_path": "/usr/lib/waybar/libniri_taskbar.so",
+    "apps": {
+      "signal": [
+        {
+          "match": "\\([0-9]+\\)$",
+          "class": "unread",
+        },
+      ],
+    },
+  },
+
+  // 音频可视化
+  "custom/cava": {
+    "tooltip": false,
+    //"tooltip-format": "左键：播放/暂停",
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/cava.sh",
+    "on-click": "playerctl play-pause"
+  },
+
+  "niri/window": {
+    "format": "{}",
+    "rewrite": {},
+  },
+
+  // 录屏
+  "custom/recorder": {
+    "format": "",
+    "tooltip-format": "左键：最小化开始录制\n右键：强制关闭",
+    "on-click": "obs --startrecording --minimize-to-tray",
+    "on-click-right": "pkill obs"
+  },
+
+  // 屏幕共享/录制提示
+  "privacy": {
+    "icon-spacing": 10,
+    "icon-size": 16,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+      },
+    ],
+  },
+
+  // 截图
+  "custom/screenshot": {
+    "format": "",
+    "tooltip-format": "左键：选取区域截图\n右键：截取聚焦窗口\n中键：截取显示器",
+    // https://github.com/Alexays/Waybar/issues/4306
+    //"on-click": "niri msg action screenshot | wl-copy",
+    "on-click-right": "niri msg action screenshot-window | wl-copy",
+    "on-click-middle": "niri msg action screenshot-screen --show-pointer false | wl-copy"
+  },
+
+  // 熄屏
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": "",
+    },
+    "tooltip-format-activated": "自动熄屏已禁止",
+    "tooltip-format-deactivated": "自动熄屏已开启",
+    "on-click-right": "~/.config/matugen/scripts/select-type.sh"
+  },
+
+  // 取色
+  "custom/colorpicker": {
+    "tooltip-format": "左键：提取颜色",
+    "format": "󱏜",
+    "on-click": "hyprpicker | wl-copy",
+  },
+
+  // 切换性能模式
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "当前性能模式：{profile}\n左键：切换性能模式",
+    "tooltip": true,
+    "format-icons": {
+      "performance": "󱐋",
+      "balanced": "",
+      "power-saver": "",
+    },
+  },
+
+  // 程序启动器
+  "custom/applauncher": {
+    "tooltip-format": "左键：软件启动菜单\n右键：切换壁纸\n中键：启用/禁用 niri 背景自动模糊",
+    "format": "󰣇",
+    "on-click": "fuzzel",
+    "on-click-right": "waypaper",
+    "on-click-middle": "~/.config/niri/scripts/auto-blur-bg.sh || pkill -f auto-blur-bg.sh"
   },
 
   // 时钟
@@ -22,54 +118,19 @@
     "on-click-right": "gnome-calendar",
   },
 
-  "clock#date": {
-    // "interval":
-    "format": "󰸗 {:%m-%d}",
-    // "timezone":
-    // "timezones":
-    // "locale":
-    // "rotate":
-    // "on-click":
-    // "on-click-middle":
-    // "on-click-right":
-    // "on-scroll-up":
-    // "on-scroll-down":
-    // "smooth-scrolling-threshold":
-    // "tooltip":
-    "on-click": "gnome-calendar",
-    "tooltip-format": "{:%Y/%m/%d %A}",
+  // 蓝牙
+  "bluetooth": {
+    "format-disabled": "󰂲",
+    "tooltip-format-disabled": "左键：启用蓝牙",
+    "format": "󰂯",
+    "tooltip-format-on": "左键：禁用蓝牙\n右键：打开面板",
+    "format-connected": "󰂱",
+    "tooltip-format-connected": "{device_alias}\n右键：打开面板",
+    "on-click": "~/.config/waybar/scripts/toggle-bluetooth.sh",
+    "on-click-right": "kitty --class bluetui -e bluetui",
   },
 
-  // 软件托盘
-  "tray": {
-    "icon-size": 22,
-    "spacing": 7,
-  },
-
-  // 工作区 窗口名称
-  "niri/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "active": "󰜋",
-      "default": "",
-    },
-    "ignore-hidden": true,
-  },
-
-  "niri/window": {
-    "format": "{}",
-    "rewrite": {},
-  },
-
-  // 网络 蓝牙
-  "group/network-bluetooth": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-left-to-right": false,
-    },
-    "modules": ["network", "bluetooth"],
-  },
-
+  // 网络
   "network": {
     "format-disconnected": "{icon}",
     "format-wifi": "{icon}",
@@ -87,46 +148,84 @@
     "on-click-right": "nm-connection-editor",
   },
 
-  "bluetooth": {
-    "format-disabled": "󰂲",
-    "tooltip-format-disabled": "左键：启用蓝牙",
-    "format": "󰂯",
-    "tooltip-format-on": "左键：禁用蓝牙\n右键：打开面板",
-    "format-connected": "󰂱",
-    // WIFI名称
-    "tooltip-format-connected": "{device_alias}\n右键：打开面板",
-    "on-click": "~/.config/waybar/scripts/toggle-bluetooth.sh",
-    "on-click-right": "kitty --class bluetui -e bluetui",
-  },
-
-  // 切换性能模式
-  "power-profiles-daemon": {
-    "format": "{icon}",
-    "tooltip-format": "当前性能模式：{profile}\n左键：切换性能模式",
-    "tooltip": true,
+  // 软件包更新模块
+  "custom/updates": {
+    "format": "{}{icon}",
+    "return-type": "json",
     "format-icons": {
-      "performance": "󱐋",
-      "balanced": "",
-      "power-saver": "",
+      "has-updates": "",
+      "updated": "",
     },
+    "exec-if": "which waybar-module-pacman-updates",
+    "exec": "waybar-module-pacman-updates --no-zero-output",
+    "on-click": "kitty -e paru",
   },
 
-  // 截图
-  "custom/screenshot": {
-    "format": "",
-    "tooltip-format": "左键：选取区域截图\n右键：截取聚焦窗口\n中键：截取显示器",
-    // https://github.com/Alexays/Waybar/issues/4306
-    //"on-click": "niri msg action screenshot | wl-copy",
-    "on-click-right": "niri msg action screenshot-window | wl-copy",
-    "on-click-middle": "niri msg action screenshot-screen --show-pointer false | wl-copy"
+  // 软件托盘
+  "tray": {
+    "icon-size": 20,
+    "spacing": 5,
   },
 
-  // 录屏
-  "custom/recorder": {
-    "format": "",
-    "tooltip-format": "左键：最小化开始录制\n右键：强制关闭",
-    "on-click": "obs --startrecording --minimize-to-tray",
-    "on-click-right": "pkill obs"
+  // 屏幕亮度（外接）
+  "group/ddcutil": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-left-to-right": false,
+    },
+    "modules": [
+      "custom/ddcutil-day",
+      "backlight/slider",
+      "backlight",
+      "custom/separator#1",
+      "custom/ddcutil-sleep",
+      "custom/ddcutil-night",
+    ],
+  },
+
+  "custom/ddcutil-day": {
+    "tooltip-format": "左键：100%外接屏幕亮度",
+    "format": "󰃠",
+    "on-click": "ddcutil --display 1 setvcp 10 100",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // 屏幕亮度
+  "backlight/slider": {
+    "min": 5,
+    "max": 100,
+    "orientation": "horizontal",
+  },
+
+  "backlight": {
+    "tooltip": false,
+    "tooltip-format":"调节亮度",
+    "format": "{icon}",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+  },
+
+  // 分隔符
+  "custom/separator#1": {
+    "format": "󱋱",
+    //"format": "󰇝",
+    "tooltip": false,
+  },
+
+  "custom/ddcutil-sleep": {
+    "tooltip-format": "左键：5%外接屏幕亮度",
+    "format": "󰃞",
+    "on-click": "ddcutil --display 1 setvcp 10 5",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  "custom/ddcutil-night": {
+    "tooltip-format": "左键：65%外接屏幕亮度",
+    "format": "󰃟",
+    "on-click": "ddcutil --display 1 setvcp 10 65",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
   },
 
   // 声音模块
@@ -135,7 +234,10 @@
     "drawer": {
       "transition-left-to-right": false,
     },
-    "modules": ["pulseaudio", "pulseaudio/slider"],
+    "modules": [
+      "pulseaudio",
+      "pulseaudio/slider"
+    ],
   },
 
   "pulseaudio": {
@@ -165,13 +267,16 @@
     "orientation": "horizontal",
   },
 
-  // 程序启动器
-  "custom/applauncher": {
-    "tooltip-format": "左键：软件启动菜单\n右键：切换壁纸\n中键：启用/禁用 niri 背景自动模糊",
-    "format": "󰣇",
-    "on-click": "fuzzel",
-    "on-click-right": "waypaper",
-    "on-click-middle": "~/.config/niri/scripts/auto-blur-bg.sh || pkill -f auto-blur-bg.sh"
+  // 电池电量
+  "battery": {
+    "interval": 60,
+    "states": {
+      "critical": 20,
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}% ",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂂", "󰁹"],
+    "tooltip-format": "剩余电量：{capacity}%\n充 放 电 ：{power}\n可用时间：{timeTo}\n电池健康度：{health}%",
   },
 
   // 电源菜单
@@ -194,12 +299,6 @@
     "on-click": "wlogout",
   },
 
-  "custom/lockscreen": {
-    "tooltip": false,
-    "format": "",
-    "on-click": "swaylock",
-  },
-
   "custom/reboot": {
     "tooltip": false,
     "format": "",
@@ -212,136 +311,9 @@
     "tooltip": false,
   },
 
-  // 屏幕亮度
-  "backlight/slider": {
-    "min": 5,
-    "max": 100,
-    "orientation": "horizontal",
-  },
-
-  "backlight": {
+  "custom/lockscreen": {
     "tooltip": false,
-    "tooltip-format":"调节亮度",
-    "format": "{icon}",
-    "format-icons": ["", "", "", "", "", "", "", "", ""],
-  },
-
-  // 屏幕亮度（外接）
-  "group/ddcutil": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-left-to-right": false,
-    },
-    "modules": [
-      "custom/ddcutil-day",
-      "backlight/slider",
-      "backlight",
-      "custom/separator#1",
-      "custom/ddcutil-sleep",
-      "custom/ddcutil-night",
-    ],
-  },
-
-  "custom/ddcutil-day": {
-    "tooltip-format": "左键：100%外接屏幕亮度",
-    "format": "󰃠",
-    "on-click": "ddcutil --display 1 setvcp 10 100",
-    "on-scroll-up": "true",
-    "on-scroll-down": "true"
-  },
-
-  "custom/ddcutil-night": {
-    "tooltip-format": "左键：65%外接屏幕亮度",
-    "format": "󰃟",
-    "on-click": "ddcutil --display 1 setvcp 10 65",
-    "on-scroll-up": "true",
-    "on-scroll-down": "true"
-  },
-
-  "custom/ddcutil-sleep": {
-    "tooltip-format": "左键：5%外接屏幕亮度",
-    "format": "󰃞",
-    "on-click": "ddcutil --display 1 setvcp 10 5",
-    "on-scroll-up": "true",
-    "on-scroll-down": "true"
-  },
-
-  "custom/mako": {
-    "format": "",
-    "on-click": "makoctl restore",
-  },
-
-  // 取色
-  "custom/colorpicker": {
-    "tooltip-format": "左键：提取颜色",
-    "format": "󱏜",
-    "on-click": "hyprpicker | wl-copy",
-  },
-
-  // 音频可视化
-  "custom/cava": {
-    "tooltip": false,
-    //"tooltip-format": "左键：播放/暂停",
-    "format": "{}",
-    "exec": "~/.config/waybar/scripts/cava.sh",
-    "on-click": "playerctl play-pause"
-  },
-
-  // 熄屏
-  "idle_inhibitor": {
-    "format": "{icon}",
-    "format-icons": {
-      "activated": "",
-      "deactivated": "",
-    },
-    "tooltip-format-activated": "自动熄屏已禁止",
-    "tooltip-format-deactivated": "自动熄屏已开启",
-    "on-click-right": "~/.config/matugen/scripts/select-type.sh"
-  },
-  // 分隔符
-  "custom/separator#1": {
-    "format": "󱋱",
-    //"format": "󰇝",
-    "tooltip": false,
-  },
-
-  // 软件包更新模块
-  "custom/updates": {
-    "format": "{}{icon}",
-    "return-type": "json",
-    "format-icons": {
-      "has-updates": "",
-      "updated": "",
-    },
-    "exec-if": "which waybar-module-pacman-updates",
-    "exec": "waybar-module-pacman-updates --no-zero-output",
-    "on-click": "kitty -e paru",
-  },
-
-  // 屏幕共享/录制提示
-  "privacy": {
-    "icon-spacing": 10,
-    "icon-size": 16,
-    "transition-duration": 250,
-    "modules": [
-      {
-        "type": "screenshare",
-        "tooltip": true,
-        "tooltip-icon-size": 24,
-      },
-    ],
-  },
-
-  "cffi/niri-taskbar": {
-    // module_path
-    "module_path": "/usr/lib/waybar/libniri_taskbar.so",
-    "apps": {
-      "signal": [
-        {
-          "match": "\\([0-9]+\\)$",
-          "class": "unread",
-        },
-      ],
-    },
+    "format": "",
+    "on-click": "swaylock",
   },
 }

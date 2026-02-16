@@ -34,14 +34,6 @@
 		"format": "",
 		"tooltip": false
 	},
-	"custom/left_inv#1": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/left_inv#2": {
-		"format": "",
-		"tooltip": false
-	},
 	/*--------------------
 		right dividers
 	--------------------*/
@@ -75,10 +67,6 @@
 	},
 	"custom/right_div#8": {
 		"format": "",
-		"tooltip": false
-	},
-	"custom/right_inv#1": {
-		"format": "",
 		"tooltip": false
 	}
 }

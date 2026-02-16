@@ -1,11 +1,10 @@
 @import "colors.css";
 
-/* 基准字体大小：18px */
 * {
     border: none;
     border-radius: 0;
     font-family: "JetBrainsMono Nerd Font Propo", "Sarasa UI SC", "JetBrains Maple Mono";
-    font-size: 16px;
+    font-size: 16px; /* 基准字体大小 */
     opacity: 1;
 }
 
@@ -103,23 +102,25 @@ window#waybar.empty #window {
 }
 
 /* 分割线颜色 */
-#custom-left_div.1 { background: @surface_container; color: @primary; }
+/*左箭头*/
+#custom-left_div.1 { color: @surface_container_high; }
 #custom-left_div.2 { background: @surface_container_high; color: @tertiary; }
-#custom-left_div.3 { color: @surface_container_high; }
-#custom-left_div.4 { background: @surface_bright; color: @surface_container_high; }
-#custom-left_div.5 { background: @surface_container; color: @surface; }
-#custom-left_div.6 { color: @surface_bright; }
+#custom-left_div.3 { background: @tertiary; color: @surface_container; }
+#custom-left_div.4 { background: @surface_container; color: @primary; }
+#custom-left_div.5 { color: @surface_bright; }
+#custom-left_div.6 { background: @surface_bright; color: @surface_container_high; }
 #custom-left_div.7 { background: @surface_container_high; color: @surface_container; }
-#custom-left_div.8 { background: @tertiary; color: @surface_container; }
+#custom-left_div.8 { background: @surface_container; color: @surface; }
 
-#custom-right_div.1 { background: @surface_container; color: @primary; }
+/*右箭头*/
+#custom-right_div.1 { color: @surface_container_high; }
 #custom-right_div.2 { background: @surface_container_high; color: @secondary; }
-#custom-right_div.3 { color: @surface_container_high; }
-#custom-right_div.4 { background: @surface_container_high; color: @surface_container; }
-#custom-right_div.5 { background: @surface_container; color: @surface; }
-#custom-right_div.6 { color: @surface_bright; }
-#custom-right_div.7 { background: @surface_bright; color: @surface_container_high; }
-#custom-right_div.8 { background: @secondary; color: @surface_container; }
+#custom-right_div.3 { background: @secondary; color: @surface_container; }
+#custom-right_div.4 { background: @surface_container; color: @primary; }
+#custom-right_div.5 { color: @surface_bright; }
+#custom-right_div.6 { background: @surface_bright; color: @surface_container_high; }
+#custom-right_div.7 { background: @surface_container_high; color: @surface_container; }
+#custom-right_div.8 { background: @surface_container; color: @surface; }
 
 /* 中间区域图标 */
 #bluetooth,
@@ -302,22 +303,4 @@ window#waybar.empty #window {
 #custom-wlogout {
     padding: 0 0.83em 0 0.56em;
     font-size: 1.39em;
-}
-
-/* 日期和通知 */
-#clock.date {
-    padding: 0 0.39em;
-    background-color: @secondary_container;
-    color: @on_secondary_container;
-}
-
-#custom-datelogo {
-    background-color: @secondary_container;
-    color: @on_secondary_container;
-}
-
-#custom-mako {
-    background-color: @surface_container_high;
-    color: @on_surface_container;
-    padding: 0 0.83em;
 }
