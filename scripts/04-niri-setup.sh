@@ -407,6 +407,7 @@ section "Step 6/9" "Wallpapers"
 if [ -d "$TEMP_DIR/wallpapers" ]; then
   as_user mkdir -p "$HOME_DIR/Pictures/Wallpapers"
   as_user cp -rf "$TEMP_DIR/wallpapers/." "$HOME_DIR/Pictures/Wallpapers/"
+  as_user rm -rf "$HOME_DIR/wallpapers"
   success "Installed."
 fi
 rm -rf "$TEMP_DIR"
