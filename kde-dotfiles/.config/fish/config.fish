@@ -1,3 +1,5 @@
+fish_config theme choose "Catppuccin Mocha"
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
@@ -8,16 +10,16 @@ starship init fish | source
 zoxide init fish --cmd cd | source
 
 function y
-	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-	yazi $argv --cwd-file="$tmp"
-	if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-		builtin cd -- "$cwd"
-	end
-	rm -f -- "$tmp"
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    yazi $argv --cwd-file="$tmp"
+    if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
 end
 
 function ls
-	command eza $argv
+    command eza $argv
 end
 
 thefuck --alias | source
@@ -27,8 +29,8 @@ abbr fa fastfetch
 function pac --description "Fuzzy search and install packages (Official Repo first)"
     # --- 配置区域 ---
     # 1. 定义颜色 (ANSI 标准色，兼容 Matugen)
-    set color_official  "\033[34m"   
-    set color_aur       "\033[35m"   
+    set color_official  "\033[34m"
+    set color_aur       "\033[35m"
     set color_reset     "\033[0m"
 
     # 2. AUR 净化过滤器 (正则)
@@ -68,8 +70,8 @@ end
 function pacr --description "Fuzzy find and remove packages (UI matched with pac)"
     # --- 配置区域 ---
     # 1. 定义颜色 (保持与 pac 一致)
-    set color_official  "\033[34m"    
-    set color_aur       "\033[35m"    
+    set color_official  "\033[34m"
+    set color_aur       "\033[35m"
     set color_reset     "\033[0m"
 
     # --- 逻辑区域 ---

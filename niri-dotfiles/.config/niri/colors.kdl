@@ -1,13 +1,76 @@
-layout{
-    focus-ring{
-        active-gradient from="#cebdffcc" to="#efb8c9cc" angle=135
-        urgent-color "#ffb4ab"
+layout {
+    # Theme: Catppuccin Mocha - blue
+    gaps 16
+    //center-focused-column "never"
+    //default-column-display "tabbed"
+    background-color "#1e1e2e"
 
-        }
-}
-recent-windows {
-    highlight {
-        active-color "#3a383e"
-        urgent-color "#ffb4ab"
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    focus-ring {
+        //off
+        width 4
+        active-color "#cba6f7"
+        inactive-color "#b4befe"
+        urgent-color "#f38ba8"
+        active-gradient from="#cba6f7" to="#89b4fa" angle=45
+        inactive-gradient from="#b4befe" to="#585b70" angle=45 relative-to="workspace-view"
+        urgent-gradient from="#f9e2af" to="#fab387" angle=45
+    }
+
+    border {
+        on
+        width 2
+        active-color "#cba6f7"
+        inactive-color "#b4befe"
+        urgent-color "#f38ba8"
+        active-gradient from="#cba6f7" to="#89b4fa" angle=45
+        inactive-gradient from="#b4befe" to="#585b70" angle=45 relative-to="workspace-view"
+        urgent-gradient from="#f9e2af" to="#fab387" angle=45
+    }
+
+    shadow {
+        off
+        softness 30
+        spread 5
+        offset x=0 y=5
+        draw-behind-window true
+        color "#11111b4d"
+        inactive-color "#1e1e2e4d"
+    }
+
+    tab-indicator {
+        on
+        //hide-when-single-tab
+        //place-within-column
+        gap 5
+        width 4
+        length total-proportion=1.0
+        position "right"
+        gaps-between-tabs 2
+        corner-radius 8
+        active-color "#cba6f7"
+        inactive-color "#b4befe"
+        urgent-color "#f38ba8"
+        active-gradient from="#cba6f7" to="#89b4fa" angle=45
+        inactive-gradient from="#b4befe" to="#585b70" angle=45 relative-to="workspace-view"
+        urgent-gradient from="#f9e2af" to="#fab387" angle=45
+    }
+
+    insert-hint {
+        on
+        color "#fab387"
+        gradient from="#fab387" to="#89b4fa" angle=45 relative-to="workspace-view"
+    }
+
+    struts {
+        left 64
+        right 64
+        top 64
+        bottom 64
     }
 }

@@ -6,7 +6,6 @@ binds {
     Mod+Shift+Slash hotkey-overlay-title="快捷键教程" { show-hotkey-overlay; }
 
     Mod+Alt+W  hotkey-overlay-title="切换壁纸" { spawn "waypaper"; }
-    Mod+Alt+T  hotkey-overlay-title="切换颜色策略" { spawn "~/.config/matugen/scripts/select-type.sh"; }
     Mod+Alt+L  hotkey-overlay-title="锁屏" { spawn "swaylock"; }
     Mod+Alt+V hotkey-overlay-title="剪贴板" {spawn "copyq" "toggle";}
 

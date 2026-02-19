@@ -6,7 +6,7 @@
         "modules-dividers.jsonc"
     ],
     // 窗口层级
-    "layer":"top",
+    "layer":"bottom",
     // 屏幕位置
     "position": "bottom",
     "fixed-center": true,

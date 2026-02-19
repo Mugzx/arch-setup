@@ -1,4 +1,4 @@
-include=~/.config/mako/colors.conf
+include=~/.config/mako/catppuccin-mocha-blue.conf
 border-size=2
 border-radius=8
 icon-border-radius=8

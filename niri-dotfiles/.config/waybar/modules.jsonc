@@ -77,7 +77,6 @@
     },
     "tooltip-format-activated": "自动熄屏已禁止",
     "tooltip-format-deactivated": "自动熄屏已开启",
-    "on-click-right": "~/.config/matugen/scripts/select-type.sh"
   },
 
   // 取色

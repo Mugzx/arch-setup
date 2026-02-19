@@ -63,7 +63,6 @@ cd arch-setup && sudo bash install.sh
 部分依赖脚本的功能可能无法正常工作，需要前往以下路径设置脚本「作为程序运行」：
 - `~/.config/niri/scripts/`
 - `~/.config/waybar/scripts/`
-- `~/.config/matugen/scripts/`
 
 ```sh
 chmod +x *.sh

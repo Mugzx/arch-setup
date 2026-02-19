@@ -1,4 +1,4 @@
-@import "colors.css";
+@import "catppuccin-mocha.css";
 
 * {
     border: none;
@@ -10,66 +10,67 @@
 
 window#waybar {
     background: transparent;
-    color: @on_surface;
+    color: @lavender;
 }
 
+
 tooltip {
-    background: @secondary_container;
-    border: 0.17em solid @outline;
+    background: @surface0;
+    border: 0.17em;
     opacity: 1;
 }
 
 tooltip label {
-    color: @on_surface;
+    color: @text;
     font-size: 0.89em;
 }
 
 /* 工作区 */
 #workspaces button {
     padding: 0 0.56em;
-    background: @surface;
-    color: @tertiary_container;
+    background: @crust;
+    color: @teal;
 }
 
 #workspaces button:hover {
-    background: @on_tertiary;
+    background: @surface0;
 }
 
 #workspaces button.active {
-    color: @tertiary;
+    color: @sapphire;
 }
 
 /* niri任务栏 */
 .niri-taskbar {
-    background: @surface_container;
+    background: @mantle;
     padding: 0 0 0 0.28em;
 }
 
 .niri-taskbar button:hover {
-    background: @surface_container;
+    background: @surface0;
 }
 
 .niri-taskbar button.focused {
-    background: @surface;
+    background: @surface0;
 }
 
 .niri-taskbar button.urgent {
-    background-color: @tertiary;
+    background-color: @mauve;
     animation: blink 0.5s steps(12) infinite alternate;
 }
 
 @keyframes blink {
     to {
-        background-color: @primary;
-        color: @error;
+        background-color: @blue;
+        color: @red;
     }
 }
 
 /* 窗口 */
 #window {
     padding: 0 0.56em;
-    background-color: @surface_bright;
-    color: @on_surface;
+    background-color: @surface0;
+    color: @text;
 }
 
 #window label {
@@ -77,7 +78,7 @@ tooltip label {
 }
 
 window#waybar.empty #window {
-    background-color: @surface_bright;
+    background-color: @surface0;
 }
 
 /* 通用分割线样式 */
@@ -103,91 +104,88 @@ window#waybar.empty #window {
 
 /* 分割线颜色 */
 /*左箭头*/
-#custom-left_div.1 { color: @surface_container_high; }
-#custom-left_div.2 { background: @surface_container_high; color: @tertiary; }
-#custom-left_div.3 { background: @tertiary; color: @surface_container; }
-#custom-left_div.4 { background: @surface_container; color: @primary; }
-#custom-left_div.5 { color: @surface_bright; }
-#custom-left_div.6 { background: @surface_bright; color: @surface_container_high; }
-#custom-left_div.7 { background: @surface_container_high; color: @surface_container; }
-#custom-left_div.8 { background: @surface_container; color: @surface; }
+#custom-left_div.1 { color: @base; }
+#custom-left_div.2 { background: @base; color: @red; }
+#custom-left_div.3 { background: @red; color: @mantle; }
+#custom-left_div.4 { background: @mantle; color: @yellow; }
+#custom-left_div.5 { color: @surface0; }
+#custom-left_div.6 { background: @surface0; color: @base; }
+#custom-left_div.7 { background: @base; color: @mantle; }
+#custom-left_div.8 { background: @mantle; color: @crust; }
 
 /*右箭头*/
-#custom-right_div.1 { color: @surface_container_high; }
-#custom-right_div.2 { background: @surface_container_high; color: @secondary; }
-#custom-right_div.3 { background: @secondary; color: @surface_container; }
-#custom-right_div.4 { background: @surface_container; color: @primary; }
-#custom-right_div.5 { color: @surface_bright; }
-#custom-right_div.6 { background: @surface_bright; color: @surface_container_high; }
-#custom-right_div.7 { background: @surface_container_high; color: @surface_container; }
-#custom-right_div.8 { background: @surface_container; color: @surface; }
+#custom-right_div.1 { color: @base; }
+#custom-right_div.2 { background: @base; color: @blue; }
+#custom-right_div.3 { background: @blue; color: @mantle; }
+#custom-right_div.4 { background: @mantle; color: @yellow; }
+#custom-right_div.5 { color: @surface0; }
+#custom-right_div.6 { background: @surface0; color: @base; }
+#custom-right_div.7 { background: @base; color: @mantle; }
+#custom-right_div.8 { background: @mantle; color: @crust; }
 
 /* 中间区域图标 */
 #bluetooth,
 #network,
-#custom-settings,
 #custom-screenshot,
 #custom-recorder {
-    background-color: @surface_container_high;
-    color: @secondary;
+    background-color: @base;
+    color: @text;
 }
 
 #bluetooth { padding: 0 0.3em 0 0.5em; font-size: 1.25em; }
 #bluetooth.disabled { padding: 0 0.22em 0 0.46em; }
 #network { padding: 0 0.34em; font-size: 1.2em; }
-#custom-settings { padding: 0 0.39em; font-size: 1.06em; }
 #custom-screenshot { padding: 0 0.4em; font-size: 1.28em; }
 #custom-recorder { padding: 0 0.3em; font-size: 1.1em; }
-#custom-recorder.recording { color: @error; }
 
-/* 电源管理 */
 #power-profiles-daemon,
 #custom-colorpicker,
 #idle_inhibitor {
-    background-color: @tertiary;
-    color: @on_tertiary;
+    background-color: @red;
+    color: @base;
     padding: 0 0.36em;
 }
 
 #idle_inhibitor.activated { padding: 0 0.4em; }
 #power-profiles-daemon { padding: 0 0.4em 0 0.36em; }
-#power-profiles-daemon.performance { color: @on_error; font-size: 1.28em; padding: 0 0.32em 0 0.45em; }
-#power-profiles-daemon.balanced { color: @on_tertiary; }
-#power-profiles-daemon.power-saver { color: #1aa052; }
+#power-profiles-daemon.performance { color: @yellow; font-size: 1.28em; padding: 0 0.32em 0 0.45em; }
+#power-profiles-daemon.balanced { color: @base; }
+#power-profiles-daemon.power-saver { color: @green; }
 
 /* 启动器 */
 #custom-applauncher {
     font-size: 1.39em;
     padding: 0 0.39em;
     margin: 0;
-    background-color: @primary;
-    color: @on_primary;
+    background-color: @yellow;
+    color: @crust;
 }
 
 /* 时钟和媒体 */
 #clock {
     padding: 0 0.45em 0 0.45em;
-    background-color: @secondary;
-    color: @on_secondary;
+    background-color: @blue;
+    color: @base;
 }
 
 #custom-cava {
-    background-color: @surface_container_high;
-    color: @primary;
+    background-color: @base;
+    color: @sky;
     padding: 0 0.39em;
 }
 
 /* 更新和托盘 */
 #custom-updates,
 #tray {
-    background-color: @surface_bright;
+    background-color: @surface0;
     padding: 0 0.39em;
+    color: @text;
 }
 
 #custom-updates {
     border-radius: 0;
     padding: 0 0.17em 0 0.39em;
-    color: @error;
+
 }
 
 #tray { font-size: 1.11em; }
@@ -198,15 +196,15 @@ window#waybar.empty #window {
 #custom-ddcutil-sleep,
 #custom-separator.1,
 #backlight {
-    background-color: @surface_container_high;
-    color: @tertiary;
+    background-color: @base;
+    color: @peach;
     padding: 0 0.33em;
 }
 
 #backlight { padding: 0 0.28em 0 0; }
 
 #backlight-slider {
-    background-color: @surface_container_high;
+    background-color: @base;
     padding: 0 0.28em 0 0;
 }
 
@@ -224,30 +222,30 @@ window#waybar.empty #window {
     min-width: 4.44em;
     border-radius: 0.28em;
     opacity: 0;
-    background-color: @background;
+    background-color: @base;
 }
 
 #backlight-slider highlight {
     min-width: 0.56em;
     border-radius: 0.28em;
-    background-color: @tertiary;
+    background-color: @yellow;
 }
 
 /* 音频控制 */
 #privacy,
 #pulseaudio,
 #pulseaudio-slider {
-    background-color: @surface_container_high;
+    background-color: @base;
 }
 
 #privacy {
     padding: 0 0.39em;
-    color: @error;
+    color: @red;
 }
 
 #pulseaudio {
     padding: 0 0 0 0.28em;
-    color: @tertiary;
+    color: @peach;
 }
 
 #pulseaudio-slider {
@@ -267,25 +265,25 @@ window#waybar.empty #window {
     min-height: 0.56em;
     min-width: 4.44em;
     border-radius: 0.28em;
-    background-color: @surface;
+    background-color: @surface0;
 }
 
 #pulseaudio-slider highlight {
     min-width: 0;
     border-radius: 0.28em;
-    background-color: @tertiary;
+    background-color: @yellow;
 }
 
 /* 电池 */
 #battery {
-    background-color: @surface_container;
-    color: @secondary;
+    background-color: @mantle;
+    color: @mauve;
     padding: 0 0.39em;
 }
 
 #battery.critical:not(.charging) {
-    background-color: @surface_container;
-    color: @error;
+    background-color: @mantle;
+    color: @red;
     padding: 0 0.39em;
     animation: blink 0.5s steps(12) infinite alternate;
 }
@@ -295,8 +293,8 @@ window#waybar.empty #window {
 #custom-reboot,
 #custom-lockscreen,
 #custom-logout {
-    background-color: @surface;
-    color: @error;
+    background-color: @crust;
+    color: @maroon;
     padding: 0 0.56em;
 }
 
