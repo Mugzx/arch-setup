@@ -1,7 +1,6 @@
 neovim                                   # Advanced version of vim
 
 # --- Gaming & Media ---
-mpv                                      # Minimalist High Performance Video Player
 upscaler                                 # image upscaler (make it more clear)
 curtail                                  # compress image (make it smaller)
 lact                                     # GPU Control Tool (Overclocking/Fan)
@@ -9,8 +8,7 @@ obs-studio                               # OBS Studio (Streaming & Recording)
 
 # --- System Utilities ---
 yazi                                     # Blazing fast terminal file manager
-btop                                     # Resource Monitor (TUI)
-# gnome-disk-utility                       Disk Management Utility (Disks)
+btop                                     # TUI for Resource Monitor
 baobab                                   # Disk Usage Analyzer
 mission-center                           # System Monitor (Task Manager style)
 flatseal                                 # flatpak permission manager

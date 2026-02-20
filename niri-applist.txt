@@ -1,4 +1,5 @@
 imv                                      # Image Viewer for Wayland
+mpv                                      # Minimalist High Performance Video Player
 fish                                     # Friendly Interactive Shell
 gnome-software                           # Gui store for flatpak software
 

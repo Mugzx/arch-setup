@@ -179,8 +179,7 @@ fi
 # STEP 2: Core Components
 # ==============================================================================
 section "Step 1/9" "Core Components"
-PKGS="niri xdg-desktop-portal-gnome fuzzel kitty libnotify mako polkit-gnome"
-exe pacman -Syu --noconfirm --needed $PKGS
+exe pacman -Syu --noconfirm --needed niri xdg-desktop-portal-gnome fuzzel kitty libnotify mako polkit-gnome
 
 # ==============================================================================
 # STEP 3: File Manager

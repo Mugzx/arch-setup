@@ -46,14 +46,14 @@ cd arch-setup && sudo bash install.sh
 │   ├── 04-niri-setup.sh # Niri 安装和配置
 │   ├── 06-kdeplasma-setup.sh # KDE Plasma 安装和配置
 │   ├── 99-apps.sh # 安装应用列表中的软件包
-│   └── niri-undochange.sh # 快照回档 (Niri)
+│   ├── undochange.sh # 快照回档 （回到文件系统初始化之前）
+│   └── niri-undochange.sh # 快照回档 (回到 Niri 安装之前)
 ├── exclude-dotfiles.txt # 需要排除的配置★
 ├── install.sh # 主安装脚本，调用其他脚本完成系统安装
-├── kde-applist.txt # KDE (KDE Plasma 桌面环境)
+├── kde-applist.txt # KDE 的桌面环境软件列表
 ├── kde-common-applist.txt # KDE 常用软件应用列表★
-├── niri-applist.txt # Niri (Niri 窗口管理器)
-├── niri-common-applist.txt # Niri 常用软件应用列表★
-└── undochange.sh # 快照回档
+├── niri-applist.txt # Niri 的窗口管理器软件列表
+└── niri-common-applist.txt # Niri 常用软件列表★
 ```
 
 有特殊标记的目录/文件建议按个人习惯自行调整。

@@ -87,7 +87,7 @@ chmod 440 "$SUDO_TEMP_FILE"
 section "Step 3/5" "KDE Dependencies"
 
 LIST_FILE="$PARENT_DIR/kde-applist.txt"
-UNDO_SCRIPT="$PARENT_DIR/undochange.sh"
+UNDO_SCRIPT="$SCRIPT_DIR/undochange.sh"
 
 # --- Critical Failure Handler ---
 critical_failure_handler() {
