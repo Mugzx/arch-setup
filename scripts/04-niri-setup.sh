@@ -303,7 +303,6 @@ if [ -f "$LIST_FILE" ]; then
     info_kv "Target" "${#PACKAGE_ARRAY[@]} packages scheduled."
 
     for pkg in "${PACKAGE_ARRAY[@]}"; do
-      [ "$pkg" == "imagemagic" ] && pkg="imagemagick"
       [[ "$pkg" == "AUR:"* ]] && AUR_LIST+=("${pkg#AUR:}") || BATCH_LIST+=("$pkg")
     done
 

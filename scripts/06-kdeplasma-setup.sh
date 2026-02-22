@@ -217,9 +217,6 @@ if [ -f "$LIST_FILE" ]; then
                 # Extract Name (Before TAB)
                 raw_pkg=$(echo "$line" | cut -f1 -d$'\t' | xargs)
                 [[ -z "$raw_pkg" ]] && continue
-                
-                # Legacy compatibility (imagemagick)
-                [ "$raw_pkg" == "imagemagic" ] && raw_pkg="imagemagick"
 
                 # Identify AUR vs Repo
                 if [[ "$raw_pkg" == AUR:* ]]; then

@@ -1,14 +1,5 @@
 // Window Rules - niri:
-// https://yalter.github.io/niri/Configuration:-Window-Rules
-
-// 放进overview里的壁纸程序
-layer-rule{
-    match namespace="hyprpaper"
-    match namespace="wallpaper"
-    match namespace="awww-daemon"
-    match namespace="swww-daemonoverview"
-    place-within-backdrop true
-}
+// https://niri-wm.github.io/niri/Configuration:-Window-Rules
 
 // 全局窗口规则
 window-rule {

@@ -6,7 +6,6 @@ eza                                      # Modern replacement for 'ls' (with ico
 thefuck                                  # Auto-corrects errors in previous console commands
 fastfetch                                # Fast system information fetcher (Neofetch alternative)
 jq                                       # Command-line JSON processor
-imagemagick                              # Powerful image manipulation tools (CLI)
 
 # --- KDE Applications ---
 ark                                      # Archiving Tool (Zip, Tar, 7z GUI)

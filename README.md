@@ -5,11 +5,9 @@
 > 使用该安装脚本需自备代理，否则无法正常工作。
 >
 
-仓库复刻自 [shorin-arch-setup](https://github.com/SHORiN-KiWATA/shorin-arch-setup)。
-
 ## 使用方法
 
-安装系统，登录之后从 tty 运行以下命令
+安装系统，登录后使用以下命令。
 
 ### 安装 git
 
@@ -61,12 +59,15 @@ cd arch-setup && sudo bash install.sh
 ## 方法解决
 
 部分依赖脚本的功能可能无法正常工作，需要前往以下路径设置脚本「作为程序运行」：
-- `~/.config/niri/scripts/`
-- `~/.config/waybar/scripts/`
 
 ```sh
-chmod +x *.sh
+chmod +x ~/.config/waybar/scripts/*.sh ~/.config/niri/scripts/*.sh
 ```
+
+## 感谢
+
+- [shorin-arch-setup](https://github.com/SHORiN-KiWATA/shorin-arch-setup)
+- [Catppuccin](https://github.com/catppuccin)
 
 ## 一些说明
 

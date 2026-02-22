@@ -100,11 +100,10 @@
 
   // 程序启动器
   "custom/applauncher": {
-    "tooltip-format": "左键：软件启动菜单\n右键：切换壁纸\n中键：启用/禁用 niri 背景自动模糊",
+    "tooltip-format": "左键：软件启动菜单\n右键：切换壁纸",
     "format": "󰣇",
     "on-click": "fuzzel",
     "on-click-right": "waypaper",
-    "on-click-middle": "~/.config/niri/scripts/auto-blur-bg.sh || pkill -f auto-blur-bg.sh"
   },
 
   // 时钟
