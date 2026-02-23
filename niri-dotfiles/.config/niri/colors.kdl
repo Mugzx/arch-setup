@@ -1,8 +1,5 @@
 layout {
-    # Theme: Catppuccin Mocha - blue
-    gaps 16
-    //center-focused-column "never"
-    //default-column-display "tabbed"
+    // Theme: Catppuccin Mocha - blue
     background-color "#1e1e2e"
 
     preset-column-widths {
@@ -23,7 +20,7 @@ layout {
     }
 
     border {
-        on
+        //on
         width 2
         active-color "#cba6f7"
         inactive-color "#b4befe"
@@ -68,9 +65,13 @@ layout {
     }
 
     struts {
-        left 64
-        right 64
-        top 64
-        bottom 64
+        //left 64
+        //right 64
+        //top 64
+        //bottom 64
     }
+}
+
+overview {
+    backdrop-color "#11111b"
 }

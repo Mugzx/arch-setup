@@ -1,5 +1,5 @@
 // Key Bindings - niri:
-// https://yalter.github.io/niri/Configuration:-Key-Bindings
+// https://niri-wm.github.io/niri/Configuration:-Key-Bindings
 
 binds {
     // 显示快捷键教程
@@ -162,6 +162,8 @@ binds {
 // 切换窗口 可以选择上/下一个窗口
 recent-windows {
     binds {
+        Mod+Tab { next-window scope="workspace"; }
+        Mod+Shift+Tab { previous-window scope="workspace"; }
         Alt+Tab { next-window scope="all"; }
         Alt+Shift+Tab { previous-window scope="all"; }
     }

@@ -5,7 +5,9 @@ include "colors.kdl"
 include "startup.kdl"
 
 // 截图保存位置
-screenshot-path "~/Pictures/Screenshots/Niri-screenshots/%Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Pictures/Screenshots/niri/%Y-%m-%d %H-%M-%S.png"
+// 隐藏窗口标题栏
+prefer-no-csd
 
 // 环境变量
 environment {
@@ -32,15 +34,13 @@ cursor {
     hide-after-inactive-ms 15000
 }
  
-// 切换窗口（super/alt+tab选择带/不带缩略图）
+// 切换窗口
 recent-windows {
     // off
     debounce-ms 750
     open-delay-ms 150
 
     highlight {
-        active-color "#999999ff"
-        urgent-color "#ff9999ff"
         // 缩略图背景内间距
         padding 30
         // 缩略图的背景圆角
@@ -50,15 +50,6 @@ recent-windows {
     previews {
         max-height 480
         max-scale 0.5
-    }
-
-    binds {
-        // scope可以设置显示的窗口是当前工作区/显示器，或者显示全部窗口
-        Mod+Tab         { next-window scope="workspace"; }
-        Mod+Shift+Tab   { previous-window scope="workspace"; }
-        // 波浪键 显示当前应用的所有窗口
-        Mod+grave       { next-window filter="app-id"; }
-        Mod+Shift+grave { previous-window filter="app-id"; }
     }
 }
 
@@ -75,18 +66,18 @@ input {
 
     // libinput 设置
     touchpad {
-        // off
+        //off
         tap
-        // dwt
-        // dwtp
-        // drag false
-        // drag-lock
-        // nautural-scroll可以翻转触摸板滚动的方向
+        //dwt
+        //dwtp
+        //drag false
+        //drag-lock
+        //nautural-scroll可以翻转触摸板滚动的方向
         natural-scroll
         //accel-speed -0.5
-        // accel-profile "flat"
-        // scroll-method "two-finger"
-        // disabled-on-external-mouse
+        //accel-profile "flat"
+        //scroll-method "two-finger"
+        //disabled-on-external-mouse
     }
 
     mouse {
@@ -119,104 +110,25 @@ input {
     //focus-follows-mouse max-scroll-amount="50%"
 }
 
-
 layout {
     // 窗口和窗口之间的间距
     gaps 12
-    //empty-workspace-above-first
-    // "never"，焦点位于屏幕外的列将保持在屏幕左侧或右侧边缘
-    // "always"，焦点列将始终居中
-    // "on-overflow"，焦点列如果无法与先前焦点列一起显示，则会居中显示与先前聚焦的列一起居中
-    center-focused-column "never"
-    
+    //center-focused-column "never"
+    //default-column-display "tabbed"
+
     // 自定义 “switch-preset-column-width” (Mod+R) 切换的宽度
     // 预设窗口宽度
     preset-column-widths {
-        // 默认预设宽度分别为输出宽度的 1/3、1/2 和 2/3。
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.66667
-        // 以像素为单位
-        //fixed 1920
+        proportion 0.3
     }
     // 自定义 "switch-preset-window-height" (Mod+Shift+R) 切换的高度
-    // preset-window-heights { }
+    preset-window-heights { proportion 0.75; }
 
     // 新窗口的默认宽度，留空则由窗口决定
     default-column-width { proportion 0.5; }
-
-    // CSD窗口形状不规则，默认焦点环和边框显示在窗口后方，透过半透明窗口显示。
-    // 若不希望，可取消 `prefer-no-csd` 注释禁用 CSD 的窗口外部绘制边框。
-    // 也可通过 draw-border-with-background 窗口规则调整。
-
-    // 聚焦窗口边框外观（颜色设置在colors.kdl）
-    focus-ring {
-        // off
-        // 焦点环向窗口外延伸的像素
-        width 3
-
-        // CSS语法
-        // 活动显示器上的颜色
-        //active-color "@primary"
-        //active-color "#00000000"
-        // Color of the ring on inactive monitors.
-
-        // 非活动显示器上的颜色
-        // 焦点环仅绘制在活动窗口周围，因此只能在其他显示器上看到此颜色
-        //inactive-color "#505050"
-
-        // 渐变（优先级高于纯色）
-        // angle 可选，默认 180（从上到下渐变）
-        //active-gradient from="#80c8ff" to="#c7ff7f" angle=45
-        // 设置 relative-to="workspace-view" 可使渐变基于整个工作区视图
-        //inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-    }
-
-    // 可以添加类似于对焦环的边框（始终可见）
-    // 窗口边框
-    border {
-        off
-        width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
-        urgent-color "#9b0000"
-
-        // 示例，可以使用oklch颜色空间的渐变
-        // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-    }
-
-    // 阴影
-    shadow {
-        on
-        // 默认阴影绘制在窗口周围而非后方
-        // 让阴影绘制在窗口后方，解决 CSD 圆角窗口的阴影显示问题
-        //draw-behind-window true
-
-        // 更改阴影的外观（值以逻辑像素为单位，与 CSS box-shadow 属性相匹配）
-        // 阴影模糊半径
-        softness 20
-        // 扩大阴影范围
-        spread 2
-        // 阴影相对于窗口的位置
-        offset x=-4 y=-4
-        // 阴影颜色和不透明度
-        color "rgba(0, 0, 0, 0.7)"
-    }
-
-    //窗口距离屏幕边缘的距离
-    struts {
-        //left 64
-        //right 64
-        //top 64
-        //bottom 64
-    }
 }
 
-// 取消启动niri时自动开启快捷键教程
+// 取消快捷键教程
 hotkey-overlay {
     skip-at-startup
 }
-
-// 隐藏窗口标题栏
-prefer-no-csd
