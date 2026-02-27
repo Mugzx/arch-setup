@@ -2,11 +2,13 @@
 {
     // 左/右 箭头需要从 左/右 的方向来看
     "include": [
-        "modules.jsonc",
-        "modules-dividers.jsonc"
+        "./modules/left.jsonc",
+        "./modules/center.jsonc",
+        "./modules/right.jsonc",
+        "./modules/dividers.jsonc"
     ],
     // 窗口层级
-    "layer":"bottom",
+    "layer": "bottom",
     // 屏幕位置
     "position": "bottom",
     "fixed-center": true,

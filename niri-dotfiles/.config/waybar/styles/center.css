@@ -1,0 +1,46 @@
+@import "catppuccin-mocha.css";
+
+/* 中间区域图标 */
+#bluetooth,
+#network,
+#custom-screenshot,
+#custom-recorder {
+    background-color: @base;
+    color: @text;
+}
+
+#bluetooth { padding: 0 0.3em 0 0.5em; font-size: 1.25em; }
+#bluetooth.disabled { padding: 0 0.22em 0 0.46em; }
+#network { padding: 0 0.34em; font-size: 1.2em; }
+#custom-screenshot { padding: 0 0.4em; font-size: 1.28em; }
+#custom-recorder { padding: 0 0.3em; font-size: 1.1em; }
+
+#power-profiles-daemon,
+#custom-colorpicker,
+#idle_inhibitor {
+    background-color: @red;
+    color: @base;
+    padding: 0 0.36em;
+}
+
+#idle_inhibitor.activated { padding: 0 0.4em; }
+#power-profiles-daemon { padding: 0 0.4em 0 0.36em; }
+#power-profiles-daemon.performance { color: @yellow; font-size: 1.28em; padding: 0 0.32em 0 0.45em; }
+#power-profiles-daemon.balanced { color: @base; }
+#power-profiles-daemon.power-saver { color: @green; }
+
+/* 启动器 */
+#custom-applauncher {
+    font-size: 1.39em;
+    padding: 0 0.39em;
+    margin: 0;
+    background-color: @yellow;
+    color: @crust;
+}
+
+/* 时钟和媒体 */
+#clock {
+    padding: 0 0.45em 0 0.45em;
+    background-color: @blue;
+    color: @base;
+}

@@ -1,0 +1,112 @@
+{
+  // 录屏
+  "custom/recorder": {
+    "format": "",
+    "tooltip-format": "左键：最小化开始录制\n右键：强制关闭",
+    "on-click": "obs --startrecording --minimize-to-tray",
+    "on-click-right": "pkill obs"
+  },
+
+  // 屏幕共享/录制提示
+  "privacy": {
+    "icon-spacing": 10,
+    "icon-size": 16,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+      },
+    ],
+  },
+
+  // 截图
+  "custom/screenshot": {
+    "format": "",
+    "tooltip-format": "左键：选取区域截图\n右键：截取聚焦窗口\n中键：截取显示器",
+    // https://github.com/Alexays/Waybar/issues/4306
+    //"on-click": "niri msg action screenshot | wl-copy",
+    "on-click-right": "niri msg action screenshot-window | wl-copy",
+    "on-click-middle": "niri msg action screenshot-screen --show-pointer false | wl-copy"
+  },
+
+  // 熄屏
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": "",
+    },
+    "tooltip-format-activated": "自动熄屏已禁止",
+    "tooltip-format-deactivated": "自动熄屏已开启",
+  },
+
+  // 取色
+  "custom/colorpicker": {
+    "tooltip-format": "左键：提取颜色",
+    "format": "󱏜",
+    "on-click": "hyprpicker | wl-copy",
+  },
+
+  // 切换性能
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "当前性能模式：{profile}\n左键：切换性能模式",
+    "tooltip": true,
+    "format-icons": {
+      "performance": "󱐋",
+      "balanced": "",
+      "power-saver": "",
+    },
+  },
+
+  // 程序启动器
+  "custom/applauncher": {
+    "tooltip-format": "左键：软件启动菜单\n右键：切换壁纸",
+    "format": "󰣇",
+    "on-click": "fuzzel",
+    "on-click-right": "waypaper",
+  },
+
+  // 时钟
+  "clock": {
+    "interval": 60,
+    "format": "󰥔 {:%H:%M}",
+    "tooltip-format": "{:%Y/%m/%d %A}\n左键：打开时钟\n右键：打开日历",
+    "max-length": 25,
+    "on-click": "gnome-clocks",
+    "on-click-right": "gnome-calendar",
+  },
+
+  // 蓝牙
+  "bluetooth": {
+    "format-disabled": "󰂲",
+    "tooltip-format-disabled": "左键：启用蓝牙",
+    "format": "󰂯",
+    "tooltip-format-on": "左键：禁用蓝牙\n右键：打开面板",
+    "format-connected": "󰂱",
+    "tooltip-format-connected": "{device_alias}\n右键：打开面板",
+    "on-click": "~/.config/waybar/scripts/toggle-bluetooth.sh",
+    "on-click-right": "kitty --class bluetui -e bluetui",
+  },
+
+  // 网络
+  "network": {
+    "format-disconnected": "{icon}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "{icon}",
+    "format-icons": {
+      "disconnected": "󰤮",
+      "wifi": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+      "ethernet": "󰈀",
+    },
+    // WIFI名称 信号强度 IP地址 设备名
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ifname}: {ipaddr}\n左键：打开面板\n右键：打开高级网络配置工具",
+    "tooltip-format-ethernet": "{ifname}: {ipaddr}\n左键：打开面板\n右键：打开高级网络配置工具",
+    "tooltip-format-disconnected": "网络未连接\n左键：打开面板\n右键：打开高级网络配置工具",
+    "on-click": "kitty --class nmtui -e nmtui",
+    "on-click-right": "nm-connection-editor",
+  },
+
+}

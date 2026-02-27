@@ -1,0 +1,130 @@
+@import "catppuccin-mocha.css";
+
+/* 更新和托盘 */
+#custom-updates,
+#tray {
+    background-color: @surface0;
+    padding: 0 0.39em;
+    color: @text;
+}
+
+#custom-updates {
+    border-radius: 0;
+    padding: 0 0.17em 0 0.39em;
+
+}
+
+#tray { font-size: 1.11em; }
+
+/* 亮度控制 */
+#custom-ddcutil-day,
+#custom-ddcutil-night,
+#custom-ddcutil-sleep,
+#custom-separator,
+#backlight {
+    background-color: @base;
+    color: @peach;
+    padding: 0 0.33em;
+}
+
+#backlight { padding: 0 0.28em 0 0; }
+
+#backlight-slider {
+    background-color: @base;
+    padding: 0 0.28em 0 0;
+}
+
+#backlight-slider slider {
+    min-height: 0;
+    min-width: 0;
+    opacity: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+#backlight-slider trough {
+    min-height: 0.56em;
+    min-width: 4.44em;
+    border-radius: 0.28em;
+    opacity: 0;
+    background-color: @base;
+}
+
+#backlight-slider highlight {
+    min-width: 0.56em;
+    border-radius: 0.28em;
+    background-color: @yellow;
+}
+
+/* 音频控制 */
+#privacy,
+#pulseaudio,
+#pulseaudio-slider {
+    background-color: @base;
+}
+
+#privacy {
+    padding: 0 0.39em;
+    color: @red;
+}
+
+#pulseaudio {
+    padding: 0 0 0 0.28em;
+    color: @peach;
+}
+
+#pulseaudio-slider {
+    padding: 0 0 0 0.56em;
+    margin: 0;
+}
+
+#pulseaudio-slider slider {
+    min-height: 0;
+    min-width: 0;
+    opacity: 0;
+    background: none;
+    box-shadow: none;
+}
+
+#pulseaudio-slider trough {
+    min-height: 0.56em;
+    min-width: 4.44em;
+    border-radius: 0.28em;
+    background-color: @surface0;
+}
+
+#pulseaudio-slider highlight {
+    min-width: 0;
+    border-radius: 0.28em;
+    background-color: @yellow;
+}
+
+/* 电池 */
+#battery {
+    background-color: @mantle;
+    color: @mauve;
+    padding: 0 0.39em;
+}
+
+#battery.critical:not(.charging) {
+    background-color: @mantle;
+    color: @red;
+    padding: 0 0.39em;
+    animation: blink 0.5s steps(12) infinite alternate;
+}
+
+/* 电源菜单 */
+#custom-wlogout,
+#custom-reboot,
+#custom-lockscreen,
+#custom-logout {
+    background-color: @crust;
+    color: @maroon;
+    padding: 0 0.56em;
+}
+
+#custom-wlogout {
+    padding: 0 0.83em 0 0.56em;
+    font-size: 1.39em;
+}

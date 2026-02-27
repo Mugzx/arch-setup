@@ -1,0 +1,43 @@
+@import "catppuccin-mocha.css";
+
+/* 通用分割线样式 */
+#custom-left_div.1,
+#custom-left_div.2,
+#custom-left_div.3,
+#custom-left_div.4,
+#custom-left_div.5,
+#custom-left_div.6,
+#custom-left_div.7,
+#custom-left_div.8,
+#custom-right_div.1,
+#custom-right_div.2,
+#custom-right_div.3,
+#custom-right_div.4,
+#custom-right_div.5,
+#custom-right_div.6,
+#custom-right_div.7,
+#custom-right_div.8 {
+    font-size: 1.39em;
+    padding: 0;
+}
+
+/* 分割线颜色 */
+/*左箭头*/
+#custom-left_div.1 { color: @base; }
+#custom-left_div.2 { background: @base; color: @red; }
+#custom-left_div.3 { background: @red; color: @mantle; }
+#custom-left_div.4 { background: @mantle; color: @yellow; }
+#custom-left_div.5 { color: @surface0; }
+#custom-left_div.6 { background: @surface0; color: @base; }
+#custom-left_div.7 { background: @base; color: @mantle; }
+#custom-left_div.8 { background: @mantle; color: @crust; }
+
+/*右箭头*/
+#custom-right_div.1 { color: @base; }
+#custom-right_div.2 { background: @base; color: @blue; }
+#custom-right_div.3 { background: @blue; color: @mantle; }
+#custom-right_div.4 { background: @mantle; color: @yellow; }
+#custom-right_div.5 { color: @surface0; }
+#custom-right_div.6 { background: @surface0; color: @base; }
+#custom-right_div.7 { background: @base; color: @mantle; }
+#custom-right_div.8 { background: @mantle; color: @crust; }

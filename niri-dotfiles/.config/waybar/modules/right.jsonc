@@ -1,0 +1,170 @@
+{
+  // 软件包更新模块
+  "custom/updates": {
+    "format": "{}{icon}",
+    "return-type": "json",
+    "format-icons": {
+      "has-updates": "",
+      "updated": "",
+    },
+    "exec-if": "which waybar-module-pacman-updates",
+    "exec": "waybar-module-pacman-updates --no-zero-output",
+    "on-click": "kitty -e paru",
+  },
+
+  // 软件托盘
+  "tray": {
+    "icon-size": 20,
+    "spacing": 5,
+  },
+
+  // 屏幕亮度（外接）
+  "group/ddcutil": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-left-to-right": false,
+    },
+    "modules": [
+      "custom/ddcutil-day",
+      "backlight/slider",
+      "backlight",
+      "custom/separator",
+      "custom/ddcutil-sleep",
+      "custom/ddcutil-night",
+    ],
+  },
+
+  "custom/ddcutil-day": {
+    "tooltip-format": "左键：100%外接屏幕亮度",
+    "format": "󰃠",
+    "on-click": "ddcutil --display 1 setvcp 10 100",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // 屏幕亮度
+  "backlight/slider": {
+    "min": 5,
+    "max": 100,
+    "orientation": "horizontal",
+  },
+
+  "backlight": {
+    "tooltip": false,
+    "tooltip-format":"调节亮度",
+    "format": "{icon}",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+  },
+
+  // 分隔符
+  "custom/separator": {
+    "format": "󱋱",
+    //"format": "󰇝",
+    "tooltip": false,
+  },
+
+  "custom/ddcutil-sleep": {
+    "tooltip-format": "左键：5%外接屏幕亮度",
+    "format": "󰃞",
+    "on-click": "ddcutil --display 1 setvcp 10 5",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  "custom/ddcutil-night": {
+    "tooltip-format": "左键：65%外接屏幕亮度",
+    "format": "󰃟",
+    "on-click": "ddcutil --display 1 setvcp 10 65",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // 声音模块
+  "group/audio": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-left-to-right": false,
+    },
+    "modules": [
+      "pulseaudio",
+      "pulseaudio/slider"
+    ],
+  },
+
+  "pulseaudio": {
+    "tooltip-format": "左键：静音\n右键：关闭麦克风\n中键：打开面板",
+    "format": "{icon} {format_source} ",
+    "format-bluetooth": " {format_source} ",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "format-muted": " {format_source} ",
+    "format-icons": {
+      "headphone": "",
+      "bluetooth": "",
+      // "speaker":"󰓃"
+      "speaker": ["", "", ""],
+      "default": "",
+    },
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-click-middle": "pavucontrol --tab=3",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+  },
+
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal",
+  },
+
+  // 电池
+  "battery": {
+    "interval": 60,
+    "states": {
+      "critical": 20,
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}% ",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂂", "󰁹"],
+    "tooltip-format": "剩余电量：{capacity}%\n充 放 电 ：{power}\n可用时间：{timeTo}\n电池健康度：{health}%",
+  },
+
+  // 电源菜单模块
+  "group/powermenu": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-left-to-right": false,
+    },
+    "modules": [
+      "custom/wlogout",
+      "custom/reboot",
+      "custom/logout",
+      "custom/lockscreen",
+    ],
+  },
+
+  "custom/wlogout": {
+    "tooltip": false,
+    "format": "󰐥",
+    "on-click": "wlogout",
+  },
+
+  "custom/reboot": {
+    "tooltip": false,
+    "format": "",
+    "on-click": "systemctl reboot",
+  },
+
+  "custom/logout": {
+    "format": "󰈆",
+    "on-click": "niri msg action quit",
+    "tooltip": false,
+  },
+
+  "custom/lockscreen": {
+    "tooltip": false,
+    "format": "",
+    "on-click": "swaylock",
+  },
+}

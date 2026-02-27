@@ -1,0 +1,38 @@
+{
+  // 工作区 窗口名称
+  "niri/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": "󰜋",
+      "default": "",
+    },
+    "ignore-hidden": true,
+  },
+
+  "cffi/niri-taskbar": {
+    // module_path
+    "module_path": "/usr/lib/waybar/libniri_taskbar.so",
+    "apps": {
+      "signal": [
+        {
+          "match": "\\([0-9]+\\)$",
+          "class": "unread",
+        },
+      ],
+    },
+  },
+
+  // 音频可视化
+  "custom/cava": {
+    "tooltip": false,
+    //"tooltip-format": "左键：播放/暂停",
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/cava.sh",
+    "on-click": "playerctl play-pause"
+  },
+
+  "niri/window": {
+    "format": "{}",
+    "rewrite": {},
+  },
+}

@@ -1,0 +1,63 @@
+@import "catppuccin-mocha.css";
+
+/* 工作区 */
+#workspaces button {
+    padding: 0 0.56em;
+    background: @crust;
+    color: @teal;
+}
+
+#workspaces button:hover {
+    background: @surface0;
+}
+
+#workspaces button.active {
+    color: @sapphire;
+}
+
+/* niri任务栏 */
+.niri-taskbar {
+    background: @mantle;
+    padding: 0 0 0 0.28em;
+}
+
+.niri-taskbar button:hover {
+    background: @surface0;
+}
+
+.niri-taskbar button.focused {
+    background: @surface0;
+}
+
+.niri-taskbar button.urgent {
+    background-color: @mauve;
+    animation: blink 0.5s steps(12) infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: @blue;
+        color: @red;
+    }
+}
+
+#custom-cava {
+    background-color: @base;
+    color: @sky;
+    padding: 0 0.39em;
+}
+
+/* 窗口 */
+#window {
+    padding: 0 0.56em;
+    background-color: @surface0;
+    color: @text;
+}
+
+#window label {
+    font-size: 0.89em;
+}
+
+window#waybar.empty #window {
+    background-color: @surface0;
+}
