@@ -1,60 +1,61 @@
 // Docs: https://github.com/Alexays/Waybar/wiki/Configuration
 {
-    // 左/右 箭头需要从 左/右 的方向来看
-    "include": [
-        "./modules/left.jsonc",
-        "./modules/center.jsonc",
-        "./modules/right.jsonc",
-        "./modules/dividers.jsonc"
-    ],
-    // 窗口层级
-    "layer": "bottom",
-    // 屏幕位置
-    "position": "bottom",
-    "fixed-center": true,
-    //"height": 30,
-    //"output": "DP-2",
-    "reload_style_on_change": true,
-    "modules-left": [
-        "niri/workspaces",
-        "custom/right_div#8",
-        //"cffi/niri-taskbar",
-        "custom/right_div#7",
-        "custom/cava",
-        "custom/right_div#6",
-        "niri/window",
-        "custom/right_div#5"
-    ],
-    "modules-center": [
-        "custom/left_div#1",
-        //"privacy",
-        "custom/recorder",
-        "custom/screenshot",
-        "custom/left_div#2",
-        "idle_inhibitor",
-        "custom/colorpicker",
-        "power-profiles-daemon",
-        "custom/left_div#3",
-        "custom/left_div#4",
-        "custom/applauncher",
-        "custom/right_div#4",
-        "custom/right_div#3",
-        "clock",
-        "custom/right_div#2",
-        "bluetooth",
-        "network",
-        "custom/right_div#1"
-    ],
-    "modules-right": [
-        "custom/left_div#5",
-        "custom/updates",
-        "tray",
-        "custom/left_div#6",
-        "group/ddcutil",
-        "group/audio",
-        "custom/left_div#7",
-        "battery",
-        "custom/left_div#8",
-        "group/powermenu"
-    ]
+  // 左/右 箭头需要从 左/右 的方向来看
+  "include": [
+    "./modules/*.jsonc",
+  ],
+  // 窗口层级
+  "layer": "bottom",
+  // 屏幕位置
+  "position": "bottom",
+  "fixed-center": true,
+  //"height": 30,
+  //"output": "DP-2",
+  "reload_style_on_change": true,
+  "modules-left": [
+    "niri/workspaces",
+    "custom/right_div#8",
+    //"cffi/niri-taskbar",
+    "cpu",
+    "custom/right_div#7",
+    //"custom/cava",
+    "memory",
+    "custom/right_div#6",
+    //"niri/window",
+    "network#upload",
+    "network#download",
+    "custom/right_div#5"
+  ],
+  "modules-center": [
+    "custom/left_div#1",
+    //"privacy",
+    "custom/recorder",
+    "custom/screenshot",
+    "custom/left_div#2",
+    "idle_inhibitor",
+    "custom/colorpicker",
+    "power-profiles-daemon",
+    "custom/left_div#3",
+    "custom/left_div#4",
+    "custom/applauncher",
+    "custom/right_div#4",
+    "custom/right_div#3",
+    "clock",
+    "custom/right_div#2",
+    "bluetooth",
+    "network",
+    "custom/right_div#1"
+  ],
+  "modules-right": [
+    "custom/left_div#5",
+    "custom/updates",
+    "tray",
+    "custom/left_div#6",
+    "group/ddcutil",
+    "group/audio",
+    "custom/left_div#7",
+    "battery",
+    "custom/left_div#8",
+    "group/powermenu"
+  ]
 }

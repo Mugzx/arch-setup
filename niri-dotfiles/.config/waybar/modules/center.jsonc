@@ -16,9 +16,9 @@
       {
         "type": "screenshare",
         "tooltip": true,
-        "tooltip-icon-size": 24,
-      },
-    ],
+        "tooltip-icon-size": 24
+      }
+    ]
   },
 
   // 截图
@@ -36,20 +36,20 @@
     "format": "{icon}",
     "format-icons": {
       "activated": "",
-      "deactivated": "",
+      "deactivated": ""
     },
     "tooltip-format-activated": "自动熄屏已禁止",
-    "tooltip-format-deactivated": "自动熄屏已开启",
+    "tooltip-format-deactivated": "自动熄屏已开启"
   },
 
   // 取色
   "custom/colorpicker": {
     "tooltip-format": "左键：提取颜色",
     "format": "󱏜",
-    "on-click": "hyprpicker | wl-copy",
+    "on-click": "hyprpicker | wl-copy"
   },
 
-  // 切换性能
+  // 切换性能模式
   "power-profiles-daemon": {
     "format": "{icon}",
     "tooltip-format": "当前性能模式：{profile}\n左键：切换性能模式",
@@ -57,8 +57,8 @@
     "format-icons": {
       "performance": "󱐋",
       "balanced": "",
-      "power-saver": "",
-    },
+      "power-saver": ""
+    }
   },
 
   // 程序启动器
@@ -66,7 +66,7 @@
     "tooltip-format": "左键：软件启动菜单\n右键：切换壁纸",
     "format": "󰣇",
     "on-click": "fuzzel",
-    "on-click-right": "waypaper",
+    "on-click-right": "waypaper"
   },
 
   // 时钟
@@ -76,7 +76,7 @@
     "tooltip-format": "{:%Y/%m/%d %A}\n左键：打开时钟\n右键：打开日历",
     "max-length": 25,
     "on-click": "gnome-clocks",
-    "on-click-right": "gnome-calendar",
+    "on-click-right": "gnome-calendar"
   },
 
   // 蓝牙
@@ -88,7 +88,7 @@
     "format-connected": "󰂱",
     "tooltip-format-connected": "{device_alias}\n右键：打开面板",
     "on-click": "~/.config/waybar/scripts/toggle-bluetooth.sh",
-    "on-click-right": "kitty --class bluetui -e bluetui",
+    "on-click-right": "kitty --class bluetui -e bluetui"
   },
 
   // 网络
@@ -99,14 +99,13 @@
     "format-icons": {
       "disconnected": "󰤮",
       "wifi": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-      "ethernet": "󰈀",
+      "ethernet": "󰈀"
     },
     // WIFI名称 信号强度 IP地址 设备名
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ifname}: {ipaddr}\n左键：打开面板\n右键：打开高级网络配置工具",
     "tooltip-format-ethernet": "{ifname}: {ipaddr}\n左键：打开面板\n右键：打开高级网络配置工具",
     "tooltip-format-disconnected": "网络未连接\n左键：打开面板\n右键：打开高级网络配置工具",
     "on-click": "kitty --class nmtui -e nmtui",
-    "on-click-right": "nm-connection-editor",
-  },
-
+    "on-click-right": "nm-connection-editor"
+  }
 }

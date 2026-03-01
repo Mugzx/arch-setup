@@ -41,10 +41,20 @@
     }
 }
 
+#cpu {
+    background-color: @mantle;
+    color: @text;
+}
+
 #custom-cava {
     background-color: @base;
     color: @sky;
     padding: 0 0.39em;
+}
+
+#memory {
+    background-color: @base;
+    color: @text;
 }
 
 /* 窗口 */
@@ -60,4 +70,12 @@
 
 window#waybar.empty #window {
     background-color: @surface0;
+}
+
+#network.upload,
+#network.download {
+    background-color: @surface0;
+    color: @text;
+    font-size: 0.89em;
+    padding: 0 0.56em;
 }

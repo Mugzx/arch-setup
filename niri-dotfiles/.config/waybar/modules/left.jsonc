@@ -4,9 +4,9 @@
     "format": "{icon}",
     "format-icons": {
       "active": "󰜋",
-      "default": "",
+      "default": ""
     },
-    "ignore-hidden": true,
+    "ignore-hidden": true
   },
 
   "cffi/niri-taskbar": {
@@ -16,10 +16,17 @@
       "signal": [
         {
           "match": "\\([0-9]+\\)$",
-          "class": "unread",
-        },
-      ],
-    },
+          "class": "unread"
+        }
+      ]
+    }
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": " {usage}%",
+    "min-length": 7,
+    "max-length": 7
   },
 
   // 音频可视化
@@ -31,8 +38,29 @@
     "on-click": "playerctl play-pause"
   },
 
+  "memory": {
+    "interval": 5,
+    "format": " {percentage}%",
+    "min-length": 7,
+    "max-length": 7,
+    "tooltip-format": "内存用量：{used:0.1f}/{total:0.1f} GB"
+  },
+
   "niri/window": {
     "format": "{}",
-    "rewrite": {},
+    "rewrite": {}
   },
+
+  // 上传/下载模块
+  "network#upload": {
+  "interval": 2,
+  "format": " {bandwidthUpBytes}",
+  "tooltip": false
+  },
+
+  "network#download": {
+    "interval": 2,
+    "format": " {bandwidthDownBytes}",
+    "tooltip": false
+  }
 }
