@@ -60,7 +60,7 @@
   "custom/separator": {
     "format": "󱋱",
     //"format": "󰇝",
-    "tooltip": false,
+    "tooltip": false
   },
 
   "custom/ddcutil-sleep": {
@@ -141,7 +141,7 @@
       "custom/reboot",
       "custom/logout",
       "custom/lockscreen"
-    ],
+    ]
   },
 
   "custom/wlogout": {

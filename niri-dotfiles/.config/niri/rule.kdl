@@ -36,6 +36,7 @@ window-rule {
     match title="重命名"
     match title="任务管理器"
     match title="微信"
+    match title="Fcitx 配置"
     open-floating true
 }
 
