@@ -1,83 +1,87 @@
 {
-    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-    "logo": {
-        "source": "~/.config/fastfetch/archpuccinn.png",
-        "type": "kitty",
-        "height": 16,
-        "width": 34,
-        "padding": {
-            "top": 1,
-           "left": 4
-        }
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "~/.config/fastfetch/archpuccinn.png",
+    "type": "kitty",
+    "height": 16,
+    "width": 34,
+    "padding": {
+      "top": 1,
+      "left": 4
+    }
+  },
+  "modules": [
+    "break",
+    "break",
+    {
+      "type": "os",
+      "key": "OS",
+      "keyColor": "red"
     },
-    "modules": [
-        "break",
-        "break",
-        {
-            "type": "os",
-            "key": "OS",
-            "keyColor": "red"
-        },
-        {
-        "type": "title",
-        "key": "├  User",
-        "keyColor": "red",
-        },
-
-        {
-            "type": "packages",
-            "key": "├  Packages",
-            "keyColor": "red"
-        },
-        {
-            "type": "shell",
-            "key": "└  Shell",
-            "keyColor": "red"
-        },
-        "break",
-        {
-            "type": "host",
-            "key": "PC",
-            "keyColor": "yellow"
-        },
-        {
-            "type": "cpu",
-            "key": "├  CPU",
-            "showPeCoreCount": true,
-            "format": "{1}",
-            "keyColor": "yellow"
-        },
-        {
-            "type": "gpu",
-            "key": "├ 󰢮 GPU",
-            "keyColor": "yellow"
-        },
-        {
-            "type": "kernel",
-            "key": "└  Kernel",
-            "keyColor": "yellow"
-        },
-        "break",
-        {
-            "type": "wm",
-            "key": "WM",
-            "keyColor": "blue"
-        },
-        {
-            "type": "memory",
-            "key": "├  Memory",
-            "keyColor": "blue"
-        },
-        {
-            "type": "disk",
-            "key": "└ 󰋊 Disk",
-            "keyColor": "blue"
-        },
-        "break",
-        {
-            "type": "custom",
-            "format": "\u001b[90m  \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m "
-        },
-        "break",
-    ]
+    {
+      "type": "title",
+      "key": "├  User",
+      "keyColor": "red"
+    },
+    {
+      "type": "packages",
+      "key": "├  Packages",
+      "keyColor": "red"
+    },
+    {
+      "type": "shell",
+      "key": "└  Shell",
+      "keyColor": "red"
+    },
+    "break",
+    {
+      "type": "host",
+      "key": "PC",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "cpu",
+      "key": "├  CPU",
+      "showPeCoreCount": true,
+      "format": "{1}",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "gpu",
+      "key": "├ 󰢮 GPU",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "kernel",
+      "key": "└  Kernel",
+      "keyColor": "yellow"
+    },
+    "break",
+    {
+      "type": "de",
+      "key": "DE",
+      "keyColor": "blue"
+    },
+    {
+      "type": "memory",
+      "key": "├  Memory",
+      "keyColor": "blue"
+    },
+    {
+      "type": "disk",
+      "key": "├ 󰋊 Disk",
+      "keyColor": "blue"
+    },
+    {
+      "type": "terminalfont",
+      "key": "└  Font",
+      "keyColor": "blue"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[90m  \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m "
+    },
+    "break"
+  ]
 }
