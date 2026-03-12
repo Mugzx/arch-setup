@@ -6,11 +6,8 @@ ksystemlog                               # System Log Viewer
 pacman-contrib                           # Pacman utilities (paccache, checkupdates)
 btop                                     # Resource Monitor (TUI)
 lact                                     # GPU Control Panel (Overclocking/Fan control)
-upscaler                                 # AI Image Upscaler (Enhance low-res images)
-curtail                                  # Image Compressor (Reduce PNG/JPG size)
 
 # --- Disk & Filesystem Tools ---
-# gnome-disk-utility                       Disk Management Utility (Disks)
 baobab                                   # Disk Usage Analyzer
 dosfstools                               # Tools for FAT12/16/32 filesystems
 ntfs-3g                                  # NTFS filesystem driver

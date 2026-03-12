@@ -4,6 +4,7 @@ indicator
 indicator-radius=200
 indicator-thickness=15
 effect-blur=10x5
+font=JetBrains Maple Mono
 # catppuccin-mocha-blue
 color=1e1e2e
 bs-hl-color=f5e0dc

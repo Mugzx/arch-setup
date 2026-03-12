@@ -1,8 +1,6 @@
 neovim                                   # Advanced version of vim
 
 # --- Gaming & Media ---
-upscaler                                 # image upscaler (make it more clear)
-curtail                                  # compress image (make it smaller)
 lact                                     # GPU Control Tool (Overclocking/Fan)
 obs-studio                               # OBS Studio (Streaming & Recording)
 
@@ -34,6 +32,7 @@ AUR:wechat-appimage                      # WeChat (AppImage)
 AUR:flclash-appimage-bin                 # ClashMeta Proxy (AppImage)
 AUR:vscodium-bin                         # Open Source Software Binaries of VS Code
 AUR:ungoogled-chromium-bin               # Better Google Chrome
+AUR:zen-browser-bin                      # Better Mozilla Firefox
 
 # --- Flatpak Packages (Prefix with flatpak:) ---
 flatpak:it.mijorus.gearlever             # AppImage Manager (Integrates AppImages)
