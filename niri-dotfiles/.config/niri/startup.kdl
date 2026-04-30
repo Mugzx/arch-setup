@@ -3,7 +3,7 @@
 // 询问管理员权限功能（身份验证）
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 // 桌面壁纸的守护进程
-spawn-at-startup "swww-daemon"
+spawn-at-startup "awww-daemon"
 // 启动 niri 时随机更换/维持当前壁纸
 //spawn-at-startup "waypaper" "--random"
 spawn-at-startup "waypaper" "--restore"
@@ -18,7 +18,7 @@ spawn-at-startup "waybar"
 // 输入法
 spawn-at-startup "fcitx5"
 // 剪贴板
-spawn-sh-at-startup "copyq & disown"
+spawn-sh-at-startup "copyq --start-server hide"
 // 闲置时自动熄屏锁屏休眠
 spawn-at-startup "~/.config/niri/scripts/swayidle.sh"
 // 大写锁定键的 osd 显示

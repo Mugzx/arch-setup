@@ -17,7 +17,7 @@ breeze                                   # KDE Breeze visual style
 ttf-jetbrains-mono-nerd                  # JetBrains Mono font (Nerd Font patched)
 
 # --- Wallpaper ---
-swww                                     # Efficient wallpaper daemon for Wayland
+awww                                     # Efficient wallpaper daemon for Wayland
 
 # --- Status Bar ---
 waybar                                   # Highly customizable Wayland bar
@@ -48,6 +48,6 @@ nm-connection-editor                     # GUI for NetworkManager
 AUR:waybar-niri-taskbar-git              # Waybar module: Niri Workspaces/Taskbar
 AUR:waybar-module-pacman-updates-git     # Waybar module: Pacman updates indicator
 AUR:wlogout                              # Logout menu (Shutdown/Reboot/Lock)
-AUR:waypaper                             # GUI wallpaper setter (Frontend for swww)
+AUR:waypaper                             # GUI wallpaper setter (Frontend for awww)
 AUR:ddcutil-service                      # Monitor hardware brightness control service
 AUR:ttf-jetbrains-maple-mono-nf-xx-xx    # Maple Mono NF font
