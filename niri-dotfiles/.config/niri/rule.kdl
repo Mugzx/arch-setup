@@ -30,7 +30,6 @@ window-rule {
     match app-id="waypaper"
     match app-id="copyq"
     match app-id="btrfs-assistant"
-    match app-id="com.follow.clash"
     match app-id="QQ"
     match app-id="wechat"
 
