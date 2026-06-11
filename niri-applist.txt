@@ -28,7 +28,6 @@ satty                                    # Modern screenshot annotation tool
 
 # --- Clipboard ---
 wl-clipboard                             # Command-line copy/paste utilities
-copyq                                    # Clipboard manager
 
 # --- CLI Enhancements ---
 starship                                 # Cross-shell prompt
@@ -51,3 +50,4 @@ AUR:wlogout                              # Logout menu (Shutdown/Reboot/Lock)
 AUR:waypaper                             # GUI wallpaper setter (Frontend for awww)
 AUR:ddcutil-service                      # Monitor hardware brightness control service
 AUR:ttf-jetbrains-maple-mono-nf-xx-xx    # Maple Mono NF font
+clipse-wayland-bin                       # Clipboard manager

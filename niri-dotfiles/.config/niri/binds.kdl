@@ -3,22 +3,25 @@
 
 binds {
     // 显示快捷键教程
-    Mod+Shift+Slash hotkey-overlay-title="快捷键教程" { show-hotkey-overlay; }
+    Mod+Shift+Slash hotkey-overlay-title="Hotkey Tutorial" { show-hotkey-overlay; }
 
-    Mod+Alt+W  hotkey-overlay-title="切换壁纸" { spawn "waypaper"; }
-    Mod+Alt+L  hotkey-overlay-title="锁屏" { spawn "swaylock"; }
-    Mod+Alt+V hotkey-overlay-title="剪贴板" {spawn "copyq" "toggle";}
+    Mod+Alt+W  hotkey-overlay-title="Switch Wallpaper" { spawn "waypaper"; }
+    Mod+Alt+L  hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
+    Mod+Alt+V hotkey-overlay-title="Clipboard" {spawn "kitty" "--class" "clipse" "-e" "clipse"; }
 
-    Mod+F1  hotkey-overlay-title="开关输入法" { spawn-sh "pkill fcitx5 || fcitx5 "; }
-    Mod+F2  hotkey-overlay-title="底部任务栏" { spawn-sh "pkill waybar & pkill cava || true && waybar"; }
-    Mod+F3  hotkey-overlay-title="快速存档" { spawn "~/.config/niri/scripts/quicksave.sh"; }
-    Mod+F4  hotkey-overlay-title="随机切换壁纸" { spawn "waypaper" "--random"; }
+    Mod+F1  hotkey-overlay-title="Toggle Input Method" { spawn-sh "pkill fcitx5 || fcitx5 "; }
+    Mod+F2  hotkey-overlay-title="Bottom Bar" { spawn-sh "pkill waybar & pkill cava || true && waybar"; }
+    Mod+F3  hotkey-overlay-title="Quick Save" { spawn "~/.config/niri/scripts/quicksave.sh"; }
+    Mod+F4  hotkey-overlay-title="Random Wallpaper" { spawn "waypaper" "--random"; }
 
-    Mod+B hotkey-overlay-title="浏览器" { spawn "chromium"; }
-    Mod+E hotkey-overlay-title="文档管理器" { spawn-sh "env GSK_RENDERER=gl GTK_IM_MODULE=fcitx nautilus"; }
-    Mod+T hotkey-overlay-title="终端" { spawn "kitty"; }
-    Mod+Z hotkey-overlay-title="程序菜单" { spawn "fuzzel"; }
-    Mod+P hotkey-overlay-title="选取屏幕颜色" { spawn-sh "hyprpicker | wl-copy"; }
+    Mod+E hotkey-overlay-title="File Manager" { spawn-sh "env GSK_RENDERER=gl GTK_IM_MODULE=fcitx nautilus"; }
+    Mod+T hotkey-overlay-title="Terminal" { spawn "kitty"; }
+    Mod+Z hotkey-overlay-title="App Launcher" { spawn "fuzzel"; }
+    Mod+P hotkey-overlay-title="Pick Screen Color" { spawn-sh "hyprpicker | wl-copy"; }
+
+    // 浏览器
+    Mod+B hotkey-overlay-title="Default Browser" { spawn "chromium"; }
+    Mod+Alt+B { spawn "zen-browser"; }
 
     // 调节音量
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
@@ -31,16 +34,16 @@ binds {
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
 
     // 切换聚焦，不限制上下切换窗口
-    Mod+Left hotkey-overlay-title="向左切换窗口" { focus-column-left; }
+    Mod+Left hotkey-overlay-title="Focus Window Left" { focus-column-left; }
     Mod+Down  { focus-window-or-workspace-down; }
     Mod+Up    { focus-window-or-workspace-up; }
-    Mod+Right hotkey-overlay-title="向右切换窗口" { focus-column-right; }
+    Mod+Right hotkey-overlay-title="Focus Window Right" { focus-column-right; }
 
     // 移动colume
-    Mod+Ctrl+Left hotkey-overlay-title="向左移动窗口" { move-column-left; }
+    Mod+Ctrl+Left hotkey-overlay-title="Move Window Left" { move-column-left; }
     Mod+Ctrl+Down  { move-window-down; }
     Mod+Ctrl+Up    { move-window-up; }
-    Mod+Ctrl+Right hotkey-overlay-title="向右移动窗口" { move-column-right; }
+    Mod+Ctrl+Right hotkey-overlay-title="Move Window Right" { move-column-right; }
 
     // 切换到第一/最后一个colume
     Mod+Home { focus-column-first; }
@@ -67,14 +70,14 @@ binds {
     //Mod+Shift+Alt+Left   { move-workspace-to-monitor-left; }
 
     // 上下切换工作区
-    Mod+U hotkey-overlay-title="向下切换窗口" { focus-workspace-down; }
-    Mod+I hotkey-overlay-title="向上切换窗口" { focus-workspace-up; }
-    Mod+Ctrl+U hotkey-overlay-title="向下移动窗口到其他工作区" { move-column-to-workspace-down; }
-    Mod+Ctrl+I hotkey-overlay-title="向上移动窗口到其他工作区" { move-column-to-workspace-up; }
+    Mod+U hotkey-overlay-title="Focus Workspace Down" { focus-workspace-down; }
+    Mod+I hotkey-overlay-title="Focus Workspace Up" { focus-workspace-up; }
+    Mod+Ctrl+U hotkey-overlay-title="Move Column to Workspace Down" { move-column-to-workspace-down; }
+    Mod+Ctrl+I hotkey-overlay-title="Move Column to Workspace Up" { move-column-to-workspace-up; }
 
     // 滚轮
     // 上下切换工作区
-    Mod+Shift+WheelScrollDown hotkey-overlay-title="切换工作区" cooldown-ms=150 { focus-workspace-down; }
+    Mod+Shift+WheelScrollDown hotkey-overlay-title="Switch Workspace" cooldown-ms=150 { focus-workspace-down; }
     Mod+Shift+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
     // 移动窗口
     Mod+Ctrl+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
@@ -96,8 +99,8 @@ binds {
     Mod+Ctrl+3 { move-column-to-workspace 3; }
 
     // 左右方括号 移动窗口
-    Mod+BracketLeft hotkey-overlay-title="向左移动到同一列" { consume-or-expel-window-left; }
-    Mod+BracketRight hotkey-overlay-title="向右移动到同一列" { consume-or-expel-window-right; }
+    Mod+BracketLeft hotkey-overlay-title="Merge Left" { consume-or-expel-window-left; }
+    Mod+BracketRight hotkey-overlay-title="Merge Right" { consume-or-expel-window-right; }
 
     // 逗号/句号 把窗口合并或者踢出当前的colume
     Mod+Comma { consume-window-into-column; }
@@ -110,7 +113,7 @@ binds {
     //Mod+MouseBack    { focus-window-down; }
 
     // 按照预设切换窗口宽度
-    Mod+R hotkey-overlay-title="按预设切换宽度" { switch-preset-column-width; }
+    Mod+R hotkey-overlay-title="Switch Preset Width" { switch-preset-column-width; }
     // 按照预设切换窗口高度
     Mod+Shift+R { switch-preset-window-height; }
     // 重置窗口高度
@@ -119,8 +122,8 @@ binds {
 
     // 增加窗口宽度占满空闲空间
     Mod+Ctrl+F { expand-column-to-available-width; }
-    Mod+Alt+F hotkey-overlay-title="全屏" { fullscreen-window; }
-    Mod+F hotkey-overlay-title="最大化" { maximize-column; }
+    Mod+Alt+F hotkey-overlay-title="Fullscreen" { fullscreen-window; }
+    Mod+F hotkey-overlay-title="Maximize" { maximize-column; }
 
     // 居中当前聚焦的colume
     Mod+C { center-column; }
@@ -136,24 +139,24 @@ binds {
     Mod+Shift+Equal { set-window-height "+5%"; }
 
     // 浮动
-    Mod+V hotkey-overlay-title="切换浮动" { toggle-window-floating; }
+    Mod+V hotkey-overlay-title="Toggle Float" { toggle-window-floating; }
     // 在浮动模式和非浮动模式之间切换聚焦
-    Mod+Shift+V hotkey-overlay-title="切换浮动聚焦" { switch-focus-between-floating-and-tiling; }
+    Mod+Shift+V hotkey-overlay-title="Toggle Float Focus" { switch-focus-between-floating-and-tiling; }
 
     // 截图
-    Mod+Alt+A hotkey-overlay-title="选取区域截图" { screenshot; }
-    Mod+Alt+S hotkey-overlay-title="截取聚焦窗口" { screenshot-window; }
-    Mod+Alt+D hotkey-overlay-title="截取显示器" { screenshot-screen; }
-    Mod+Shift+S hotkey-overlay-title="截图后按下此键进行编辑" { spawn-sh "wl-paste | satty -f -"; }
+    Mod+Alt+A hotkey-overlay-title="Screenshot Area" { screenshot; }
+    Mod+Alt+S hotkey-overlay-title="Screenshot Window" { screenshot-window; }
+    Mod+Alt+D hotkey-overlay-title="Screenshot Screen" { screenshot-screen; }
+    Mod+Shift+S hotkey-overlay-title="Edit Screenshot" { spawn-sh "wl-paste | satty -f -"; }
 
     // 其它
     // 鼠标中键 关闭窗口
     Mod+MouseMiddle { close-window; }
-    Mod+Q hotkey-overlay-title="关闭聚焦窗口" repeat=false { close-window; }
-    Mod+O hotkey-overlay-title="切换总览界面" repeat=false { toggle-overview; }
-    Mod+Shift+E hotkey-overlay-title="退出 niri" { quit; }
-    Ctrl+Alt+Delete hotkey-overlay-title="电源菜单" { spawn "wlogout"; }
-    Mod+Shift+P hotkey-overlay-title="关闭显示器" { power-off-monitors; }
+    Mod+Q hotkey-overlay-title="Close Focused Window" repeat=false { close-window; }
+    Mod+O hotkey-overlay-title="Toggle Overview" repeat=false { toggle-overview; }
+    Mod+Shift+E hotkey-overlay-title="Quit niri" { quit; }
+    Ctrl+Alt+Delete hotkey-overlay-title="Power Menu" { spawn "wlogout"; }
+    Mod+Shift+P hotkey-overlay-title="Power Off Monitors" { power-off-monitors; }
 
     // 避免问题软件劫持快捷键
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }

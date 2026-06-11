@@ -28,7 +28,7 @@ window-rule {
     match app-id="nm-connection-editor"
     match app-id="org.gnome.FileRoller"
     match app-id="waypaper"
-    match app-id="copyq"
+    match app-id="clipse"
     match app-id="btrfs-assistant"
     match app-id="QQ"
     match app-id="wechat"
