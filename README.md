@@ -33,7 +33,7 @@ cd arch-setup && sudo bash install.sh
 .
 ├── kde-dotfiles # KDE Plasma 配置
 ├── niri-dotfiles # Niri 配置
-│   └── wallpapers # Waypaper 壁纸目录★
+│   └── wallpapers # 壁纸目录★
 ├── scripts # 安装脚本
 │   ├── 00-btrfs-init.sh # Btrfs文件系统初始化
 │   ├── 00-utils.sh # 工具函数和通用变量定义
