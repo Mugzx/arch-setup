@@ -119,7 +119,6 @@ binds {
     // 重置窗口高度
     Mod+Ctrl+R { reset-window-height; }
 
-
     // 增加窗口宽度占满空闲空间
     Mod+Ctrl+F { expand-column-to-available-width; }
     Mod+Alt+F hotkey-overlay-title="Fullscreen" { fullscreen-window; }

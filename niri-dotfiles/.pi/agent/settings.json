@@ -1,0 +1,15 @@
+{
+  "packages": [
+    "npm:@danchamorro/pi-agent-modes",
+    "npm:pi-mcp-extension",
+    "npm:pi-nano-context"
+  ],
+  "lastChangelogVersion": "0.80.2",
+  "theme": "catppuccin-mocha-blue",
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-v4-pro",
+  "enableInstallTelemetry": false,
+  "showHardwareCursor": true,
+  "quietStartup": true,
+  "defaultThinkingLevel": "high"
+}
