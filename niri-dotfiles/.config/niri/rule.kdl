@@ -32,6 +32,8 @@ window-rule {
     match app-id="btrfs-assistant"
     match app-id="QQ"
     match app-id="wechat"
+    // Sunsetvault
+    match app-id="chrome-leedpmmbobncoipdjocgcbkmogekjkga-Default"
 
     match title="群聊的聊天记录"
     match title="聊天记录"
