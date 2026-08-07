@@ -42,6 +42,8 @@ window-rule {
     match title="任务管理器"
     match title="微信"
     match title="Fcitx 配置"
+    match title="我的足迹"
+    match title="关于 Mozilla Firefox"
     open-floating true
 }
 
