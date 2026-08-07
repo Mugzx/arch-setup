@@ -21,7 +21,7 @@ binds {
 
     // 浏览器
     Mod+B hotkey-overlay-title="Default Browser" { spawn "chromium"; }
-    Mod+Alt+B { spawn "zen-browser"; }
+    Mod+Alt+B { spawn "firefox"; }
 
     // 调节音量
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
