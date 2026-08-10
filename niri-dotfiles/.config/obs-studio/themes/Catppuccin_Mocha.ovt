@@ -1,3 +1,4 @@
+/* Source: https://github.com/catppuccin/obs-studio */
 @OBSThemeMeta {
     name: 'Mocha';
     id: 'com.obsproject.Catppuccin.Mocha';

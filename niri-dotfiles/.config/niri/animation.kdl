@@ -1,5 +1,6 @@
 // Animations - niri:
 // https://niri-wm.github.io/niri/Configuration:-Animations
+// 过渡动画
 
 animations {
     // Uncomment to turn off all animations.

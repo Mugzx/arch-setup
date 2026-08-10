@@ -1,3 +1,4 @@
+/* Source: https://github.com/catppuccin/obs-studio */
 @OBSThemeMeta {
     name: 'Catppuccin';
     id: 'com.obsproject.Catppuccin';

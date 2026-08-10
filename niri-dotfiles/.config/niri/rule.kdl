@@ -1,7 +1,8 @@
 // Window Rules - niri:
 // https://niri-wm.github.io/niri/Configuration:-Window-Rules
+// 窗口规则
 
-// 全局窗口规则
+// 圆角与模糊
 window-rule {
     // 圆角
     geometry-corner-radius 8
@@ -11,9 +12,20 @@ window-rule {
     opacity 0.9
     // 禁止边框画到背景里
     draw-border-with-background false
+
     // 窗口模糊
     background-effect {
+        xray true
         blur true
+    }
+
+    // 右键菜单设置
+    popups {
+        geometry-corner-radius 16
+        opacity 0.9
+        background-effect {
+            blur true
+        }
     }
 }
 

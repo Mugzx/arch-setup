@@ -1,5 +1,10 @@
+// Layout - niri:
+// https://niri-wm.github.io/niri/Configuration:-Layout
+// 颜色主题
+
 layout {
     // Theme: Catppuccin Mocha - blue
+    // Source: https://github.com/ninetailedtori/catppuccin-niri
     background-color "#1e1e2e"
 
     preset-column-widths {

@@ -33,6 +33,7 @@ $memory_usage\
 [ ](fg:prev_bg)\
 $line_break$character"""
 
+# Source: https://github.com/catppuccin/starship
 palette = "catppuccin_mocha"
 
 [palettes.catppuccin_mocha]

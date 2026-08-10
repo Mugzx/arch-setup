@@ -1,3 +1,7 @@
+// Introduction - niri:
+// https://niri-wm.github.io/niri/Configuration:-Introduction
+// 全局配置
+
 include "binds.kdl"
 include "rule.kdl"
 include "output.kdl"

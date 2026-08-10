@@ -1,4 +1,5 @@
 # Catppuccin Mocha Blue
+# Source: https://github.com/catppuccin/imv
 [options]
 background=1e1e2e
 overlay_text_color=cdd6f4

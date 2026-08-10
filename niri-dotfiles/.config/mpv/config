@@ -4,6 +4,7 @@ gpu-api=vulkan
 hwdec=auto-safe
 
 # Catppuccin Mocha Blue
+# Source: https://github.com/catppuccin/mpv
 # Main mpv options
 background-color='#1e1e2e'
 osd-back-color='#11111b'

@@ -1,4 +1,5 @@
 # catppuccin-mocha-blue
+# Source: https://github.com/catppuccin/yazi
 [app]
 overall = { bg = "#1e1e2e" }
 
