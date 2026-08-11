@@ -76,7 +76,16 @@ binds {
     Mod+Ctrl+U hotkey-overlay-title="Move Column to Workspace Down" { move-column-to-workspace-down; }
     Mod+Ctrl+I hotkey-overlay-title="Move Column to Workspace Up" { move-column-to-workspace-up; }
 
-    // 滚轮
+    // 数字 切换工作区
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    // 移动colume
+    Mod+Ctrl+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+3 { move-column-to-workspace 3; }
+
+    // 滚轮（WheelScroll）
     // 上下切换工作区
     Mod+Shift+WheelScrollDown hotkey-overlay-title="Switch Workspace" cooldown-ms=150 { focus-workspace-down; }
     Mod+Shift+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
@@ -89,15 +98,6 @@ binds {
     // 移动colume
     Mod+Ctrl+WheelScrollDown { move-column-right; }
     Mod+Ctrl+WheelScrollUp   { move-column-left; }
-
-    // 数字 切换工作区
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    // 移动colume
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
 
     // 左右方括号 移动窗口
     Mod+BracketLeft hotkey-overlay-title="Merge Left" { consume-or-expel-window-left; }

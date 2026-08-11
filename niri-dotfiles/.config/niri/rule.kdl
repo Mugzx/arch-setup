@@ -29,6 +29,28 @@ window-rule {
     }
 }
 
+// 录屏窗口采集提醒
+window-rule {
+    match is-window-cast-target=true
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#eba0ac"
+    }
+    border {
+        inactive-color "#eba0ac"
+    }
+    shadow {
+        color "#f38ba870"
+    }
+}
+
+// 遮挡特定窗口
+window-rule {
+    match app-id="QQ"
+    match app-id="wechat"
+    block-out-from "screencast"
+}
+
 // 以浮动模式打开
 window-rule {
     // 窗口标题和应用程序 ID
