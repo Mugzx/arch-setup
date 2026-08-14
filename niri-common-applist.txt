@@ -25,12 +25,12 @@ gnome-font-viewer                        # manage fonts easily
 gnome-calendar                           # calendar
 gnome-clocks                             # clocks
 localsend                                # send files across devices
-AUR:firefox                              # Mozilla Firefox
+firefox                                  # Mozilla Firefox
 
 # --- AUR Packages (Social) ---
 AUR:linuxqq-appimage                     # Tencent QQ (AppImage)
 AUR:vscodium-bin                         # Open Source Software Binaries of VS Code
-AUR:pi-bin                               # AI agent
+AUR:pi-coding-agent-bin                  # AI agent
 AUR:ungoogled-chromium-bin               # Better Google Chrome
 
 # --- Flatpak Packages (Prefix with flatpak:) ---

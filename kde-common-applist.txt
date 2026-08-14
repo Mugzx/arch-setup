@@ -20,6 +20,10 @@ xfsprogs                                 # Tools for XFS filesystems
 haruna                                   # Modern Video Player (MPV frontend for KDE)
 obs-studio                               # OBS Studio (Streaming & Recording)
 
+# --- Others ---
+localsend                                # send files across devices
+firefox                                  # Mozilla Firefox
+
 # --- AUR Packages (Social) ---
 AUR:linuxqq-appimage                     # Tencent QQ (AppImage)
 AUR:wechat-appimage                      # WeChat (AppImage)
