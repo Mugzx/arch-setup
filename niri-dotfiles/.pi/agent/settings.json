@@ -1,15 +1,30 @@
 {
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-v4-pro",
+  "defaultThinkingLevel": "high",
+  "hideThinkingBlock": true,
+  "theme": "catppuccin-mocha-blue",
+  "tuiMode": "fullscreen",
+  "fullscreenExitOutput": "resume-hint",
+  "quietStartup": true,
+  "collapseChangelog": true,
+  "enableInstallTelemetry": false,
   "packages": [
     "npm:@danchamorro/pi-agent-modes",
     "npm:pi-mcp-extension",
-    "npm:pi-nano-context"
+    "npm:pi-nano-context",
+    "npm:pi-observational-memory"
   ],
-  "lastChangelogVersion": "0.80.2",
-  "theme": "catppuccin-mocha-blue",
-  "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-pro",
-  "enableInstallTelemetry": false,
-  "showHardwareCursor": true,
-  "quietStartup": true,
-  "defaultThinkingLevel": "high"
+  "observational-memory": {
+    "observeAfterTokens": 20000,
+    "reflectAfterTokens": 50000,
+    "compactAfterTokensMode": "ratio",
+    "agentMaxTurns": 8,
+    "model": {
+      "provider": "deepseek",
+      "id": "deepseek-v4-flash",
+      "thinking": "off"
+    }
+  },
+  "lastChangelogVersion": "0.84.2"
 }
