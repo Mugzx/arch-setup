@@ -1,5 +1,10 @@
 {
   "mcpServers": {
+    "context7": {
+      "transport": "streamable-http",
+      "url": "https://mcp.context7.com/mcp",
+      "lifecycle": "eager"
+    },
     "gh_grep": {
       "transport": "streamable-http",
       "url": "https://mcp.grep.app",
