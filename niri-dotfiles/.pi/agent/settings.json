@@ -11,7 +11,6 @@
   "enableInstallTelemetry": false,
   "packages": [
     "npm:@danchamorro/pi-agent-modes",
-    "npm:pi-mcp-extension",
     "npm:pi-nano-context",
     "npm:pi-observational-memory"
   ],
@@ -26,5 +25,5 @@
       "thinking": "off"
     }
   },
-  "lastChangelogVersion": "0.84.2"
+  "lastChangelogVersion": "0.87.1"
 }
