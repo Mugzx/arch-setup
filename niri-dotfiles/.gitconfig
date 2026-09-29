@@ -1,0 +1,18 @@
+[user]
+	name = Mugzx
+	email = 158086960+Mugzx@users.noreply.github.com
+	signingkey = ~/.ssh/id_ed25519_signing
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers
+[commit]
+	gpgsign = true
+[credential "helperselector"]
+	selected = manager
+[credential]
+	helper = manager
+[core]
+	autocrlf = false
+[init]
+	defaultBranch = main
