@@ -2,16 +2,15 @@
   "defaultProvider": "deepseek",
   "defaultModel": "deepseek-v4-pro",
   "defaultThinkingLevel": "high",
-  "hideThinkingBlock": true,
   "theme": "catppuccin-mocha-blue",
   "tuiMode": "fullscreen",
   "fullscreenExitOutput": "resume-hint",
+  "hideThinkingBlock": true,
   "quietStartup": true,
   "collapseChangelog": true,
   "enableInstallTelemetry": false,
   "packages": [
     "npm:@danchamorro/pi-agent-modes",
-    "npm:pi-nano-context",
     "npm:pi-observational-memory"
   ],
   "observational-memory": {
@@ -21,9 +20,9 @@
     "agentMaxTurns": 8,
     "model": {
       "provider": "deepseek",
-      "id": "deepseek-v4-flash",
+      "id": "deepseek-flash",
       "thinking": "off"
     }
   },
-  "lastChangelogVersion": "0.87.1"
+  "lastChangelogVersion": "0.99.1"
 }
