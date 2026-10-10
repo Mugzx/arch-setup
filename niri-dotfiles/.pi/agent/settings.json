@@ -3,7 +3,6 @@
   "defaultModel": "deepseek-v4-pro",
   "defaultThinkingLevel": "high",
   "theme": "catppuccin-mocha-blue",
-  "tuiMode": "fullscreen",
   "fullscreenExitOutput": "resume-hint",
   "hideThinkingBlock": true,
   "quietStartup": true,
@@ -24,5 +23,5 @@
       "thinking": "off"
     }
   },
-  "lastChangelogVersion": "0.99.1"
+  "lastChangelogVersion": "1.0.0"
 }

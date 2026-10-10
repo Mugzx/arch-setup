@@ -35,7 +35,7 @@ Five facts drive every rule below:
 The first line is something the reader can do. Not context. Not a plan. The action.
 
 Bad: "Let's think about this. Your auth flow has a few moving pieces..."
-Good: "Run `pnpm add jsonwebtoken`, then edit `src/auth.ts:42`."
+Good: "Run `npm install jsonwebtoken`, then edit `src/auth.ts:42`."
 
 If the answer is a command, path, or snippet, it goes first. Prose comes after, if at all.
 
@@ -51,7 +51,7 @@ Good:
 ```
 1. Open `src/auth.ts`
 2. Replace `verifyToken` (lines 42 to 58) with the snippet below
-3. Run `pnpm test -- auth.spec.ts`
+3. Run `npm test -- auth.spec.ts`
 ```
 
 ### 3. End with one concrete next action
@@ -59,7 +59,7 @@ Good:
 If anything is left open, name ONE thing the reader can do in under two minutes. Even "open the file" counts.
 
 Bad: "Hope that helps. Let me know if you want to dig deeper."
-Good: "Next: run `pnpm test` and paste the first failing line."
+Good: "Next: run `npm test` and paste the first failing line."
 
 ### 4. Suppress tangents
 
@@ -91,7 +91,7 @@ Good: "About 15 minutes if tests already cover this. An afternoon if not."
 Show what now works, in concrete terms. Do not bury wins in a recap.
 
 Bad: "I've made some changes to the auth flow. Among other things..."
-Good: "Login now works with magic links. Try: `pnpm dev`, open `/login`."
+Good: "Login now works with magic links. Try: `npm run dev`, open `/login`."
 
 ### 8. Matter-of-fact tone for errors
 
@@ -100,9 +100,11 @@ Never use "Uh oh," "Oh no," or "There seems to be a problem." State cause and fi
 Bad: "Uh oh, the test is failing. There seems to be an issue..."
 Good: "Test fails at `auth.spec.ts:42`: expected 200, got 401. Cause: missing auth header. Fix: add `Authorization: Bearer ${token}` to the request."
 
-### 9. Cap lists at 5 items
+### 9. Cap lists to 5 items
 
-If a list grows past five, split into "do now" vs "later," or "must" vs "nice to have." Five items ranked beats ten unranked.
+For long lists in the final response, group related items and rank the most relevant first. Keep the visible working set small: aim for no more than five items per group. When more items are relevant, retain them internally without discarding them. Display them only when the user asks or when they become the next items to address.
+
+Never omit relevant items when completeness matters. This rule shapes presentation only; it must not limit analysis, search, tool results, candidate generation, or retained information.
 
 ### 10. No preamble, no recap, no closing pleasantries
 

@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "description": "Search up-to-date documentation for libraries and frameworks"
+    },
+    "gh_grep": {
+      "url": "https://mcp.grep.app",
+      "description": "Search public code on GitHub"
+    },
+    "websearch": {
+      "url": "https://mcp.exa.ai/mcp",
+      "description": "Search the web"
+    }
+  }
+}
