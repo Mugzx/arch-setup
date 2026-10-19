@@ -7,10 +7,6 @@
     "gh_grep": {
       "url": "https://mcp.grep.app",
       "description": "Search public code on GitHub"
-    },
-    "websearch": {
-      "url": "https://mcp.exa.ai/mcp",
-      "description": "Search the web"
     }
   }
 }
