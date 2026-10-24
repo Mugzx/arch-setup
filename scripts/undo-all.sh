@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # ==============================================================================
-# undochange.sh - Emergency System Rollback Tool (Silent Mode)
+# undo-all.sh - Emergency System Rollback Tool (Silent Mode)
 # ==============================================================================
-# Usage: sudo ./scripts/undochange.sh
+# Usage: sudo ./scripts/undo-all.sh
 # Description: Reverts system to the state "Before Setup" IMMEDIATELY
 # ==============================================================================
 
@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 
 # 1. Check Root
 if [ "$EUID" -ne 0 ]; then
-    echo -e "${RED}Error: Please run as root (sudo ./scripts/undochange.sh)${NC}"
+    echo -e "${RED}Error: Please run as root (sudo ./scripts/undo-all.sh)${NC}"
     exit 1
 fi
 

@@ -1,109 +1,20 @@
 #!/bin/bash
 
 # ==============================================================================
-# 04-niri-setup.sh - Niri Desktop (Restored FZF & Robust AUR)
+# 05-niri.sh - Niri Desktop (Restored FZF & Robust AUR)
 # ==============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PARENT_DIR="$(dirname "$SCRIPT_DIR")"
-source "$SCRIPT_DIR/00-utils.sh"
+source "$SCRIPT_DIR/lib-utils.sh"
 
 DEBUG=${DEBUG:-0}
 CN_MIRROR=${CN_MIRROR:-0}
-UNDO_SCRIPT="$SCRIPT_DIR/niri-undochange.sh"
+UNDO_SCRIPT="$SCRIPT_DIR/undo-niri.sh"
 
 check_root
 
 # --- [HELPER FUNCTIONS] ---
-
-# 1. 简化的用户执行封装
-as_user() {
-  runuser -u "$TARGET_USER" -- "$@"
-}
-
-# 2. Critical Failure Handler (The "Big Red Box")
-critical_failure_handler() {
-  local failed_reason="$1"
-  trap - ERR
-
-  echo ""
-  echo -e "\033[0;31m################################################################\033[0m"
-  echo -e "\033[0;31m#                                                              #\033[0m"
-  echo -e "\033[0;31m#   CRITICAL INSTALLATION FAILURE DETECTED                     #\033[0m"
-  echo -e "\033[0;31m#                                                              #\033[0m"
-  echo -e "\033[0;31m#   Reason: $failed_reason\033[0m"
-  echo -e "\033[0;31m#                                                              #\033[0m"
-  echo -e "\033[0;31m#   OPTIONS(Choose one):                                       #\033[0m"
-  echo -e "\033[0;31m#   1. Restore snapshot                                        #\033[0m"
-  echo -e "\033[0;31m#   2. Fix manually and re-run: sudo bash install.sh           #\033[0m"
-  echo -e "\033[0;31m#                                                              #\033[0m"
-  echo -e "\033[0;31m################################################################\033[0m"
-  echo ""
-
-  while true; do
-    read -p "Execute System Recovery (Restore Snapshot)? [y/n]: " -r choice
-    case "$choice" in
-    [yY]*)
-      if [ -f "$UNDO_SCRIPT" ]; then
-        warn "Executing recovery script..."
-        bash "$UNDO_SCRIPT"
-        exit 1
-      else
-        error "Recovery script missing! You are on your own."
-        exit 1
-      fi
-      ;;
-    [nN]*)
-      warn "User chose NOT to recover."
-      warn "Please fix the issue manually before re-running."
-      error "Installation aborted."
-      exit 1
-      ;;
-    *) echo "Invalid input. Please enter 'y' or 'n'." ;;
-    esac
-  done
-}
-
-# 3. Robust Package Installation with Retry Loop
-ensure_package_installed() {
-  local pkg="$1"
-  local context="$2" # e.g., "Repo" or "AUR"
-  local max_attempts=3
-  local attempt=1
-  local install_success=false
-
-  # 1. Check if already installed
-  if pacman -Q "$pkg" &>/dev/null; then
-    return 0
-  fi
-
-  # 2. Retry Loop
-  while [ $attempt -le $max_attempts ]; do
-    if [ $attempt -gt 1 ]; then
-      warn "Retrying '$pkg' ($context)... (Attempt $attempt/$max_attempts)"
-      sleep 3 # Cooldown
-    else
-      log "Installing '$pkg' ($context)..."
-    fi
-
-    # Try installation
-    if as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake "$pkg"; then
-      install_success=true
-      break
-    else
-      warn "Attempt $attempt/$max_attempts failed for '$pkg'."
-    fi
-
-    ((attempt++))
-  done
-
-  # 3. Final Verification
-  if [ "$install_success" = true ] && pacman -Q "$pkg" &>/dev/null; then
-    success "Installed '$pkg'."
-  else
-    critical_failure_handler "Failed to install '$pkg' after $max_attempts attempts."
-  fi
-}
 
 # hide .desktop
 hide_desktop_file() {
@@ -125,7 +36,7 @@ if ! command -v whiptail &>/dev/null; then
   pacman -S --noconfirm libnewt >/dev/null 2>&1
 fi
 
-section "Phase 4" "Niri Desktop Environment"
+section "Phase 5" "Niri Desktop Environment"
 
 # ==============================================================================
 # STEP 0: Safety Checkpoint
@@ -151,7 +62,7 @@ trap 'critical_failure_handler "Script Error at Line $LINENO"' ERR
 # STEP 1: Identify User & DM Check
 # ==============================================================================
 log "Identifying user..."
-DETECTED_USER=$(awk -F: '$3 == 1000 {print $1}' /etc/passwd)
+DETECTED_USER=$(detect_user)
 TARGET_USER="${DETECTED_USER:-$(read -p "Target user: " u && echo $u)}"
 HOME_DIR="/home/$TARGET_USER"
 info_kv "Target" "$TARGET_USER"
@@ -179,7 +90,7 @@ fi
 # STEP 2: Core Components
 # ==============================================================================
 section "Step 1/9" "Core Components"
-exe pacman -Syu --noconfirm --needed niri xdg-desktop-portal-gnome fuzzel kitty libnotify mako polkit-gnome
+exe pacman -S --noconfirm --needed niri xdg-desktop-portal-gnome fuzzel kitty libnotify mako polkit-gnome
 
 # ==============================================================================
 # STEP 3: File Manager
@@ -224,9 +135,7 @@ else
   log "Using Global Sources."
 fi
 
-SUDO_TEMP_FILE="/etc/sudoers.d/99_installer_temp"
-echo "$TARGET_USER ALL=(ALL) NOPASSWD: ALL" >"$SUDO_TEMP_FILE"
-chmod 440 "$SUDO_TEMP_FILE"
+setup_temp_sudoers
 
 # ==============================================================================
 # STEP 5: Dependencies (RESTORED FZF)
@@ -238,90 +147,46 @@ LIST_FILE="$PARENT_DIR/niri-applist.txt"
 command -v fzf &>/dev/null || pacman -S --noconfirm fzf >/dev/null 2>&1
 
 if [ -f "$LIST_FILE" ]; then
-  mapfile -t DEFAULT_LIST < <(grep -vE "^\s*#|^\s*$" "$LIST_FILE" | sed 's/#.*//; s/AUR://g' | xargs -n1)
+  echo -e "\n   ${H_YELLOW}>>> Default installation in 60s. Press ANY KEY to customize...${NC}"
+  SELECTED_RAW=""
 
-  if [ ${#DEFAULT_LIST[@]} -eq 0 ]; then
-    warn "App list is empty. Skipping."
-    PACKAGE_ARRAY=()
+  if read -t 60 -n 1 -s -r; then
+    clear
+    log "Loading package list..."
+    fzf_select "$LIST_FILE" "Search Pkg > " "[TAB] TOGGLE | [ENTER] INSTALL | [CTRL-D] DE-ALL | [CTRL-A] SE-ALL"
+    clear
   else
-    echo -e "\n   ${H_YELLOW}>>> Default installation in 60s. Press ANY KEY to customize...${NC}"
-
-    if read -t 60 -n 1 -s -r; then
-      # --- [RESTORED] Original FZF Selection Logic ---
-      clear
-      log "Loading package list..."
-
-      SELECTED_LINES=$(grep -vE "^\s*#|^\s*$" "$LIST_FILE" |
-        sed -E 's/[[:space:]]+#/\t#/' |
-        fzf --multi \
-          --layout=reverse \
-          --border \
-          --margin=1,2 \
-          --prompt="Search Pkg > " \
-          --pointer=">>" \
-          --marker="* " \
-          --delimiter=$'\t' \
-          --with-nth=1 \
-          --bind 'load:select-all' \
-          --bind 'ctrl-a:select-all,ctrl-d:deselect-all' \
-          --info=inline \
-          --header="[TAB] TOGGLE | [ENTER] INSTALL | [CTRL-D] DE-ALL | [CTRL-A] SE-ALL" \
-          --preview "echo {} | cut -f2 -d$'\t' | sed 's/^# //'" \
-          --preview-window=right:50%:wrap:border-left \
-          --color=dark \
-          --color=fg+:white,bg+:black \
-          --color=hl:blue,hl+:blue:bold \
-          --color=header:yellow:bold \
-          --color=info:magenta \
-          --color=prompt:cyan,pointer:cyan:bold,marker:green:bold \
-          --color=spinner:yellow)
-
-      clear
-
-      if [ -z "$SELECTED_LINES" ]; then
-        warn "User cancelled selection. Installing NOTHING."
-        PACKAGE_ARRAY=()
-      else
-        PACKAGE_ARRAY=()
-        while IFS= read -r line; do
-          raw_pkg=$(echo "$line" | cut -f1 -d$'\t' | xargs)
-          clean_pkg="${raw_pkg#AUR:}"
-          [ -n "$clean_pkg" ] && PACKAGE_ARRAY+=("$clean_pkg")
-        done <<<"$SELECTED_LINES"
-      fi
-      # -----------------------------------------------
-    else
-      log "Auto-confirming ALL packages."
-      PACKAGE_ARRAY=("${DEFAULT_LIST[@]}")
-    fi
+    log "Auto-confirming ALL packages."
+    SELECTED_RAW=$(grep -vE "^\s*#|^\s*$" "$LIST_FILE" | sed -E 's/[[:space:]]+#/\t#/')
   fi
 
-  # --- Installation Loop ---
-  if [ ${#PACKAGE_ARRAY[@]} -gt 0 ]; then
-    BATCH_LIST=()
-    AUR_LIST=()
-    info_kv "Target" "${#PACKAGE_ARRAY[@]} packages scheduled."
-
-    for pkg in "${PACKAGE_ARRAY[@]}"; do
-      [[ "$pkg" == "AUR:"* ]] && AUR_LIST+=("${pkg#AUR:}") || BATCH_LIST+=("$pkg")
-    done
+  if [ -z "$SELECTED_RAW" ]; then
+    warn "No packages selected."
+  else
+    parse_selection
+    info_kv "Target" "$(( ${#REPO_APPS[@]} + ${#AUR_APPS[@]} )) packages scheduled."
 
     # 1. Batch Install Repo Packages
-    if [ ${#BATCH_LIST[@]} -gt 0 ]; then
+    if [ ${#REPO_APPS[@]} -gt 0 ]; then
       log "Phase 1: Batch Installing Repo Packages..."
-      as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake "${BATCH_LIST[@]}" || true
-
-      # Verify Each
-      for pkg in "${BATCH_LIST[@]}"; do
-        ensure_package_installed "$pkg" "Repo"
+      as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake "${REPO_APPS[@]}" || true
+      for pkg in "${REPO_APPS[@]}"; do
+        pkg_installed "$pkg" && continue
+        warn "Missing: $pkg. Retrying individually..."
+        install_aur_retry "$pkg"; rc=$?
+        [ $rc -eq 130 ] && continue
+        [ $rc -eq 0 ] || critical_failure_handler "Failed to install '$pkg'."
       done
     fi
 
     # 2. Sequential AUR Install
-    if [ ${#AUR_LIST[@]} -gt 0 ]; then
+    if [ ${#AUR_APPS[@]} -gt 0 ]; then
       log "Phase 2: Installing AUR Packages (Sequential)..."
-      for pkg in "${AUR_LIST[@]}"; do
-        ensure_package_installed "$pkg" "AUR"
+      for pkg in "${AUR_APPS[@]}"; do
+        pkg_installed "$pkg" && continue
+        install_aur_retry "$pkg"; rc=$?
+        [ $rc -eq 130 ] && continue
+        [ $rc -eq 0 ] || critical_failure_handler "Failed to install '$pkg'."
       done
     fi
 
@@ -330,8 +195,6 @@ if [ -f "$LIST_FILE" ]; then
       warn "Waybar missing. Installing stock..."
       exe pacman -S --noconfirm --needed waybar
     fi
-  else
-    warn "No packages selected."
   fi
 else
   warn "niri-applist.txt not found."
@@ -427,7 +290,7 @@ success "Tools configured."
 # STEP 9: Cleanup & Auto-Login
 # ==============================================================================
 section "Final" "Cleanup & Boot"
-rm -f "$SUDO_TEMP_FILE"
+cleanup_temp_sudoers
 
 SVC_DIR="$HOME_DIR/.config/systemd/user"
 SVC_FILE="$SVC_DIR/niri-autostart.service"
@@ -458,4 +321,4 @@ EOT
 fi
 
 trap - ERR
-log "Module 04 completed."
+log "Module 05-niri completed."

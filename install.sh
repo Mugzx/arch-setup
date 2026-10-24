@@ -9,22 +9,17 @@ SCRIPTS_DIR="$BASE_DIR/scripts"
 STATE_FILE="$BASE_DIR/.install_progress"
 
 # --- Source Visual Engine ---
-if [ -f "$SCRIPTS_DIR/00-utils.sh" ]; then
-    source "$SCRIPTS_DIR/00-utils.sh"
+if [ -f "$SCRIPTS_DIR/lib-utils.sh" ]; then
+    source "$SCRIPTS_DIR/lib-utils.sh"
 else
-    echo "Error: 00-utils.sh not found."
+    echo "Error: lib-utils.sh not found."
     exit 1
 fi
 
-# --- Global Cleanup on Exit ---
-cleanup() {
-    rm -f "/tmp/install_user"
-}
-trap cleanup EXIT
-
-# --- Global Trap (Restore Cursor on Exit) ---
+# --- Global Cleanup on Exit (tput 恢复光标 + 清理临时文件) ---
 cleanup_on_exit() {
     tput cnorm
+    rm -f "/tmp/install_user"
 }
 trap cleanup_on_exit EXIT
 
@@ -154,18 +149,18 @@ sys_dashboard
 BASE_MODULES=(
     "00-btrfs-init.sh"
     "01-base.sh"
-    "02-musthave.sh"
-    "02a-dualboot-fix.sh"
-    "03-user.sh"
+    "02-essentials.sh"
+    "03-dualboot.sh"
+    "04-user.sh"
 )
 
 if [ "$DESKTOP_ENV" == "niri" ]; then
-    BASE_MODULES+=("04-niri-setup.sh")
+    BASE_MODULES+=("05-niri.sh")
 elif [ "$DESKTOP_ENV" == "kde" ]; then
-    BASE_MODULES+=("06-kdeplasma-setup.sh")
+    BASE_MODULES+=("05-kde.sh")
 fi
 
-BASE_MODULES+=("99-apps.sh")
+BASE_MODULES+=("06-apps.sh")
 MODULES=("${BASE_MODULES[@]}")
 
 if [ ! -f "$STATE_FILE" ]; then touch "$STATE_FILE"; fi

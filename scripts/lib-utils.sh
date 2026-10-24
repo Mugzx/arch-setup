@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==============================================================================
-# 00-utils.sh - The "TUI" Visual Engine (v4.0)
+# lib-utils.sh - The "TUI" Visual Engine (v4.0)
 # ==============================================================================
 
 # --- 1. 颜色与样式定义 (ANSI) ---
@@ -21,6 +21,7 @@ export H_PURPLE='\033[1;35m'
 export H_CYAN='\033[1;36m'
 export H_WHITE='\033[1;37m'
 export H_GRAY='\033[1;90m'
+export H_MAGENTA='\033[1;95m'
 
 # 背景色 (用于标题栏)
 export BG_BLUE='\033[44m'
@@ -249,4 +250,111 @@ select_flathub_mirror() {
     else
         error "Failed to update mirror."
     fi
+}
+
+# --- 6. 共享安装逻辑 (Shared Install Helpers) ---
+
+# 检测 UID 1000 的用户名
+detect_user() {
+    awk -F: '$3 == 1000 {print $1}' /etc/passwd
+}
+
+# 判断包是否已安装
+pkg_installed() {
+    pacman -Q "$1" &>/dev/null
+}
+
+# 以 TARGET_USER 身份执行命令
+as_user() {
+    runuser -u "$TARGET_USER" -- "$@"
+}
+
+# 临时 NOPASSWD sudoers（安装期间免密；结束或失败时须调用 cleanup_temp_sudoers）
+SUDO_TEMP_FILE="/etc/sudoers.d/99_installer_temp"
+setup_temp_sudoers() {
+    echo "$TARGET_USER ALL=(ALL) NOPASSWD: ALL" > "$SUDO_TEMP_FILE"
+    chmod 440 "$SUDO_TEMP_FILE"
+}
+cleanup_temp_sudoers() {
+    rm -f "$SUDO_TEMP_FILE"
+}
+
+# 从列表文件 FZF 多选，结果写入全局 SELECTED_RAW
+fzf_select() {
+    local list_file="$1" prompt="$2" header="$3"
+    SELECTED_RAW=$(grep -vE "^\s*#|^\s*$" "$list_file" | \
+        sed -E 's/[[:space:]]+#/\t#/' | \
+        fzf --multi \
+            --layout=reverse --border --margin=1,2 \
+            --prompt="$prompt" --pointer=">>" --marker="* " \
+            --delimiter=$'\t' --with-nth=1 \
+            --bind 'load:select-all' --bind 'ctrl-a:select-all,ctrl-d:deselect-all' \
+            --info=inline --header="$header" \
+            --preview "echo {} | cut -f2 -d$'\t' | sed 's/^# //'" \
+            --preview-window=right:45%:wrap:border-left \
+            --color=dark --color=fg+:white,bg+:black \
+            --color=hl:blue,hl+:blue:bold --color=header:yellow:bold \
+            --color=info:magenta --color=prompt:cyan,pointer:cyan:bold,marker:green:bold \
+            --color=spinner:yellow)
+}
+
+# 解析 SELECTED_RAW 到 REPO_APPS / AUR_APPS / FLATPAK_APPS
+parse_selection() {
+    REPO_APPS=(); AUR_APPS=(); FLATPAK_APPS=()
+    local line raw
+    while IFS= read -r line; do
+        raw=$(echo "$line" | cut -f1 -d$'\t' | xargs)
+        [[ -z "$raw" ]] && continue
+        case "$raw" in
+            flatpak:*) FLATPAK_APPS+=("${raw#flatpak:}") ;;
+            AUR:*)     AUR_APPS+=("${raw#AUR:}") ;;
+            *)         REPO_APPS+=("$raw") ;;
+        esac
+    done <<< "$SELECTED_RAW"
+}
+
+# AUR 包逐包安装（带重试）；返回 0=成功 / 130=用户跳过 / 1=失败
+install_aur_retry() {
+    local pkg="$1" max_retries="${2:-2}" attempt
+    for ((attempt=0; attempt<=max_retries; attempt++)); do
+        [ $attempt -gt 0 ] && { warn "Retry $attempt/$max_retries for '$pkg' in 3s..."; sleep 3; }
+        as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake "$pkg"
+        local rc=$?
+        [ $rc -eq 130 ] && { warn "Skipped '$pkg' by user (Ctrl+C)."; return 130; }
+        if pkg_installed "$pkg"; then success "Installed $pkg"; return 0; fi
+        warn "Attempt $((attempt+1)) failed for $pkg"
+    done
+    return 1
+}
+
+# 关键失败处理：提示回滚快照（依赖全局 UNDO_SCRIPT）
+critical_failure_handler() {
+    local reason="$1"
+    trap - ERR
+    echo ""
+    echo -e "\033[0;31m###############################################################\033[0m"
+    echo -e "\033[0;31m#   CRITICAL INSTALLATION FAILURE DETECTED                    #\033[0m"
+    echo -e "\033[0;31m#   Reason: $reason\033[0m"
+    echo -e "\033[0;31m#   1. Restore snapshot   2. Fix manually and re-run          #\033[0m"
+    echo -e "\033[0;31m###############################################################\033[0m"
+    echo ""
+    while true; do
+        read -p "Execute System Recovery (Restore Snapshot)? [y/n]: " -r choice
+        case "$choice" in
+            [yY]*)
+                cleanup_temp_sudoers
+                if [ -f "$UNDO_SCRIPT" ]; then
+                    warn "Executing recovery script..."
+                    bash "$UNDO_SCRIPT"
+                else
+                    error "Recovery script missing!"
+                fi
+                exit 1 ;;
+            [nN]*)
+                cleanup_temp_sudoers
+                error "Installation aborted."
+                exit 1 ;;
+            *) echo "Invalid input. Please enter 'y' or 'n'." ;;
+        esac
+    done
 }

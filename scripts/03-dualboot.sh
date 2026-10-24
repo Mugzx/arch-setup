@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # ==============================================================================
-# Script: 02a-dualboot-fix.sh
+# Script: 03-dualboot.sh
 # Purpose: Auto-configure for Windows dual-boot and apply advanced GRUB settings.
 # ==============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/00-utils.sh"
+source "$SCRIPT_DIR/lib-utils.sh"
 
 check_root
 
@@ -81,7 +81,7 @@ manage_kernel_param() {
 
 # --- Main Script ---
 
-section "Phase 2A" "Advanced GRUB & Dual-Boot Configuration"
+section "Phase 3" "Advanced GRUB & Dual-Boot Configuration"
 
 # (Original file check removed here since we checked at the very top)
 

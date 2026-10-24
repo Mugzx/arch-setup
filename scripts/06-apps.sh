@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # ==============================================================================
-# 99-apps.sh - Common Applications (FZF Menu + Split Repo/AUR + Retry Logic)
+# 06-apps.sh - Common Applications (FZF Menu + Split Repo/AUR + Retry Logic)
 # ==============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PARENT_DIR="$(dirname "$SCRIPT_DIR")"
-source "$SCRIPT_DIR/00-utils.sh"
+source "$SCRIPT_DIR/lib-utils.sh"
 
 check_root
 
@@ -21,10 +21,10 @@ trap 'echo -e "\n   ${H_YELLOW}>>> Operation cancelled by user (Ctrl+C). Skippin
 # ------------------------------------------------------------------------------
 # 0. Identify Target User & Helper
 # ------------------------------------------------------------------------------
-section "Phase 5" "Common Applications"
+section "Phase 6" "Common Applications"
 
 log "Identifying target user..."
-DETECTED_USER=$(awk -F: '$3 == 1000 {print $1}' /etc/passwd)
+DETECTED_USER=$(detect_user)
 
 if [ -n "$DETECTED_USER" ]; then
     TARGET_USER="$DETECTED_USER"
@@ -33,11 +33,6 @@ else
 fi
 HOME_DIR="/home/$TARGET_USER"
 info_kv "Target" "$TARGET_USER"
-
-# Helper function for user commands
-as_user() {
-  runuser -u "$TARGET_USER" -- "$@"
-}
 
 # ------------------------------------------------------------------------------
 # 1. List Selection & User Prompt
@@ -49,9 +44,6 @@ else
 fi
 LIST_FILE="$PARENT_DIR/$LIST_FILENAME"
 
-REPO_APPS=()
-AUR_APPS=()
-FLATPAK_APPS=()
 FAILED_PACKAGES=()
 
 if [ ! -f "$LIST_FILE" ]; then
@@ -96,30 +88,7 @@ else
         clear
         echo -e "\n  Loading application list..."
 
-        SELECTED_RAW=$(grep -vE "^\s*#|^\s*$" "$LIST_FILE" | \
-            sed -E 's/[[:space:]]+#/\t#/' | \
-            fzf --multi \
-                --layout=reverse \
-                --border \
-                --margin=1,2 \
-                --prompt="Search App > " \
-                --pointer=">>" \
-                --marker="* " \
-                --delimiter=$'\t' \
-                --with-nth=1 \
-                --bind 'load:select-all' \
-                --bind 'ctrl-a:select-all,ctrl-d:deselect-all' \
-                --info=inline \
-                --header="[TAB] TOGGLE | [ENTER] INSTALL | [CTRL-D] DE-ALL | [CTRL-A] SE-ALL" \
-                --preview "echo {} | cut -f2 -d$'\t' | sed 's/^# //'" \
-                --preview-window=right:45%:wrap:border-left \
-                --color=dark \
-                --color=fg+:white,bg+:black \
-                --color=hl:blue,hl+:blue:bold \
-                --color=header:yellow:bold \
-                --color=info:magenta \
-                --color=prompt:cyan,pointer:cyan:bold,marker:green:bold \
-                --color=spinner:yellow)
+        fzf_select "$LIST_FILE" "Search App > " "[TAB] TOGGLE | [ENTER] INSTALL | [CTRL-D] DE-ALL | [CTRL-A] SE-ALL"
 
         clear
         
@@ -135,21 +104,7 @@ fi
 # 2. Categorize Selection & Strip Prefixes
 # ------------------------------------------------------------------------------
 log "Processing selection..."
-
-while IFS= read -r line; do
-    raw_pkg=$(echo "$line" | cut -f1 -d$'\t' | xargs)
-    [[ -z "$raw_pkg" ]] && continue
-
-    if [[ "$raw_pkg" == flatpak:* ]]; then
-        clean_name="${raw_pkg#flatpak:}"
-        FLATPAK_APPS+=("$clean_name")
-    elif [[ "$raw_pkg" == AUR:* ]]; then
-        clean_name="${raw_pkg#AUR:}"
-        AUR_APPS+=("$clean_name")
-    else
-        REPO_APPS+=("$raw_pkg")
-    fi
-done <<< "$SELECTED_RAW"
+parse_selection
 
 info_kv "Scheduled" "Repo: ${#REPO_APPS[@]}" "AUR: ${#AUR_APPS[@]}" "Flatpak: ${#FLATPAK_APPS[@]}"
 
@@ -158,9 +113,7 @@ info_kv "Scheduled" "Repo: ${#REPO_APPS[@]}" "AUR: ${#AUR_APPS[@]}" "Flatpak: ${
 # ------------------------------------------------------------------------------
 if [ ${#REPO_APPS[@]} -gt 0 ] || [ ${#AUR_APPS[@]} -gt 0 ]; then
     log "Configuring temporary NOPASSWD for installation..."
-    SUDO_TEMP_FILE="/etc/sudoers.d/99_installer_apps"
-    echo "$TARGET_USER ALL=(ALL) NOPASSWD: ALL" > "$SUDO_TEMP_FILE"
-    chmod 440 "$SUDO_TEMP_FILE"
+    setup_temp_sudoers
 fi
 
 # ------------------------------------------------------------------------------
@@ -181,17 +134,19 @@ if [ ${#REPO_APPS[@]} -gt 0 ]; then
     done
 
     if [ ${#REPO_QUEUE[@]} -gt 0 ]; then
-        BATCH_LIST="${REPO_QUEUE[*]}"
         info_kv "Installing" "${#REPO_QUEUE[@]} packages via Pacman/Paru"
 
-        if ! exe as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake $BATCH_LIST; then
-            error "Batch installation failed. Some repo packages might be missing."
-            for pkg in "${REPO_QUEUE[@]}"; do
-                FAILED_PACKAGES+=("repo:$pkg")
-            done
-        else
+        if as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake "${REPO_QUEUE[@]}"; then
             success "Repo batch installation completed."
+        else
+            error "Batch installation failed. Some repo packages might be missing."
         fi
+
+        for pkg in "${REPO_QUEUE[@]}"; do
+            pkg_installed "$pkg" && continue
+            warn "Missing: $pkg. Retrying individually..."
+            install_aur_retry "$pkg" || FAILED_PACKAGES+=("repo:$pkg")
+        done
     else
         log "All Repo packages are already installed."
     fi
@@ -202,34 +157,10 @@ if [ ${#AUR_APPS[@]} -gt 0 ]; then
     section "Step 2/3" "AUR Packages (Sequential + Retry)"
 
     for app in "${AUR_APPS[@]}"; do
-        if pacman -Qi "$app" &>/dev/null; then
-            log "Skipping '$app' (Already installed)."
-            continue
-        fi
+        pkg_installed "$app" && { log "Skipping '$app' (Already installed)."; continue; }
 
         log "Installing AUR: $app ..."
-        install_success=false
-        max_retries=2
-        
-        for (( i=0; i<=max_retries; i++ )); do
-            if [ $i -gt 0 ]; then
-                warn "Retry $i/$max_retries for '$app' in 3 seconds..."
-                sleep 3
-            fi
-
-            if as_user paru -S --noconfirm --needed --skipreview --nocleanafter --keepsrc --noremovemake "$app"; then
-                install_success=true
-                success "Installed $app"
-                break
-            else
-                warn "Attempt $((i+1)) failed for $app"
-            fi
-        done
-
-        if [ "$install_success" = false ]; then
-            error "Failed to install $app after $((max_retries+1)) attempts."
-            FAILED_PACKAGES+=("aur:$app")
-        fi
+        install_aur_retry "$app" || FAILED_PACKAGES+=("aur:$app")
     done
 fi
 
@@ -256,10 +187,7 @@ fi
 # ------------------------------------------------------------------------------
 # [FIX] CLEANUP GLOBAL SUDO CONFIGURATION
 # ------------------------------------------------------------------------------
-if [ -f "$SUDO_TEMP_FILE" ]; then
-    log "Revoking temporary NOPASSWD..."
-    rm -f "$SUDO_TEMP_FILE"
-fi
+cleanup_temp_sudoers
 
 # ------------------------------------------------------------------------------
 # 4. Generate Failure Report
@@ -288,4 +216,4 @@ fi
 # Reset Trap
 trap - INT
 
-log "Module 99-apps completed."
+log "Module 06-apps completed."

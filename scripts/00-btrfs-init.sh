@@ -5,7 +5,7 @@
 # ==============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/00-utils.sh"
+source "$SCRIPT_DIR/lib-utils.sh"
 
 check_root
 
@@ -20,7 +20,7 @@ ROOT_FSTYPE=$(findmnt -n -o FSTYPE /)
 if [ "$ROOT_FSTYPE" == "btrfs" ]; then
     log "Root is Btrfs. Installing Snapper..."
     # Minimal install for snapshot capability
-    exe pacman -Syu --noconfirm --needed snapper less
+    exe pacman -S --noconfirm --needed snapper less
     
     log "Configuring Snapper for Root..."
     if ! snapper list-configs | grep -q "^root "; then

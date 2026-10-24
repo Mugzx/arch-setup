@@ -1,12 +1,12 @@
 #!/bin/bash
 # ==============================================================================
-# Script: niri-undochange.sh
+# Script: undo-niri.sh
 # Purpose: Emergency rollback to 'Before Niri Setup' checkpoint
 # ==============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PARENT_DIR="$(dirname "$SCRIPT_DIR")"
-source "$SCRIPT_DIR/00-utils.sh"
+source "$SCRIPT_DIR/lib-utils.sh"
 
 check_root
 
@@ -63,7 +63,7 @@ pacman -Sc --noconfirm
 
 # 清理 Yay 緩存 (針對 UID 1000 用戶)
 # 雖然回滾 /home 可能已經清除了一部分，但強制刪除是最保險的
-MAIN_USER=$(awk -F: '$3 == 1000 {print $1}' /etc/passwd)
+MAIN_USER=$(detect_user)
 if [ -n "$MAIN_USER" ]; then
     YAY_CACHE="/home/$MAIN_USER/.cache/yay"
     if [ -d "$YAY_CACHE" ]; then
@@ -81,9 +81,9 @@ success "Caches cleaned."
 
 # 3. 狀態文件保護
 # 我們保留 .install_progress 文件，這樣重啟後前面 00-03 的步驟會被自動跳過
-# 但為了安全，我們確保 04-niri-setup.sh 不在裡面
+# 但為了安全，我們確保 05-niri.sh 不在裡面
 if [ -f "$PARENT_DIR/.install_progress" ]; then
-    sed -i "/04-niri-setup.sh/d" "$PARENT_DIR/.install_progress"
+    sed -i "/05-niri.sh/d" "$PARENT_DIR/.install_progress"
 fi
 
 # 4. 強制重啟與用戶提示

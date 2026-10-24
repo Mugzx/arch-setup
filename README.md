@@ -35,17 +35,17 @@ cd arch-setup && sudo bash install.sh
 ├── niri-dotfiles # Niri 配置
 │   └── wallpapers # 壁纸目录★
 ├── scripts # 安装脚本
-│   ├── 00-btrfs-init.sh # Btrfs文件系统初始化
-│   ├── 00-utils.sh # 工具函数和通用变量定义
-│   ├── 01-base.sh # 基础系统安装
-│   ├── 02a-dualboot-fix.sh # 系统引导
-│   ├── 02-musthave.sh # 必备软件安装
-│   ├── 03-user.sh # 用户账户和权限配置
-│   ├── 04-niri-setup.sh # Niri 安装和配置
-│   ├── 06-kdeplasma-setup.sh # KDE Plasma 安装和配置
-│   ├── 99-apps.sh # 安装应用列表中的软件包
-│   ├── undochange.sh # 快照回档 （回到文件系统初始化之前）
-│   └── niri-undochange.sh # 快照回档 (回到 Niri 安装之前)
+│   ├── 00-btrfs-init.sh # Btrfs文件系统初始化
+│   ├── 01-base.sh # 基础系统安装
+│   ├── 02-essentials.sh # 必备软件安装
+│   ├── 03-dualboot.sh # 系统引导
+│   ├── 04-user.sh # 用户账户和权限配置
+│   ├── 05-niri.sh # Niri 安装和配置
+│   ├── 05-kde.sh # KDE Plasma 安装和配置
+│   ├── 06-apps.sh # 安装应用列表中的软件包
+│   ├── lib-utils.sh # 工具函数和通用变量定义
+│   ├── undo-all.sh # 快照回档（回到文件系统初始化之前）
+│   └── undo-niri.sh # 快照回档（回到 Niri 安装之前）
 ├── exclude-dotfiles.txt # 需要排除的配置★
 ├── install.sh # 主安装脚本，调用其他脚本完成系统安装
 ├── kde-applist.txt # KDE 的桌面环境软件列表

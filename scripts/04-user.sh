@@ -1,18 +1,18 @@
 #!/bin/bash
 
 # ==============================================================================
-# 03-user.sh - User Creation & Configuration (Visual Fix)
+# 04-user.sh - User Creation & Configuration (Visual Fix)
 # ==============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/00-utils.sh"
+source "$SCRIPT_DIR/lib-utils.sh"
 
 check_root
 
 # ------------------------------------------------------------------------------
 # 1. User Detection / Creation Logic
 # ------------------------------------------------------------------------------
-section "Phase 3" "User Account Setup"
+section "Phase 4" "User Account Setup"
 
 EXISTING_USER=$(awk -F: '$3 == 1000 {print $1}' /etc/passwd)
 MY_USERNAME=""
@@ -73,7 +73,7 @@ if [ "$SKIP_CREATION" = true ]; then
     fi
 else
     log "Creating new user..."
-    exe useradd -m -g wheel "$MY_USERNAME"
+    exe useradd -m -G wheel -s /bin/bash "$MY_USERNAME"
     
     log "Setting password for $MY_USERNAME..."
     # passwd 需要交互，直接运行
@@ -86,16 +86,13 @@ else
     fi
 fi
 
-# Configure Sudoers
+# Configure Sudoers (使用 drop-in，避免直接改写 /etc/sudoers)
 log "Configuring sudoers..."
-if grep -q "^# %wheel ALL=(ALL:ALL) ALL" /etc/sudoers; then
-    exe sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
-    success "Uncommented %wheel in /etc/sudoers."
-elif grep -q "^%wheel ALL=(ALL:ALL) ALL" /etc/sudoers; then
+if [ -f /etc/sudoers.d/10-wheel ]; then
     success "Sudo access already enabled."
 else
-    log "Appending %wheel rule..."
-    echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
+    echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/10-wheel
+    chmod 440 /etc/sudoers.d/10-wheel
     success "Sudo access configured."
 fi
 
@@ -104,7 +101,7 @@ fi
 # ------------------------------------------------------------------------------
 section "Step 3/3" "User Directories"
 
-exe pacman -Syu --noconfirm --needed xdg-user-dirs
+exe pacman -S --noconfirm --needed xdg-user-dirs
 
 log "Generating directories (Downloads, Documents...)..."
 

@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # ==============================================================================
-# 02-musthave.sh - Essential Software, Drivers & Locale
+# 02-essentials.sh - Essential Software, Drivers & Locale
 # ==============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/00-utils.sh"
+source "$SCRIPT_DIR/lib-utils.sh"
 
 check_root
 
@@ -19,7 +19,7 @@ ROOT_FSTYPE=$(findmnt -n -o FSTYPE /)
 
 if [ "$ROOT_FSTYPE" == "btrfs" ]; then
     log "Btrfs filesystem detected."
-    exe pacman -Syu --noconfirm --needed snapper snap-pac btrfs-assistant
+    exe pacman -S --noconfirm --needed snapper snap-pac btrfs-assistant
     success "Snapper tools installed."
 
     log "Initializing Snapper 'root' configuration..."
