@@ -1,3 +1,4 @@
-swaylock
-wofi
-obs-studio
+btop/btop.conf
+gtk-3.0/bookmarks
+qt5ct/qt5ct.conf
+qt6ct/qt6ct.conf
