@@ -1,4 +1,5 @@
 #!/bin/bash
+set -uo pipefail
 
 # ==============================================================================
 # 01-base.sh - Base System Configuration
@@ -52,10 +53,10 @@ if grep -q "^\[multilib\]" /etc/pacman.conf; then
 else
     log "Uncommenting [multilib]..."
     # Uncomment [multilib] and the following Include line
-    exe sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+    exe_must sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
     
     log "Refreshing database..."
-    exe pacman -Syu
+    exe_must pacman -Syu
     success "[multilib] enabled."
 fi
 
@@ -65,7 +66,7 @@ fi
 section "Step 3/6" "Base Fonts"
 
 log "Installing adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts noto-fonts-cjk, noto-fonts, emoji..."
-exe pacman -S --noconfirm --needed adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts noto-fonts-cjk noto-fonts noto-fonts-emoji
+exe_must pacman -S --noconfirm --needed adobe-source-han-serif-cn-fonts adobe-source-han-sans-cn-fonts noto-fonts-cjk noto-fonts noto-fonts-emoji
 success "Base fonts installed."
 
 # ------------------------------------------------------------------------------
@@ -90,7 +91,7 @@ fi
 
 log "Installing archlinuxcn-keyring..."
 # Keyring installation often needs -Sy specifically, but -Syu is safe too
-exe pacman -Syu --noconfirm archlinuxcn-keyring
+exe_must pacman -Syu --noconfirm archlinuxcn-keyring
 success "ArchLinuxCN configured."
 
 # ------------------------------------------------------------------------------
@@ -99,7 +100,9 @@ success "ArchLinuxCN configured."
 section "Step 5/6" "AUR Helpers"
 
 log "Installing yay and paru..."
-exe pacman -S --noconfirm --needed base-devel yay paru
+exe_must pacman -S --noconfirm --needed base-devel yay paru
+# 关键断言：AUR helper 必须可用，后续所有 AUR 安装都依赖它
+command -v paru >/dev/null 2>&1 || { error "paru not found after install. Aborting."; exit 1; }
 success "Helpers installed."
 
 log "Module 01 completed."

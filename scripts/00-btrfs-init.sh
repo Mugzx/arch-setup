@@ -1,4 +1,5 @@
 #!/bin/bash
+set -uo pipefail
 
 # ==============================================================================
 # 00-btrfs-init.sh - Pre-install Snapshot Safety Net (Root & Home)
@@ -20,7 +21,7 @@ ROOT_FSTYPE=$(findmnt -n -o FSTYPE /)
 if [ "$ROOT_FSTYPE" == "btrfs" ]; then
     log "Root is Btrfs. Installing Snapper..."
     # Minimal install for snapshot capability
-    exe pacman -S --noconfirm --needed snapper less
+    exe_must pacman -S --noconfirm --needed snapper less
     
     log "Configuring Snapper for Root..."
     if ! snapper list-configs | grep -q "^root "; then
@@ -30,25 +31,25 @@ if [ "$ROOT_FSTYPE" == "btrfs" ]; then
             exe_silent rm -rf /.snapshots
         fi
         
-        if exe snapper -c root create-config /; then
-            success "Config 'root' created."
-            
-            # Apply Retention Policy
-            exe snapper -c root set-config \
-                ALLOW_GROUPS="wheel" \
-                TIMELINE_CREATE="no" \
-                TIMELINE_CLEANUP="yes" \
-                NUMBER_LIMIT="20" \
-                NUMBER_LIMIT_IMPORTANT="5" \
-                TIMELINE_LIMIT_HOURLY="5" \
-                TIMELINE_LIMIT_DAILY="7" \
-                TIMELINE_LIMIT_WEEKLY="0" \
-                TIMELINE_LIMIT_MONTHLY="0" \
-                TIMELINE_LIMIT_YEARLY="0"
-        fi
+        exe_must snapper -c root create-config /
+        success "Config 'root' created."
+        # Apply Retention Policy
+        exe_must snapper -c root set-config \
+            ALLOW_GROUPS="wheel" \
+            TIMELINE_CREATE="no" \
+            TIMELINE_CLEANUP="yes" \
+            NUMBER_LIMIT="20" \
+            NUMBER_LIMIT_IMPORTANT="5" \
+            TIMELINE_LIMIT_HOURLY="5" \
+            TIMELINE_LIMIT_DAILY="7" \
+            TIMELINE_LIMIT_WEEKLY="0" \
+            TIMELINE_LIMIT_MONTHLY="0" \
+            TIMELINE_LIMIT_YEARLY="0"
     else
         log "Config 'root' already exists."
     fi
+    # 关键断言：root config 必须存在，否则无法建立安全快照
+    snapper list-configs | grep -q "^root " || { error "Snapper 'root' config missing. Aborting."; exit 1; }
 else
     warn "Root is not Btrfs. Skipping Root snapshot."
 fi
@@ -69,25 +70,25 @@ if findmnt -n -o FSTYPE /home | grep -q "btrfs"; then
             exe_silent rm -rf /home/.snapshots
         fi
         
-        if exe snapper -c home create-config /home; then
-            success "Config 'home' created."
-            
-            # Apply same policy to home
-            exe snapper -c home set-config \
-                ALLOW_GROUPS="wheel" \
-                TIMELINE_CREATE="no" \
-                TIMELINE_CLEANUP="yes" \
-                NUMBER_LIMIT="20" \
-                NUMBER_LIMIT_IMPORTANT="5" \
-                TIMELINE_LIMIT_HOURLY="5" \
-                TIMELINE_LIMIT_DAILY="7" \
-                TIMELINE_LIMIT_WEEKLY="0" \
-                TIMELINE_LIMIT_MONTHLY="0" \
-                TIMELINE_LIMIT_YEARLY="0"
-        fi
+        exe_must snapper -c home create-config /home
+        success "Config 'home' created."
+        # Apply same policy to home
+        exe_must snapper -c home set-config \
+            ALLOW_GROUPS="wheel" \
+            TIMELINE_CREATE="no" \
+            TIMELINE_CLEANUP="yes" \
+            NUMBER_LIMIT="20" \
+            NUMBER_LIMIT_IMPORTANT="5" \
+            TIMELINE_LIMIT_HOURLY="5" \
+            TIMELINE_LIMIT_DAILY="7" \
+            TIMELINE_LIMIT_WEEKLY="0" \
+            TIMELINE_LIMIT_MONTHLY="0" \
+            TIMELINE_LIMIT_YEARLY="0"
     else
         log "Config 'home' already exists."
     fi
+    # 关键断言：home config 必须存在
+    snapper list-configs | grep -q "^home " || { error "Snapper 'home' config missing. Aborting."; exit 1; }
 else
     log "/home is not a separate Btrfs volume. Skipping."
 fi
@@ -120,5 +121,21 @@ if snapper list-configs | grep -q "^home "; then
         exit 1
     fi
 fi
+
+# ------------------------------------------------------------------------------
+# 4. Deploy Rollback Scripts (持久化，安装器删除后仍可手动回滚)
+# ------------------------------------------------------------------------------
+log "Deploying rollback scripts to /usr/local/bin..."
+
+exe mkdir -p /usr/local/bin
+if [ -f "$SCRIPT_DIR/undo-all.sh" ]; then
+    exe cp -f "$SCRIPT_DIR/undo-all.sh" /usr/local/bin/arch-setup-undo-all
+    exe chmod +x /usr/local/bin/arch-setup-undo-all
+fi
+if [ -f "$SCRIPT_DIR/undo-desktop.sh" ]; then
+    exe cp -f "$SCRIPT_DIR/undo-desktop.sh" /usr/local/bin/arch-setup-undo-desktop
+    exe chmod +x /usr/local/bin/arch-setup-undo-desktop
+fi
+success "Rollback scripts deployed."
 
 log "Module 00 completed. Safe to proceed."

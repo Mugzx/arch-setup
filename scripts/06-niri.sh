@@ -1,7 +1,8 @@
 #!/bin/bash
+set -uo pipefail
 
 # ==============================================================================
-# 05-niri.sh - Niri Desktop (Restored FZF & Robust AUR)
+# 06-niri.sh - Niri Desktop (Restored FZF & Robust AUR)
 # ==============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -10,7 +11,7 @@ source "$SCRIPT_DIR/lib-utils.sh"
 
 DEBUG=${DEBUG:-0}
 CN_MIRROR=${CN_MIRROR:-0}
-UNDO_SCRIPT="$SCRIPT_DIR/undo-niri.sh"
+export UNDO_SCRIPT="$SCRIPT_DIR/undo-desktop.sh"
 
 check_root
 
@@ -36,24 +37,7 @@ if ! command -v whiptail &>/dev/null; then
   pacman -S --noconfirm libnewt >/dev/null 2>&1
 fi
 
-section "Phase 5" "Niri Desktop Environment"
-
-# ==============================================================================
-# STEP 0: Safety Checkpoint
-# ==============================================================================
-
-create_checkpoint() {
-  local marker="Before Niri Setup"
-  if snapper -c root list | grep -q "$marker"; then
-    log "Checkpoint '$marker' already exists."
-  else
-    log "Creating safety checkpoint..."
-    snapper -c root create -d "$marker"
-    snapper -c home list &>/dev/null && snapper -c home create -d "$marker"
-    success "Checkpoint created."
-  fi
-}
-create_checkpoint
+section "Phase 6" "Niri Desktop Environment"
 
 # Enable Trap
 trap 'critical_failure_handler "Script Error at Line $LINENO"' ERR
@@ -63,7 +47,10 @@ trap 'critical_failure_handler "Script Error at Line $LINENO"' ERR
 # ==============================================================================
 log "Identifying user..."
 DETECTED_USER=$(detect_user)
-TARGET_USER="${DETECTED_USER:-$(read -p "Target user: " u && echo $u)}"
+TARGET_USER="${DETECTED_USER:-${ARCH_SETUP_USER:-}}"
+if [ -z "$TARGET_USER" ]; then
+    read -t 30 -p "Target user: " TARGET_USER || { error "No target user. Set ARCH_SETUP_USER env var."; exit 1; }
+fi
 HOME_DIR="/home/$TARGET_USER"
 info_kv "Target" "$TARGET_USER"
 
@@ -105,10 +92,12 @@ fi
 # Nautilus Nvidia/Input Fix
 DESKTOP_FILE="/usr/share/applications/org.gnome.Nautilus.desktop"
 if [ -f "$DESKTOP_FILE" ]; then
-  GPU_COUNT=$(lspci | grep -E -i "vga|3d" | wc -l)
-  HAS_NVIDIA=$(lspci | grep -E -i "nvidia" | wc -l)
+  GPU_COUNT=$(lspci | grep -ciE "vga|3d") || true
+  HAS_NVIDIA=$(lspci | grep -ciE "nvidia") || true
   ENV_VARS="env GTK_IM_MODULE=fcitx"
-  [ "$GPU_COUNT" -gt 1 ] && [ "$HAS_NVIDIA" -gt 0 ] && ENV_VARS="env GSK_RENDERER=gl GTK_IM_MODULE=fcitx"
+  if [ "$GPU_COUNT" -gt 1 ] && [ "$HAS_NVIDIA" -gt 0 ]; then
+    ENV_VARS="env GSK_RENDERER=gl GTK_IM_MODULE=fcitx"
+  fi
 
   if ! grep -q "^Exec=$ENV_VARS" "$DESKTOP_FILE"; then
     exe sed -i "s|^Exec=|Exec=$ENV_VARS |" "$DESKTOP_FILE"
@@ -321,4 +310,4 @@ EOT
 fi
 
 trap - ERR
-log "Module 05-niri completed."
+log "Module 06-niri completed."

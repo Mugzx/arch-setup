@@ -1,4 +1,5 @@
 #!/bin/bash
+set -uo pipefail
 
 # ==============================================================================
 # lib-utils.sh - The "TUI" Visual Engine (v4.0)
@@ -49,7 +50,8 @@ check_root() {
 
 write_log() {
     # Strip ANSI colors for log file
-    local clean_msg=$(echo -e "$2" | sed 's/\x1b\[[0-9;]*m//g')
+    local clean_msg
+    clean_msg=$(echo -e "$2" | sed 's/\x1b\[[0-9;]*m//g')
     echo "[$(date '+%H:%M:%S')] [$1] $clean_msg" >> "$TEMP_LOG_FILE"
 }
 
@@ -76,7 +78,7 @@ section() {
 info_kv() {
     local key="$1"
     local val="$2"
-    local extra="$3"
+    local extra="${3:-}"
     printf "   ${H_BLUE}●${NC} %-15s : ${BOLD}%s${NC} ${DIM}%s${NC}\n" "$key" "$val" "$extra"
     write_log "INFO" "$key=$val"
 }
@@ -135,6 +137,11 @@ exe() {
 # 静默执行
 exe_silent() {
     "$@" > /dev/null 2>&1
+}
+
+# 必须成功的命令执行器（关键步骤失败即中止，避免静默失败）
+exe_must() {
+    exe "$@" || { error "Critical step failed: $*"; exit 1; }
 }
 
 # --- 5. 可复用逻辑块 ---
@@ -339,7 +346,12 @@ critical_failure_handler() {
     echo -e "\033[0;31m###############################################################\033[0m"
     echo ""
     while true; do
-        read -p "Execute System Recovery (Restore Snapshot)? [y/n]: " -r choice
+        if ! read -p "Execute System Recovery (Restore Snapshot)? [y/n]: " -r choice; then
+            # read 失败（EOF/非交互环境），默认中止而非死循环
+            warn "No input received. Aborting installation (no rollback)."
+            cleanup_temp_sudoers
+            exit 1
+        fi
         case "$choice" in
             [yY]*)
                 cleanup_temp_sudoers

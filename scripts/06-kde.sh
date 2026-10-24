@@ -1,7 +1,8 @@
 #!/bin/bash
+set -uo pipefail
 
 # ==============================================================================
-# 05-kde.sh - KDE Plasma Setup (FZF Menu + Robust Installation)
+# 06-kde.sh - KDE Plasma Setup (FZF Menu + Robust Installation)
 # ==============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -10,7 +11,7 @@ source "$SCRIPT_DIR/lib-utils.sh"
 
 DEBUG=${DEBUG:-0}
 CN_MIRROR=${CN_MIRROR:-0}
-UNDO_SCRIPT="$SCRIPT_DIR/undo-kde.sh"
+export UNDO_SCRIPT="$SCRIPT_DIR/undo-desktop.sh"
 
 check_root
 
@@ -22,23 +23,7 @@ fi
 
 trap 'echo -e "\n   ${H_YELLOW}>>> Operation cancelled by user (Ctrl+C). Skipping...${NC}"' INT
 
-section "Phase 5" "KDE Plasma Environment"
-
-# ==============================================================================
-# STEP 0: Safety Checkpoint
-# ==============================================================================
-create_checkpoint() {
-  local marker="Before KDE Setup"
-  if snapper -c root list | grep -q "$marker"; then
-    log "Checkpoint '$marker' already exists."
-  else
-    log "Creating safety checkpoint..."
-    snapper -c root create -d "$marker"
-    snapper -c home list &>/dev/null && snapper -c home create -d "$marker"
-    success "Checkpoint created."
-  fi
-}
-create_checkpoint
+section "Phase 6" "KDE Plasma Environment"
 
 # Enable Trap
 trap 'critical_failure_handler "Script Error at Line $LINENO"' ERR
@@ -48,7 +33,10 @@ trap 'critical_failure_handler "Script Error at Line $LINENO"' ERR
 # ------------------------------------------------------------------------------
 log "Identifying user..."
 DETECTED_USER=$(detect_user)
-if [ -n "$DETECTED_USER" ]; then TARGET_USER="$DETECTED_USER"; else read -p "Target user: " TARGET_USER; fi
+TARGET_USER="${DETECTED_USER:-${ARCH_SETUP_USER:-}}"
+if [ -z "$TARGET_USER" ]; then
+    read -t 30 -p "Target user: " TARGET_USER || { error "No target user. Set ARCH_SETUP_USER env var."; exit 1; }
+fi
 HOME_DIR="/home/$TARGET_USER"
 info_kv "Target" "$TARGET_USER"
 
@@ -265,4 +253,4 @@ cleanup_temp_sudoers
 success "Done."
 
 trap - ERR
-log "Module 05-kde completed."
+log "Module 06-kde completed."

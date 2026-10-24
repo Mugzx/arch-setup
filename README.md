@@ -40,12 +40,13 @@ cd arch-setup && sudo bash install.sh
 │   ├── 02-essentials.sh # 必备软件安装
 │   ├── 03-dualboot.sh # 系统引导
 │   ├── 04-user.sh # 用户账户和权限配置
-│   ├── 05-niri.sh # Niri 安装和配置
-│   ├── 05-kde.sh # KDE Plasma 安装和配置
-│   ├── 06-apps.sh # 安装应用列表中的软件包
+│   ├── 05-snapshot-desktop.sh # 桌面安装前快照
+│   ├── 06-niri.sh # Niri 安装和配置
+│   ├── 06-kde.sh # KDE Plasma 安装和配置
+│   ├── 07-apps.sh # 安装应用列表中的软件包
 │   ├── lib-utils.sh # 工具函数和通用变量定义
 │   ├── undo-all.sh # 快照回档（回到文件系统初始化之前）
-│   └── undo-niri.sh # 快照回档（回到 Niri 安装之前）
+│   └── undo-desktop.sh # 快照回档（回到桌面安装之前）
 ├── exclude-dotfiles.txt # 需要排除的配置★
 ├── install.sh # 主安装脚本，调用其他脚本完成系统安装
 ├── kde-applist.txt # KDE 的桌面环境软件列表

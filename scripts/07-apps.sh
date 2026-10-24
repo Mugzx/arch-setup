@@ -1,7 +1,8 @@
 #!/bin/bash
+set -uo pipefail
 
 # ==============================================================================
-# 06-apps.sh - Common Applications (FZF Menu + Split Repo/AUR + Retry Logic)
+# 07-apps.sh - Common Applications (FZF Menu + Split Repo/AUR + Retry Logic)
 # ==============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -21,15 +22,14 @@ trap 'echo -e "\n   ${H_YELLOW}>>> Operation cancelled by user (Ctrl+C). Skippin
 # ------------------------------------------------------------------------------
 # 0. Identify Target User & Helper
 # ------------------------------------------------------------------------------
-section "Phase 6" "Common Applications"
+section "Phase 7" "Common Applications"
 
 log "Identifying target user..."
 DETECTED_USER=$(detect_user)
 
-if [ -n "$DETECTED_USER" ]; then
-    TARGET_USER="$DETECTED_USER"
-else
-    read -p "   Please enter the target username: " TARGET_USER
+TARGET_USER="${DETECTED_USER:-${ARCH_SETUP_USER:-}}"
+if [ -z "$TARGET_USER" ]; then
+    read -t 30 -p "   Please enter the target username: " TARGET_USER || { error "No target user. Set ARCH_SETUP_USER env var."; exit 1; }
 fi
 HOME_DIR="/home/$TARGET_USER"
 info_kv "Target" "$TARGET_USER"
@@ -37,7 +37,7 @@ info_kv "Target" "$TARGET_USER"
 # ------------------------------------------------------------------------------
 # 1. List Selection & User Prompt
 # ------------------------------------------------------------------------------
-if [ "$DESKTOP_ENV" == "kde" ]; then
+if [ "${DESKTOP_ENV:-}" == "kde" ]; then
     LIST_FILENAME="kde-common-applist.txt"
 else
     LIST_FILENAME="niri-common-applist.txt"
@@ -216,4 +216,4 @@ fi
 # Reset Trap
 trap - INT
 
-log "Module 06-apps completed."
+log "Module 07-apps completed."

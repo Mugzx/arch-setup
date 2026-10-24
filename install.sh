@@ -1,4 +1,5 @@
 #!/bin/bash
+set -uo pipefail
 
 # ==============================================================================
 # Arch Setup - Main Installer (v1.1))
@@ -152,15 +153,16 @@ BASE_MODULES=(
     "02-essentials.sh"
     "03-dualboot.sh"
     "04-user.sh"
+    "05-snapshot-desktop.sh"
 )
 
 if [ "$DESKTOP_ENV" == "niri" ]; then
-    BASE_MODULES+=("05-niri.sh")
+    BASE_MODULES+=("06-niri.sh")
 elif [ "$DESKTOP_ENV" == "kde" ]; then
-    BASE_MODULES+=("05-kde.sh")
+    BASE_MODULES+=("06-kde.sh")
 fi
 
-BASE_MODULES+=("06-apps.sh")
+BASE_MODULES+=("07-apps.sh")
 MODULES=("${BASE_MODULES[@]}")
 
 if [ ! -f "$STATE_FILE" ]; then touch "$STATE_FILE"; fi

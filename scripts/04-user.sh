@@ -1,4 +1,5 @@
 #!/bin/bash
+set -uo pipefail
 
 # ==============================================================================
 # 04-user.sh - User Creation & Configuration (Visual Fix)
@@ -26,33 +27,43 @@ if [ -n "$EXISTING_USER" ]; then
 else
     warn "No standard user found (UID 1000)."
     
-    while true; do
-        echo ""
-        # 使用 echo -n 打印普通提示，避免 read -p 的兼容性问题
-        echo -ne "   Please enter new username: "
-        read INPUT_USER
-        
-        # 去除可能误输入的空格
-        INPUT_USER=$(echo "$INPUT_USER" | xargs)
-        
-        if [[ -z "$INPUT_USER" ]]; then
-            warn "Username cannot be empty."
-            continue
-        fi
+    # 支持环境变量预置用户名（非交互/ttyd 环境）
+    if [ -n "${ARCH_SETUP_USER:-}" ]; then
+        MY_USERNAME="$ARCH_SETUP_USER"
+        log "Using username from ARCH_SETUP_USER: $MY_USERNAME"
+    else
+        while true; do
+            echo ""
+            # 使用 echo -n 打印普通提示，避免 read -p 的兼容性问题
+            echo -ne "   Please enter new username: "
+            if ! read INPUT_USER; then
+                # EOF/非交互：不死循环，明确报错
+                error "No input available. Set ARCH_SETUP_USER env var for non-interactive install."
+                exit 1
+            fi
+            
+            # 去除可能误输入的空格
+            INPUT_USER=$(echo "$INPUT_USER" | xargs)
+            
+            if [[ -z "$INPUT_USER" ]]; then
+                warn "Username cannot be empty."
+                continue
+            fi
 
-        # [FIX] 分离打印和读取，确保变量和颜色正确显示
-        echo -ne "   Create user '${BOLD}${INPUT_USER}${NC}'? [Y/n] "
-        read CONFIRM
-        
-        CONFIRM=${CONFIRM:-Y}
-        
-        if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
-            MY_USERNAME="$INPUT_USER"
-            break
-        else
-            log "Cancelled. Please re-enter."
-        fi
-    done
+            # [FIX] 分离打印和读取，确保变量和颜色正确显示
+            echo -ne "   Create user '${BOLD}${INPUT_USER}${NC}'? [Y/n] "
+            read CONFIRM || CONFIRM=""
+            
+            CONFIRM=${CONFIRM:-Y}
+            
+            if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
+                MY_USERNAME="$INPUT_USER"
+                break
+            else
+                log "Cancelled. Please re-enter."
+            fi
+        done
+    fi
 fi
 
 # Export username for next scripts
@@ -69,11 +80,13 @@ if [ "$SKIP_CREATION" = true ]; then
         success "User is already in 'wheel' group."
     else
         log "Adding to 'wheel' group..."
-        exe usermod -aG wheel "$MY_USERNAME"
+        exe_must usermod -aG wheel "$MY_USERNAME"
+        # 关键断言：确认已加入 wheel 组
+        groups "$MY_USERNAME" | grep -q "\bwheel\b" || { error "Failed to add $MY_USERNAME to wheel group."; exit 1; }
     fi
 else
     log "Creating new user..."
-    exe useradd -m -G wheel -s /bin/bash "$MY_USERNAME"
+    exe_must useradd -m -G wheel -s /bin/bash "$MY_USERNAME"
     
     log "Setting password for $MY_USERNAME..."
     # passwd 需要交互，直接运行
@@ -93,6 +106,8 @@ if [ -f /etc/sudoers.d/10-wheel ]; then
 else
     echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/10-wheel
     chmod 440 /etc/sudoers.d/10-wheel
+    # 关键断言：sudoers drop-in 必须生效
+    [ -f /etc/sudoers.d/10-wheel ] || { error "Failed to write sudoers drop-in."; exit 1; }
     success "Sudo access configured."
 fi
 

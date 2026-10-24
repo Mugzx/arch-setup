@@ -1,4 +1,5 @@
 #!/bin/bash
+set -uo pipefail
 
 # ==============================================================================
 # 02-essentials.sh - Essential Software, Drivers & Locale
@@ -19,27 +20,25 @@ ROOT_FSTYPE=$(findmnt -n -o FSTYPE /)
 
 if [ "$ROOT_FSTYPE" == "btrfs" ]; then
     log "Btrfs filesystem detected."
-    exe pacman -S --noconfirm --needed snapper snap-pac btrfs-assistant
+    exe_must pacman -S --noconfirm --needed snapper snap-pac btrfs-assistant
     success "Snapper tools installed."
 
-    log "Initializing Snapper 'root' configuration..."
-    if ! snapper list-configs | grep -q "^root "; then
-        if [ -d "/.snapshots" ]; then
-            warn "Removing existing /.snapshots..."
-            exe_silent umount /.snapshots
-            exe_silent rm -rf /.snapshots
-        fi
-        if exe snapper -c root create-config /; then
-            success "Snapper config created."
-            log "Applying retention policy..."
-            exe snapper -c root set-config ALLOW_GROUPS="wheel" TIMELINE_CREATE="yes" TIMELINE_CLEANUP="yes" NUMBER_LIMIT="10" NUMBER_LIMIT_IMPORTANT="5" TIMELINE_LIMIT_HOURLY="5" TIMELINE_LIMIT_DAILY="7" TIMELINE_LIMIT_WEEKLY="0" TIMELINE_LIMIT_MONTHLY="0" TIMELINE_LIMIT_YEARLY="0"
-            success "Policy applied."
-        fi
-    else
-        log "Config exists."
-    fi
+    # Config 已由 00-btrfs-init 创建，这里统一应用最终保留策略（开启 timeline）
+    log "Applying final retention policy..."
+    exe_must snapper -c root set-config \
+        ALLOW_GROUPS="wheel" \
+        TIMELINE_CREATE="yes" \
+        TIMELINE_CLEANUP="yes" \
+        NUMBER_LIMIT="10" \
+        NUMBER_LIMIT_IMPORTANT="5" \
+        TIMELINE_LIMIT_HOURLY="5" \
+        TIMELINE_LIMIT_DAILY="7" \
+        TIMELINE_LIMIT_WEEKLY="0" \
+        TIMELINE_LIMIT_MONTHLY="0" \
+        TIMELINE_LIMIT_YEARLY="0"
+    success "Policy applied."
     
-    exe systemctl enable --now snapper-timeline.timer snapper-cleanup.timer
+    exe_must systemctl enable --now snapper-timeline.timer snapper-cleanup.timer
 
     # GRUB Integration
     if [ -d "/boot/grub" ] || [ -f "/etc/default/grub" ]; then
@@ -76,10 +75,10 @@ fi
 section "Step 2/8" "Audio & Video"
 
 log "Installing firmware..."
-exe pacman -S --noconfirm --needed sof-firmware alsa-ucm-conf alsa-firmware
+exe_must pacman -S --noconfirm --needed sof-firmware alsa-ucm-conf alsa-firmware
 
 log "Installing Pipewire stack..."
-exe pacman -S --noconfirm --needed pipewire wireplumber pipewire-pulse pipewire-alsa pipewire-jack pavucontrol
+exe_must pacman -S --noconfirm --needed pipewire wireplumber pipewire-pulse pipewire-alsa pipewire-jack pavucontrol
 
 exe systemctl --global enable pipewire pipewire-pulse wireplumber
 success "Audio setup complete."
@@ -106,7 +105,7 @@ fi
 # ------------------------------------------------------------------------------
 section "Step 4/8" "Input Method (Fcitx5)"
 
-exe pacman -S --noconfirm --needed fcitx5-im fcitx5-rime
+exe_must pacman -S --noconfirm --needed fcitx5-im fcitx5-rime
 
 log "Configuring Rime defaults..."
 TARGET_DIR="/etc/skel/.local/share/fcitx5/rime"
@@ -138,7 +137,7 @@ if rfkill list bluetooth >/dev/null 2>&1; then BT_FOUND=true; fi
 if [ "$BT_FOUND" = true ]; then
     info_kv "Hardware" "Detected"
     
-    if [ "$DESKTOP_ENV" == "kde" ]; then
+    if [ "${DESKTOP_ENV:-}" == "kde" ]; then
         log "Desktop is KDE: Installing Bluez only..."
         exe pacman -S --noconfirm --needed bluez
     else
