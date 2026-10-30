@@ -8,20 +8,5 @@
   "quietStartup": true,
   "collapseChangelog": true,
   "enableInstallTelemetry": false,
-  "packages": [
-    "npm:@danchamorro/pi-agent-modes",
-    "npm:pi-observational-memory"
-  ],
-  "observational-memory": {
-    "observeAfterTokens": 20000,
-    "reflectAfterTokens": 50000,
-    "compactAfterTokensMode": "ratio",
-    "agentMaxTurns": 8,
-    "model": {
-      "provider": "deepseek",
-      "id": "deepseek-flash",
-      "thinking": "off"
-    }
-  },
-  "lastChangelogVersion": "1.0.0"
+  "lastChangelogVersion": "1.4.0"
 }
